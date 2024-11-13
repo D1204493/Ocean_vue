@@ -1,89 +1,116 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 
 import MuseumHeader from './components/MuseumHeader.vue'
+import MuseumNavBar from './components/MuseumNavBar.vue'
 </script>
 
 <template>
-  <!-- <header> -->
-    <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" /> -->
+  <div class="museum-app">
+    <div class="fixed-header">
+      <div class="header-wrapper">
+        <MuseumHeader />
+        <MuseumNavBar />
+      </div>
+    </div>
+    <div class="content-container">
+      <!-- 這裡放置主要內容 -->
+      <RouterView />
+    </div>
+  </div>
 
-      <MuseumHeader />
-
-      <!-- <nav>
+  <!-- <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
-    </div>
-  </header>
 
   <RouterView /> -->
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-nav {
+.museum-app {
   width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  min-height: 100vh;
+  position: relative;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #fff;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.header-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px;
+  width: 100%;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.content-container {
+  padding-top: 180px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-nav a:first-of-type {
-  border: 0;
+/* Header 和 NavBar 的基本樣式 */
+.museum-header,
+.nav-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+.header-container,
+.nav-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.museum-header {
+  background-color: #E6EEF9;
+  padding: 8px 0;
+}
+
+.nav-bar {
+  background-color: white;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* 響應式設計 */
+@media (max-width: 1200px) {
+  .header-container,
+  .nav-container {
+    padding: 0 16px;
   }
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
+@media (max-width: 768px) {
+  .header-wrapper {
+    padding: 8px;
   }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+  
+  .content-container {
+    padding-top: 220px;
   }
 }
 </style>

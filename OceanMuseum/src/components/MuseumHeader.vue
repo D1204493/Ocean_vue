@@ -71,22 +71,20 @@ export default {
 }
 </script>
 
+
 <style scoped>
 .museum-header {
   background-color: #E6EEF9;
   border-radius: 20px;
-  padding: 8px 0;
+  padding: 8px 16px;
   width: 100%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-top: -10px; /* 添加負的上邊距使其往上移動 */
-  position: relative; /* 添加相對定位 */
-  z-index: 10; /* 確保header在其他元素上方 */
+  margin-bottom: 5px;
 }
 
 .header-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
