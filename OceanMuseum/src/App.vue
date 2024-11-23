@@ -7,4 +7,13 @@
 </template>
 
 
-<style></style>
+<style>
+@media (min-width: 1024px) {
+  #app {
+    display: block;
+    /* 禁用 grid，改為 block 佈局 */
+    padding: 0;
+    /* 視需求調整 */
+  }
+}
+</style>

@@ -12,7 +12,7 @@
 
             <!-- 搜索框 -->
             <div class="search-box">
-                <input type="text" v-model="searchQuery" placeholder="搜尋" class="search-input" />
+                <input type="text" v-model="searchQuery" placeholder="搜尋海洋生物" class="search-input" />
                 <span class="search-icon">🔍</span>
             </div>
         </div>
