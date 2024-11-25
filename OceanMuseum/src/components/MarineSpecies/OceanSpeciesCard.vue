@@ -19,7 +19,7 @@
 
         <!-- 圖片網格 -->
         <div class="image-grid">
-            <div v-for="animal in filteredAnimals" :key="animal.id" class="card">
+            <div v-for="animal in filteredAnimals" :key="animal.id" class="card" @click="navigateToSpecies(animal.id)">
                 <img :src="animal.image" :alt="animal.name" class="card-image" />
                 <div class="card-overlay">
                     <h3 class="card-title">{{ animal.name }}</h3>
@@ -49,56 +49,72 @@ export default {
                     name: '海獺',
                     category: 'mammals',
                     image: '/img/OceanSpecies/海獺.jpg',
-                    description: '可愛的海洋哺乳動物'
+                    description: '可愛的海洋哺乳動物',
+                    images: ['/img/OceanSpecies/水獺1.jpg', '/img/OceanSpecies/水獺2.jpg'],
+                    fullDescription: '海獺（學名：Enhydra lutris）是食肉目動物中最適應海中生活的物種，很少在陸地或冰上覓食，大半的時間都待在水裡，連生產與育幼也都在水中進行。大部分時間裡，海獺不是仰躺著浮在水面上，就是潛入海床覓食。當牠們待在海面時，幾乎一直在整理毛皮，保持它的清潔與防水性。科學家已辨識出三個不同的亞種，分別位於美國加州、阿拉斯加及俄羅斯等地。各地的海獺族群皆以各自的棲地命名[1]:91。屬名Enhyra源自希臘文的En加上hydōr，意為「在水裡面」；種名lutris則源自拉丁文lutra，也是水獺的意思。'
                 },
                 {
                     id: 2,
                     name: '水母',
                     category: 'deep-sea',
                     image: '/img/OceanSpecies/水母.jpg',
-                    description: '深海中的發光生物'
+                    description: '深海中的發光生物',
+                    images: ['/img/OceanSpecies/水母1.jpg', '/img/OceanSpecies/水母2.jpg'],
+                    fullDescription: '水母'
                 },
                 {
                     id: 3,
                     name: '翻車魚',
                     category: 'deep-sea',
                     image: '/img/OceanSpecies/翻車魚.jpg',
-                    description: '深海奇特魚類'
+                    description: '深海奇特魚類',
+                    images: ['/img/OceanSpecies/翻車魚1.jpg', '/img/OceanSpecies/翻車魚2.png'],
+                    fullDescription: '翻車魚'
                 },
                 {
                     id: 4,
                     name: '小丑魚',
                     category: 'shallow-water',
                     image: '/img/OceanSpecies/小丑魚.jpg',
-                    description: '珊瑚礁區的居民'
+                    description: '珊瑚礁區的居民',
+                    images: ['/img/OceanSpecies/小丑魚1.jpg', '/img/OceanSpecies/小丑魚2.jpg'],
+                    fullDescription: '小丑魚'
                 },
                 {
                     id: 5,
                     name: '海獅',
                     category: 'mammals',
                     image: '/img/OceanSpecies/海獅.jpg',
-                    description: '活潑的海洋哺乳動物'
+                    description: '活潑的海洋哺乳動物',
+                    images: ['/img/OceanSpecies/海獅1.jpg', '/img/OceanSpecies/海獅2.jpg'],
+                    fullDescription: '海獅'
                 },
                 {
                     id: 6,
                     name: '海豚',
                     category: 'mammals',
                     image: '/img/OceanSpecies/海豚.jpg',
-                    description: '智慧的海洋哺乳動物'
+                    description: '智慧的海洋哺乳動物',
+                    images: ['/img/OceanSpecies/海豚1.jpg', '/img/OceanSpecies/海豚2.jpg'],
+                    fullDescription: '海豚'
                 },
                 {
                     id: 7,
                     name: '海象',
                     category: 'mammals',
                     image: '/img/OceanSpecies/海象.jpg',
-                    description: '北極圈的居民'
+                    description: '北極圈的居民',
+                    images: ['/img/OceanSpecies/海象1.jpg', '/img/OceanSpecies/海象2.jpg'],
+                    fullDescription: '海象'
                 },
                 {
                     id: 8,
                     name: '海龜',
                     category: 'shallow-water',
                     image: '/img/OceanSpecies/海龜.jpg',
-                    description: '優雅的海洋爬行動物'
+                    description: '優雅的海洋爬行動物',
+                    images: ['/img/OceanSpecies/海龜2.jpg', '/img/OceanSpecies/海龜3.jpg'],
+                    fullDescription: '海龜是海洋龜類的總稱，所有龜鱉目動物中唯一生活在海洋的物種，分布範圍十分平均，分布於除北冰洋外的全球海域中。背上有殼，其花紋較一般陸龜或河龜複雜，背甲為扁平流線形，前後鰭為舟漿狀。'
                 }
             ]
         }
@@ -111,7 +127,20 @@ export default {
                 return matchesCategory && matchesSearch
             })
         }
-    }
+    },
+    methods: {
+        navigateToSpecies(id) {
+            try {
+                // 使用路由導航到物種詳情頁，並傳遞物種ID
+                this.$router.push({
+                    name: 'SpeciesAnnotate',
+                    params: { id: id.toString() }
+                });
+            } catch (error) {
+                console.error('Navigation error: ', error);
+            }
+        }
+    },
 }
 </script>
 
@@ -218,6 +247,7 @@ body {
 }
 
 .card:hover {
+    cursor: pointer;
     transform: translateY(-5px);
 }
 

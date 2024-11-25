@@ -5,6 +5,7 @@ import OceanSpeciesCard from '../components/MarineSpecies/OceanSpeciesCard.vue'
 
 </script>
 
+
 <template>
 
     <div class="museum-app">
