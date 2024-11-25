@@ -5,7 +5,9 @@
       <!-- Logo and Title Section -->
       <div class="logo-section">
         <div class="logo-container">
-          <img src="/img/OceanLogo-removebg.png" alt="WhaleLogo" class="logo-image">
+          <router-link to="/">
+            <img src="/img/OceanLogo-removebg.png" alt="WhaleLogo" class="logo-image">
+          </router-link>
         </div>
       </div>
 
@@ -13,22 +15,11 @@
       <div class="tools-section">
         <!-- Search Bar -->
         <div class="search-container">
-          <input
-            v-model="searchQuery"
-            type="search"
-            placeholder="搜尋"
-            class="search-input"
-          />
+          <input v-model="searchQuery" type="search" placeholder="搜尋" class="search-input" />
           <button class="search-button" aria-label="搜尋">
             <svg class="search-icon" viewBox="0 0 24 24">
-              <path 
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                fill="none"
-              />
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" fill="none" />
             </svg>
           </button>
         </div>
@@ -37,12 +28,8 @@
         <div class="text-size-controls">
           <span>字級:</span>
           <div class="size-buttons">
-            <button 
-              v-for="(size, index) in textSizes" 
-              :key="index"
-              @click="changeTextSize(index)"
-              :class="['size-button', { active: currentTextSize === index }]"
-            >
+            <button v-for="(size, index) in textSizes" :key="index" @click="changeTextSize(index)"
+              :class="['size-button', { active: currentTextSize === index }]">
               <span :style="{ fontSize: `${12 + index * 2}px` }">T</span>
             </button>
           </div>
@@ -99,6 +86,22 @@ export default {
 .logo-container {
   display: flex;
   align-items: center;
+}
+
+.logo-container a,
+.logo-container router-link {
+  text-decoration: none;
+  display: inline-block;
+  line-height: 0;
+  /* 消除額外空間 */
+  font-size: 0;
+  /* 消除文字影響 */
+}
+
+.logo-container a:hover {
+  background: none;
+  opacity: 0.7;
+  /* 添加輕微透明效果 */
 }
 
 .logo-image {

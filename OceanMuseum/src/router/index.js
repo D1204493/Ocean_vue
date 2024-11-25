@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import MarineSpecies from '../views/MarineSpecies.vue'
-import SpeciesAnnotate from '../components/MarineSpecies/SpeciesAnnotate.vue'
+import SpeciesAnnotate from '../views/SpeciesAnnotate.vue'
 
 
 const router = createRouter({

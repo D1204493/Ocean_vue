@@ -112,7 +112,7 @@ export default {
                     name: '海龜',
                     category: 'shallow-water',
                     image: '/img/OceanSpecies/海龜.jpg',
-                    description: '優雅的海洋爬行動物',
+                    description: '碰到要被罰錢的海洋爬行動物',
                     images: ['/img/OceanSpecies/海龜2.jpg', '/img/OceanSpecies/海龜3.jpg'],
                     fullDescription: '海龜是海洋龜類的總稱，所有龜鱉目動物中唯一生活在海洋的物種，分布範圍十分平均，分布於除北冰洋外的全球海域中。背上有殼，其花紋較一般陸龜或河龜複雜，背甲為扁平流線形，前後鰭為舟漿狀。'
                 }

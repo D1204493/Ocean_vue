@@ -2,11 +2,8 @@
 <template>
     <nav class="nav-bar">
         <div class="nav-container">
-            <a v-for="(item, index) in navItems" 
-               :key="index" 
-               href="#" 
-               class="nav-item"
-               :class="{ 'first-item': index === 0 }">
+            <a v-for="(item, index) in navItems" :key="index" :href="item.url" class="nav-item"
+                :class="{ 'first-item': index === 0 }">
                 <div class="nav-icon">
                     <img :src="item.icon" :alt="item.text" class="icon-image">
                 </div>
@@ -22,13 +19,41 @@ export default {
     data() {
         return {
             navItems: [
-                { text: '最新動態', icon: '/src/components/icons/messages.png' },
-                { text: '館場導覽', icon: '/src/components/icons/museum.png' },
-                { text: '認識海洋生物', icon: '/src/components/icons/blowfish.png' },
-                { text: '節目表', icon: '/src/components/icons/seal.png' },
-                { text: '購票', icon: '/src/components/icons/tickets.png' },
-                { text: '文創', icon: '/src/components/icons/puzzle.png' },
-                { text: '服務功能介紹', icon: '/src/components/icons/personQA.png' }
+                {
+                    text: '最新動態',
+                    icon: '/src/components/icons/messages.png',
+                    url: '/'
+                },
+                {
+                    text: '館場導覽',
+                    icon: '/src/components/icons/museum.png',
+                    url: '/'
+                },
+                {
+                    text: '認識海洋生物',
+                    icon: '/src/components/icons/blowfish.png',
+                    url: '/MarineSpecies'
+                },
+                {
+                    text: '節目表',
+                    icon: '/src/components/icons/seal.png',
+                    url: '/'
+                },
+                {
+                    text: '購票',
+                    icon: '/src/components/icons/tickets.png',
+                    url: '/'
+                },
+                {
+                    text: '文創',
+                    icon: '/src/components/icons/puzzle.png',
+                    url: '/'
+                },
+                {
+                    text: '服務功能介紹',
+                    icon: '/src/components/icons/personQA.png',
+                    url: '/'
+                }
             ]
         }
     }
@@ -62,17 +87,20 @@ export default {
     padding: 8px;
     border-radius: 8px;
     transition: all 0.3s;
-    position: relative; /* 為偽元素定位 */
+    position: relative;
+    /* 為偽元素定位 */
 }
 
 /* 使用偽元素添加分隔線 */
 .nav-item:not(.first-item)::before {
     content: '';
     position: absolute;
-    left: -4px; /* 調整分隔線位置 */
+    left: -4px;
+    /* 調整分隔線位置 */
     top: 50%;
     transform: translateY(-50%);
-    height: 60%; /* 調整分隔線高度 */
+    height: 60%;
+    /* 調整分隔線高度 */
     width: 1px;
     background-color: #ddd;
     transition: opacity 0.3s;
@@ -80,7 +108,7 @@ export default {
 
 /* hover 時隱藏相鄰的分隔線 */
 .nav-item:hover::before,
-.nav-item:hover + .nav-item::before {
+.nav-item:hover+.nav-item::before {
     opacity: 0;
 }
 
@@ -125,7 +153,8 @@ export default {
 
     /* 在移動端調整分隔線 */
     .nav-item::before {
-        display: none; /* 移除分隔線 */
+        display: none;
+        /* 移除分隔線 */
     }
 }
 

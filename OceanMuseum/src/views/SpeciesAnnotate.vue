@@ -1,7 +1,7 @@
 <script setup>
 import MuseumHeader from '../components/MuseumHeader.vue'
 import MuseumNavBar from '../components/MuseumNavBar.vue'
-// import OceanSpeciesCard from '../components/MarineSpecies/OceanSpeciesCard.vue'
+import SpeciesAnnotate from '../components/MarineSpecies/SpeciesAnnotate.vue'
 
 </script>
 
@@ -16,7 +16,7 @@ import MuseumNavBar from '../components/MuseumNavBar.vue'
             </div>
         </div>
         <div class="content-container">
-            <!-- <OceanSpeciesCard /> -->
+            <SpeciesAnnotate />
         </div>
     </div>
 </template>
@@ -99,12 +99,6 @@ body {
 
 /* 響應式設計 */
 @media (max-width: 2230px) {
-    .content-container {
-        padding-top: 200px;
-    }
-}
-
-@media (max-width: 1200px) {
 
     .header-container,
     .nav-container {
@@ -112,13 +106,13 @@ body {
     }
 
     .content-container {
-        padding-top: 200px;
+        padding-top: 230px;
     }
 }
 
 @media (max-width: 1023px) {
     .content-container {
-        padding-top: 170px;
+        padding-top: 200px;
     }
 }
 
@@ -134,7 +128,7 @@ body {
     }
 
     .content-container {
-        padding-top: 360px;
+        padding-top: 390px;
     }
 }
 </style>
