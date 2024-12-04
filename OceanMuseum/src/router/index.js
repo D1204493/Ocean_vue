@@ -4,6 +4,7 @@ import MarineSpecies from '../views/MarineSpecies.vue'
 import SpeciesAnnotate from '../views/SpeciesAnnotate.vue'
 
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

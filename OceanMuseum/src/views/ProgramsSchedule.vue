@@ -4,6 +4,7 @@ import MuseumNavBar from '../components/MuseumNavBar.vue'
 import Activity from '@/components/homePage/Activity.vue';
 import News from '@/components/homePage/News.vue';
 import Reports from '@/components/homePage/Reports.vue';
+import ProgramsSchedule from '@/components/ProgramsSchedule.vue';
 
 // import OceanSpeciesCard from '../components/MarineSpecies/OceanSpeciesCard.vue'
 
@@ -20,7 +21,7 @@ import Reports from '@/components/homePage/Reports.vue';
             </div>
         </div>
         <div class="content-container">
-            <News />
+            <ProgramsSchedule />
         </div>
     </div>
 </template>

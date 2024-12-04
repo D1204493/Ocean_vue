@@ -20,7 +20,7 @@ import Reports from '@/components/homePage/Reports.vue';
             </div>
         </div>
         <div class="content-container">
-            <News />
+            <Reports />
         </div>
     </div>
 </template>
