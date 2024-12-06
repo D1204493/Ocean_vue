@@ -21,7 +21,7 @@ import OceanSpeciesCard from '../../components/MarineSpecies/OceanSpeciesCard.vu
     </div>
 </template>
 
-<style>
+<style scoped>
 * {
     margin: 0;
     padding: 0;

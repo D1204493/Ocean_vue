@@ -21,7 +21,7 @@ import TicketOrder from '../../components/Ticket/TicketOrder.vue'
     </div>
 </template>
 
-<style>
+<style scoped>
 * {
     margin: 0;
     padding: 0;
@@ -64,7 +64,7 @@ body {
     min-height: calc(100vh - 120px);
     overflow-y: auto;
     padding: 20px;
-    margin-top: 170px;
+    margin-top: 210px;
 }
 
 /* Header 和 NavBar 的基本樣式 */

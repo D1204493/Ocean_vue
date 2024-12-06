@@ -95,17 +95,17 @@
 export default {
     data() {
         return {
-            formData: {
+            formData: {  // 表單資料
                 name: '',
                 idNumber: '',
                 phone: '',
                 email: '',
                 visitDate: '',
-                fullTickets: 0,
-                halfTickets: 0,
-                childTickets: 0
+                fullTickets: 0,  // 全票數量
+                halfTickets: 0,  // 優待票數量
+                childTickets: 0  // 博愛票數量
             },
-            ticketPrices: {
+            ticketPrices: { // 票價設定
                 full: { type:'全票', weekday: 150, weekend: 200 },
                 half: { type: '博愛票', weekday: 120, weekend: 150 },
                 child: { type: '優待票', weekday: 75, weekend: 100 },
@@ -125,33 +125,32 @@ export default {
                 '2024-10-10', // 雙十節
             ],
             // 用於存儲價格變動提示
-            priceChangeNotification: false,
-            previousPriceType: null,
+            previousPriceType: null,  // 記錄前一次的價格類型
         }
     },
     computed: {
-        isWeekend() {
+        isWeekend() {  // 判斷是否為週末
             if(!this.formData.visitDate) return false;
             const date = new Date(this.formData.visitDate);
             const day = date.getDay();
             return day === 0 || day === 6; // 0是週日，6是週六
         },
-        isHoliday() {
+        isHoliday() {  // 判斷是否為假日（週末或特定假日）
             if(!this.formData.visitDate) return false;
             return this.isWeekend || this.holidays.includes(this.formData.visitDate);
         },
-        getPriceType() {
+        getPriceType() {  // 取得價格類型標示
             if(!this.formData.visitDate) return '';
             return this.isHoliday ? '(假日價)' : '(平日價)';
         },
-        totalAmount() {
+        totalAmount() {  // 計算總金額
             return (
                 this.formData.fullTickets * this.getTicketPrice('full') +
                 this.formData.halfTickets * this.getTicketPrice('half') +
                 this.formData.childTickets * this.getTicketPrice('child')
             )
         },
-        totalParticipants() {
+        totalParticipants() {  // 計算總人數
             return (
                 this.formData.fullTickets +
                 this.formData.halfTickets +
@@ -160,13 +159,13 @@ export default {
         }
     },
     methods: {
-        getTicketPrice(type) {
+        getTicketPrice(type) {  // 取得票價
             if(!this.formData.visitDate) {
                 return this.ticketPrices[type].weekday; // 預設顯示平日價格
             }
             return this.isHoliday ? this.ticketPrices[type].weekend : this.ticketPrices[type].weekday;
         },
-        handleDateChange() {
+        handleDateChange() {  // 處理日期變更
             const currentPriceType = this.isHoliday;
 
             // 如果之前有選擇日期，且價格類型發生變化
@@ -177,9 +176,11 @@ export default {
             }
             this.previousPriceType = currentPriceType;
         },
+        // 顯示價格變動提示
         showPriceChangeNotification() {
             alert(`因選擇${this.isHoliday ? '假日' : '平日'}，票價已更新`);
         },
+        // 增加票數
         increaseTicket(type) {
             switch (type) {
                 case 'full':
@@ -193,6 +194,7 @@ export default {
                     break
             }
         },
+        // 減少票數
         decreaseTicket(type) {
             switch (type) {
                 case 'full':
@@ -206,6 +208,7 @@ export default {
                     break
             }
         },
+        // 重置表單
         resetForm() {
             this.formData = {
                 name: '',
@@ -218,6 +221,7 @@ export default {
                 childTickets: 0
             }
         },
+        // 提交表單
         submitForm() {
             console.log('Form submitted:', this.formData)
         }
@@ -439,10 +443,10 @@ input[type="date"] {
 
 .cancel-btn,
 .submit-btn {
-    width: 180px; /* 固定寬度 */
+    width: 140px; /* 固定寬度 */
     padding: 12px 35px;
     border-radius: 25px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease; /* 添加過渡效果 */

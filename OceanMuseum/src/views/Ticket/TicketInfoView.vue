@@ -21,7 +21,7 @@ import OrderTicketInfo from '../../components/Ticket/OrderTicketInfo.vue'
     </div>
 </template>
 
-<style>
+<style scoped>
 * {
     margin: 0;
     padding: 0;
@@ -118,7 +118,7 @@ body {
 
 @media (max-width: 1023px) {
     .content-container {
-        padding-top: 190px;
+        padding-top: 200px;
     }
 }
 
