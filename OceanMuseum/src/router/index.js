@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import MarineSpecies from '../views/MarineSpecies.vue'
 import SpeciesAnnotate from '../views/SpeciesAnnotate.vue'
+import TicketInfoView from '../views/TicketInfoView.vue'
 
 
 const router = createRouter({
@@ -22,6 +23,11 @@ const router = createRouter({
       name: 'SpeciesAnnotate',
       component: SpeciesAnnotate,
       props: true  // 允許將路由參數作為props傳遞
+    },
+    {
+      path: '/TicketInfoView',
+      name: 'TicketInfoView',
+      component: TicketInfoView
     },
     
   ]

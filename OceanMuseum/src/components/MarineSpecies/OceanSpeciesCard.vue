@@ -20,6 +20,7 @@
         <!-- 圖片網格 -->
         <div class="image-grid">
             <div v-for="species in filteredSpecies" :key="species.species_id" class="card" @click="navigateToSpecies(species.species_id)">
+                <!-- :src 是動態綁定圖片源。:alt 綁定圖片的替代文字為物種名稱。 -->
                 <img :src="getImageUrl(species.image_url)" :alt="species.name" class="card-image" />
                 <div class="card-overlay">
                     <h3 class="card-title">{{ species.name }}</h3>

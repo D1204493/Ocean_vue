@@ -42,7 +42,7 @@ export default {
                 {
                     text: '購票',
                     icon: '/src/components/icons/tickets.png',
-                    url: '/'
+                    url: '/TicketInfoView'
                 },
                 {
                     text: '文創',
