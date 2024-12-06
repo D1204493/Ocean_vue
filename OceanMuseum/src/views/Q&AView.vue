@@ -1,7 +1,7 @@
 <script setup>
-import MuseumHeader from '../../components/MuseumHeader.vue'
-import MuseumNavBar from '../../components/MuseumNavBar.vue'
-import TicketOrder from '../../components/Ticket/TicketOrder.vue'
+import MuseumHeader from '../components/MuseumHeader.vue'
+import MuseumNavBar from '../components/MuseumNavBar.vue'
+import QandA from '../components/Q&A.vue'
 
 </script>
 
@@ -16,7 +16,7 @@ import TicketOrder from '../../components/Ticket/TicketOrder.vue'
             </div>
         </div>
         <div class="content-container">
-            <TicketOrder />
+            <QandA />
         </div>
     </div>
 </template>
@@ -97,7 +97,7 @@ body {
 /* 響應式設計 */
 @media (min-width: 1024px) {
     .content-container {
-        padding: 30px;
+        padding: 45px;
         max-width: 100%; /* 移除最大寬度限制 */
     }
 }
@@ -111,12 +111,6 @@ body {
 @media (max-width: 768px) {
     .content-container {
         margin-top: 380px;
-    }
-}
-
-@media (max-width: 511px) {
-    .content-container {
-        margin-top: 415px;
     }
 }
 

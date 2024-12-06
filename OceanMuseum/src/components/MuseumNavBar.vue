@@ -52,7 +52,7 @@ export default {
                 {
                     text: '服務功能介紹',
                     icon: '/src/components/icons/personQA.png',
-                    url: '/'
+                    url: '/QandAView'
                 }
             ]
         }

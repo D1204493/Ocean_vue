@@ -4,6 +4,7 @@ import MarineSpecies from '../views/Marine/MarineSpecies.vue'
 import SpeciesAnnotate from '../views/Marine/SpeciesAnnotate.vue'
 import TicketInfoView from '../views/Ticket/TicketInfoView.vue'
 import OrderTicketView from '../views/Ticket/OrderTicketView.vue'
+import QandAView from '../views/Q&AView.vue'
 
 
 const router = createRouter({
@@ -34,6 +35,11 @@ const router = createRouter({
       path: '/OrderTicketView',
       name: 'OrderTicketView',
       component: OrderTicketView
+    },
+    {
+      path: '/QandAView',
+      name: 'QandAView',
+      component: QandAView
     },
     
   ]
