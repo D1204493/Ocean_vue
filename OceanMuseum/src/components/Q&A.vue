@@ -60,64 +60,18 @@ export default {
                 { id: 'purchase', name: '購票與收費類' },
                 { id: 'service', name: '網站與服務類' }
             ],
-            questions: [
-                {
-                    question: '是否能攜帶寵物入館？若寵物無法入館是否有寄放服務？',
-                    answer: '海生館禁止攜帶寵物入館參觀，若您有攜帶寵物，於本館遊客中心處的服務台有提供寵物寄放區，請您持個人證件即可免費辦理。',
-                    type: 'service'
-                },
-                {
-                    question: '夜宿海生館是睡在海生館內嗎？',
-                    answer: '夜宿活動地點在教育中心，並非在展示館內。',
-                    type: 'traffic'
-                },
-                {
-                    question: '是否有白鯨餵食演出？',
-                    answer: '目前尚無白鯨餵食演出活動。',
-                    type: 'service'
-                },
-                {
-                    question: '是否有白鯨餵食演出？',
-                    answer: '目前尚無白鯨餵食演出活動。',
-                    type: 'service'
-                },
-                {
-                    question: '是否有白鯨餵食演出？',
-                    answer: '目前尚無白鯨餵食演出活動。',
-                    type: 'service'
-                },
-                {
-                    question: '是否有白鯨餵食演出？',
-                    answer: '目前尚無白鯨餵食演出活動。',
-                    type: 'service'
-                },
-                {
-                    question: '是否有白鯨餵食演出？',
-                    answer: '目前尚無白鯨餵食演出活動。',
-                    type: 'service'
-                },
-                {
-                    question: '是否有白鯨餵食演出？',
-                    answer: '目前尚無白鯨餵食演出活動。',
-                    type: 'service'
-                },
-                {
-                    question: '是否有白鯨餵食演出？',
-                    answer: '目前尚無白鯨餵食演出活動。',
-                    type: 'service'
-                },
-                {
-                    question: '是否有白鯨餵食演出？',
-                    answer: '目前尚無白鯨餵食演出活動。',
-                    type: 'service'
-                },
-            ]
+            questions: [],
         }
     },
     computed: {
         filteredQuestions() {
             if (this.activeTab === 'all') return this.questions;
-            return this.questions.filter(q => q.type === this.activeTab);
+            const categoryMap = {
+                'traffic': '交通與住宿類',
+                'service': '網站與服務類',
+                'purchase': '購票與收費類'
+            };
+            return this.questions.filter(q => q.category === categoryMap[this.activeTab]);
         },
         totalPages() {
             return Math.ceil(this.filteredQuestions.length / this.itemsPerPage);
@@ -131,14 +85,25 @@ export default {
     methods: {
         toggleAnswer(index) {
             this.expandedIndex = this.expandedIndex === index ? null : index;
-        }
+        },
+        async fetchData() {
+            try {
+                const response = await fetch('http://localhost:8080/FAQ/get');
+                this.questions = await response.json();
+            } catch(error) {
+                console.log('Failed to fetch FAQ data:', error);
+            }
+        },
     },
     watch: {
         activeTab() {
             this.currentPage = 1;
             this.expandedIndex = null;
         }
-    }
+    },
+    created() {
+        this.fetchData();
+    },
 }
 </script>
 
@@ -204,7 +169,7 @@ export default {
 
 .question {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
     cursor: pointer;
 }
