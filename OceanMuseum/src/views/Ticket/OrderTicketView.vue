@@ -64,7 +64,7 @@ body {
     min-height: calc(100vh - 120px);
     overflow-y: auto;
     padding: 20px;
-    margin-top: 210px;
+    margin-top: 170px;
 }
 
 /* Header 和 NavBar 的基本樣式 */
@@ -97,20 +97,26 @@ body {
 /* 響應式設計 */
 @media (min-width: 1024px) {
     .content-container {
-        padding: 40px;
+        padding: 20px;
         max-width: 100%; /* 移除最大寬度限制 */
     }
 }
 
 @media (max-width: 860px) {
     .content-container {
-        margin-top: 200px;
+        margin-top: 170px;
     }
 }
 
 @media (max-width: 768px) {
     .content-container {
         margin-top: 380px;
+    }
+}
+
+@media (max-width: 511px) {
+    .content-container {
+        margin-top: 415px;
     }
 }
 

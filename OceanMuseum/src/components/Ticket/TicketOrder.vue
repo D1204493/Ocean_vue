@@ -229,7 +229,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .booking-form {
     max-width: none;
     margin: 0 auto;
