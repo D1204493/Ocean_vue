@@ -14,7 +14,7 @@
         <div class="content-section">
             <h2 class="content-title">問題</h2>
             <div class="faq-container">
-                <div v-for="(item, index) in filteredQuestions" :key="index" class="faq-item">
+                <div v-for="(item, index) in paginatedQuestions" :key="index" class="faq-item">
                     <div class="question" @click="toggleAnswer(index)">
                         <span class="arrow" :class="{ 'arrow-expanded': expandedIndex === index }">›</span>
                         {{ item.question }}
@@ -23,6 +23,24 @@
                         <div class="answer-content" v-html="item.answer"></div>
                     </div>
                 </div>
+            </div>
+
+            <div class="pagination">
+                <button 
+                    class="page-button" 
+                    @click="currentPage--" 
+                    :disabled="currentPage === 1"
+                >
+                    上一頁
+                </button>
+                <span class="page-info">{{ currentPage }} / {{ totalPages }}</span>
+                <button 
+                    class="page-button" 
+                    @click="currentPage++" 
+                    :disabled="currentPage === totalPages"
+                >
+                    下一頁
+                </button>
             </div>
         </div>
     </div>
@@ -35,6 +53,8 @@ export default {
         return {
             activeTab: 'all',
             expandedIndex: null,
+            currentPage: 1,
+            itemsPerPage: 6,
             tabs: [
                 { id: 'traffic', name: '交通與住宿類' },
                 { id: 'purchase', name: '購票與收費類' },
@@ -55,7 +75,42 @@ export default {
                     question: '是否有白鯨餵食演出？',
                     answer: '目前尚無白鯨餵食演出活動。',
                     type: 'service'
-                }
+                },
+                {
+                    question: '是否有白鯨餵食演出？',
+                    answer: '目前尚無白鯨餵食演出活動。',
+                    type: 'service'
+                },
+                {
+                    question: '是否有白鯨餵食演出？',
+                    answer: '目前尚無白鯨餵食演出活動。',
+                    type: 'service'
+                },
+                {
+                    question: '是否有白鯨餵食演出？',
+                    answer: '目前尚無白鯨餵食演出活動。',
+                    type: 'service'
+                },
+                {
+                    question: '是否有白鯨餵食演出？',
+                    answer: '目前尚無白鯨餵食演出活動。',
+                    type: 'service'
+                },
+                {
+                    question: '是否有白鯨餵食演出？',
+                    answer: '目前尚無白鯨餵食演出活動。',
+                    type: 'service'
+                },
+                {
+                    question: '是否有白鯨餵食演出？',
+                    answer: '目前尚無白鯨餵食演出活動。',
+                    type: 'service'
+                },
+                {
+                    question: '是否有白鯨餵食演出？',
+                    answer: '目前尚無白鯨餵食演出活動。',
+                    type: 'service'
+                },
             ]
         }
     },
@@ -63,11 +118,25 @@ export default {
         filteredQuestions() {
             if (this.activeTab === 'all') return this.questions;
             return this.questions.filter(q => q.type === this.activeTab);
+        },
+        totalPages() {
+            return Math.ceil(this.filteredQuestions.length / this.itemsPerPage);
+        },
+        paginatedQuestions() {
+            const start = (this.currentPage - 1) * this.itemsPerPage;
+            const end = start + this.itemsPerPage;
+            return this.filteredQuestions.slice(start, end);
         }
     },
     methods: {
         toggleAnswer(index) {
             this.expandedIndex = this.expandedIndex === index ? null : index;
+        }
+    },
+    watch: {
+        activeTab() {
+            this.currentPage = 1;
+            this.expandedIndex = null;
         }
     }
 }
@@ -158,6 +227,34 @@ export default {
 
 .answer-content {
     line-height: 1.6;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.page-button {
+    padding: 8px 16px;
+    border: 1px solid #D4A017;
+    border-radius: 20px;
+    background: white;
+    color: #D4A017;
+    cursor: pointer;
+}
+
+.page-button:disabled {
+    border-color: #ccc;
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.page-info {
+    font-size: 14px;
+    color: #666;
 }
 
 @media (min-width: 1024px) {
