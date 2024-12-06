@@ -1,7 +1,7 @@
 <script setup>
-import MuseumHeader from '../components/MuseumHeader.vue'
-import MuseumNavBar from '../components/MuseumNavBar.vue'
-import OceanSpeciesCard from '../components/MarineSpecies/OceanSpeciesCard.vue'
+import MuseumHeader from '../../components/MuseumHeader.vue'
+import MuseumNavBar from '../../components/MuseumNavBar.vue'
+import OrderTicketInfo from '../../components/Ticket/OrderTicketInfo.vue'
 
 </script>
 
@@ -16,7 +16,7 @@ import OceanSpeciesCard from '../components/MarineSpecies/OceanSpeciesCard.vue'
             </div>
         </div>
         <div class="content-container">
-            <OceanSpeciesCard />
+            <OrderTicketInfo />
         </div>
     </div>
 </template>
@@ -100,7 +100,7 @@ body {
 /* 響應式設計 */
 @media (max-width: 2230px) {
     .content-container {
-        padding-top: 200px;
+        padding-top: 230px;
     }
 }
 
@@ -112,19 +112,19 @@ body {
     }
 
     .content-container {
-        padding-top: 200px;
+        padding-top: 230px;
     }
 }
 
 @media (max-width: 1023px) {
     .content-container {
-        padding-top: 170px;
+        padding-top: 190px;
     }
 }
 
 @media (max-width: 900px) {
     .content-container {
-        padding-top: 190px;
+        padding-top: 200px;
     }
 }
 
@@ -134,7 +134,7 @@ body {
     }
 
     .content-container {
-        padding-top: 360px;
+        padding-top: 410px;
     }
 }
 </style>

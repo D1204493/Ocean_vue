@@ -36,7 +36,7 @@
         </div>
         <div class="button-group">
             <button class="btn btn-primary">我的票夾</button>
-            <button class="btn btn-secondary">前往訂票</button>
+            <button class="btn btn-secondary" @click="$router.push('/OrderTicketView')">前往訂票</button>
         </div>
     </div>
 </template>

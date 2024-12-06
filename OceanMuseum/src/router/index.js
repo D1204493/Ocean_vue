@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import MarineSpecies from '../views/MarineSpecies.vue'
-import SpeciesAnnotate from '../views/SpeciesAnnotate.vue'
-import TicketInfoView from '../views/TicketInfoView.vue'
+import MarineSpecies from '../views/Marine/MarineSpecies.vue'
+import SpeciesAnnotate from '../views/Marine/SpeciesAnnotate.vue'
+import TicketInfoView from '../views/Ticket/TicketInfoView.vue'
+import OrderTicketView from '../views/Ticket/OrderTicketView.vue'
 
 
 const router = createRouter({
@@ -28,6 +29,11 @@ const router = createRouter({
       path: '/TicketInfoView',
       name: 'TicketInfoView',
       component: TicketInfoView
+    },
+    {
+      path: '/OrderTicketView',
+      name: 'OrderTicketView',
+      component: OrderTicketView
     },
     
   ]

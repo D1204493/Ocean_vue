@@ -1,7 +1,7 @@
 <script setup>
-import MuseumHeader from '../components/MuseumHeader.vue'
-import MuseumNavBar from '../components/MuseumNavBar.vue'
-import TicketOrder from '../components/Ticket/TicketOrder.vue'
+import MuseumHeader from '../../components/MuseumHeader.vue'
+import MuseumNavBar from '../../components/MuseumNavBar.vue'
+import OceanSpeciesCard from '../../components/MarineSpecies/OceanSpeciesCard.vue'
 
 </script>
 
@@ -16,7 +16,7 @@ import TicketOrder from '../components/Ticket/TicketOrder.vue'
             </div>
         </div>
         <div class="content-container">
-            <!-- <TicketOrder /> -->
+            <OceanSpeciesCard />
         </div>
     </div>
 </template>

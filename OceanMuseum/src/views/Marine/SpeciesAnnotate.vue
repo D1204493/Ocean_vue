@@ -1,7 +1,7 @@
 <script setup>
-import MuseumHeader from '../components/MuseumHeader.vue'
-import MuseumNavBar from '../components/MuseumNavBar.vue'
-import SpeciesAnnotate from '../components/MarineSpecies/SpeciesAnnotate.vue'
+import MuseumHeader from '../../components/MuseumHeader.vue'
+import MuseumNavBar from '../../components/MuseumNavBar.vue'
+import SpeciesAnnotate from '../../components/MarineSpecies/SpeciesAnnotate.vue'
 
 </script>
 
