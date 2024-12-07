@@ -26,22 +26,40 @@
             </div>
 
             <div class="pagination">
-                <button 
-                    class="page-button" 
-                    @click="currentPage--" 
-                    :disabled="currentPage === 1"
-                >
+                <button class="page-button" @click="currentPage--" :disabled="currentPage === 1">
                     上一頁
                 </button>
                 <span class="page-info">{{ currentPage }} / {{ totalPages }}</span>
-                <button 
-                    class="page-button" 
-                    @click="currentPage++" 
-                    :disabled="currentPage === totalPages"
-                >
+                <button class="page-button" @click="currentPage++" :disabled="currentPage === totalPages">
                     下一頁
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- 詢問AI Button -->
+    <div class="header-section">
+        <button class="gpt-button" @click="toggleChat">
+            <span class="gpt-icon">🤖</span>
+            詢問AI助理
+        </button>
+    </div>
+
+    <!-- 對話視窗 -->
+    <div v-if="showChat" class="chat-dialog">
+        <div class="chat-header">
+            <span>AI助理</span>
+            <button class="close-button" @click="toggleChat">×</button>
+        </div>
+        <div class="chat-body" ref="chatBody">
+            <div v-for="(message, index) in messages" :key="index"
+                :class="['chat-message', message.isUser ? 'user-message' : 'bot-message']">
+                {{ message.text }}
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" v-model="userInput" @keyup.enter="sendMessage" placeholder="輸入問題..." />
+            <button class="send-button" @click="sendMessage">送出</button>
         </div>
     </div>
 </template>
@@ -55,12 +73,16 @@ export default {
             expandedIndex: null,
             currentPage: 1,
             itemsPerPage: 6,
+            showChat: false,
+            userInput: "",
+            messages: [],
             tabs: [
                 { id: 'traffic', name: '交通與住宿類' },
                 { id: 'purchase', name: '購票與收費類' },
                 { id: 'service', name: '網站與服務類' }
             ],
             questions: [],
+            isLoading: false,
         }
     },
     computed: {
@@ -90,8 +112,58 @@ export default {
             try {
                 const response = await fetch('http://localhost:8080/FAQ/get');
                 this.questions = await response.json();
-            } catch(error) {
+            } catch (error) {
                 console.log('Failed to fetch FAQ data:', error);
+            }
+        },
+        toggleChat() {
+            this.showChat = !this.showChat;
+        },
+        async sendMessage() {
+            if (!this.userInput.trim() || this.isLoading) return;
+
+            const userMessage = this.userInput.trim();
+            this.messages.push({ text: userMessage, isUser: true });
+            this.userInput = '';
+            this.isLoading = true;
+
+            try {
+                const response = await fetch('http://localhost:8080/api/chat', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                     },
+                    body: JSON.stringify({ 
+                        message: userMessage 
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || '系統發生錯誤');
+                }
+                
+                this.messages.push({ 
+                    text: data.response, 
+                    isUser: false 
+                });
+
+                // 自動滾動到最新消息
+                this.$nextTick(() => {
+                    if (this.$refs.chatBody) {
+                        this.$refs.chatBody.scrollTop = this.$refs.chatBody.scrollHeight;
+                    }
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                this.messages.push({ 
+                    text: `錯誤！${error.message || '系統發生錯誤，請稍後再試。'}`, 
+                    isUser: false 
+                });
+            } finally {
+                this.isLoading = false;
             }
         },
     },
@@ -220,6 +292,116 @@ export default {
 .page-info {
     font-size: 14px;
     color: #666;
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.gpt-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #19c37d;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.gpt-button:hover {
+    background: #15a76c;
+}
+
+.gpt-icon {
+    font-size: 16px;
+}
+
+.chat-dialog {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    padding: 10px;
+    background: #19c37d;
+    color: white;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.chat-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.chat-message {
+    margin: 5px;
+    padding: 8px 12px;
+    border-radius: 15px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.user-message {
+    background: #e6f7ff;
+    margin-left: auto;
+}
+
+.bot-message {
+    background: #f5f5f5;
+    margin-right: auto;
+}
+
+.chat-footer {
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.chat-footer input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+}
+
+.send-button {
+    padding: 8px 15px;
+    background: #19c37d;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.send-button:hover {
+    background: #15a76c;
 }
 
 @media (min-width: 1024px) {
