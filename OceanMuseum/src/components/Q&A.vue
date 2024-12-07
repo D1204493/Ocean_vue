@@ -1,14 +1,25 @@
 <template>
     <div class="container">
-        <div class="tab-container">
-            <button class="tab-button" :class="{ active: activeTab === 'all', 'all-tab': activeTab === 'all' }"
-                @click="activeTab = 'all'">
-                全部
-            </button>
-            <button v-for="tab in tabs" :key="tab.id" class="tab-button" :class="{ active: activeTab === tab.id }"
-                @click="activeTab = tab.id">
-                {{ tab.name }}
-            </button>
+
+        <div class="header-wrapper">
+            <div class="tab-container">
+                <button class="tab-button" :class="{ active: activeTab === 'all', 'all-tab': activeTab === 'all' }"
+                    @click="activeTab = 'all'">
+                    全部
+                </button>
+                <button v-for="tab in tabs" :key="tab.id" class="tab-button" :class="{ active: activeTab === tab.id }"
+                    @click="activeTab = tab.id">
+                    {{ tab.name }}
+                </button>
+            </div>
+
+            <!-- 詢問AI Button -->
+            <div class="header-section">
+                <button class="gpt-button" @click="toggleChat">
+                    <span class="gpt-icon">🤖</span>
+                    詢問AI助理
+                </button>
+            </div>
         </div>
 
         <div class="content-section">
@@ -36,14 +47,7 @@
             </div>
         </div>
     </div>
-
-    <!-- 詢問AI Button -->
-    <div class="header-section">
-        <button class="gpt-button" @click="toggleChat">
-            <span class="gpt-icon">🤖</span>
-            詢問AI助理
-        </button>
-    </div>
+    
 
     <!-- 對話視窗 -->
     <div v-if="showChat" class="chat-dialog">
@@ -130,12 +134,12 @@ export default {
             try {
                 const response = await fetch('http://localhost:8080/api/chat', {
                     method: 'POST',
-                    headers: { 
+                    headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
-                     },
-                    body: JSON.stringify({ 
-                        message: userMessage 
+                    },
+                    body: JSON.stringify({
+                        message: userMessage
                     })
                 });
 
@@ -144,10 +148,10 @@ export default {
                 if (!response.ok) {
                     throw new Error(data.error || '系統發生錯誤');
                 }
-                
-                this.messages.push({ 
-                    text: data.response, 
-                    isUser: false 
+
+                this.messages.push({
+                    text: data.response,
+                    isUser: false
                 });
 
                 // 自動滾動到最新消息
@@ -158,9 +162,9 @@ export default {
                 });
             } catch (error) {
                 console.error('Error:', error);
-                this.messages.push({ 
-                    text: `錯誤！${error.message || '系統發生錯誤，請稍後再試。'}`, 
-                    isUser: false 
+                this.messages.push({
+                    text: `錯誤！${error.message || '系統發生錯誤，請稍後再試。'}`,
+                    isUser: false
                 });
             } finally {
                 this.isLoading = false;
@@ -184,7 +188,14 @@ export default {
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 10px 20px;
+}
+
+.header-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .tab-container {
@@ -306,8 +317,8 @@ export default {
     align-items: center;
     gap: 8px;
     padding: 8px 16px;
-    background: #19c37d;
-    color: white;
+    background: #dbe7f6;
+    color: black;
     border: none;
     border-radius: 20px;
     cursor: pointer;
@@ -315,7 +326,8 @@ export default {
 }
 
 .gpt-button:hover {
-    background: #15a76c;
+    background: #4a90e2;
+    color: white;
 }
 
 .gpt-icon {
@@ -337,7 +349,7 @@ export default {
 
 .chat-header {
     padding: 10px;
-    background: #19c37d;
+    background: #4a90e2;
     color: white;
     border-radius: 8px 8px 0 0;
     display: flex;
@@ -393,7 +405,7 @@ export default {
 
 .send-button {
     padding: 8px 15px;
-    background: #19c37d;
+    background: #4a90e2;
     color: white;
     border: none;
     border-radius: 20px;
