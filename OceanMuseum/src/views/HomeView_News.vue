@@ -1,9 +1,9 @@
 <script setup>
 import MuseumHeader from '../components/MuseumHeader.vue'
 import MuseumNavBar from '../components/MuseumNavBar.vue'
-import Activity from '@/components/homePage/Activity.vue';
-import News from '@/components/homePage/News.vue';
-import Reports from '@/components/homePage/Reports.vue';
+import Activities from '../components/homePage/Activities.vue';
+import News from '../components/homePage/News.vue';
+import Reports from '../components/homePage/Reports.vue';
 
 // import OceanSpeciesCard from '../components/MarineSpecies/OceanSpeciesCard.vue'
 
@@ -20,7 +20,7 @@ import Reports from '@/components/homePage/Reports.vue';
             </div>
         </div>
         <div class="content-container">
-            <Activity />
+            <News />
         </div>
     </div>
 </template>

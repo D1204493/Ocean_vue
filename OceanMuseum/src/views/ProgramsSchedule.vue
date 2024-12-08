@@ -1,7 +1,7 @@
 <script setup>
 import MuseumHeader from '../components/MuseumHeader.vue'
 import MuseumNavBar from '../components/MuseumNavBar.vue'
-import Activity from '@/components/homePage/Activity.vue';
+import Activity from '@/components/homePage/Activities.vue';
 import News from '@/components/homePage/News.vue';
 import Reports from '@/components/homePage/Reports.vue';
 import ProgramsSchedule from '@/components/ProgramsSchedule.vue';
