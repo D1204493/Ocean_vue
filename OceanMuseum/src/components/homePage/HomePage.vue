@@ -31,88 +31,19 @@
             </div>
           </div>
         </div>
-  
-        <!-- 首頁顯示兩個公告 -->
-        <template v-if="$route.path === '/' || $route.path === '/home'">
-          <!-- 館方快訊 -->
-          <div class="announcement-section mb-5">
-            <div class="section-header mb-4">
-              <h3 class="text-center section-title">館方快訊</h3>
-            </div>
-            <NewsComponent :announcements="displayedNews" />
-          
-            <!-- 看更多按鈕 -->
-            <div v-if="news.length > 10" class="text-end mt-3">
-              <button 
-                @click="toggleNewsExpand"
-                class="btn btn-link text-primary"
-              >
-                {{ isNewsExpanded ? '收合' : '看更多...' }}
-              </button>
-            </div>
-          </div>
-  
-          <!-- 相關報導 -->
-          <div class="announcement-section">
-            <div class="section-header mb-4">
-              <h3 class="text-center section-title">相關報導</h3>
-            </div>
-            <ReportsComponent :announcements="displayedReports" /> 
-           
-            <!-- 看更多按鈕 -->
-            <div v-if="reports.length > 10" class="text-end mt-3">
-              <button 
-                @click="toggleReportsExpand"
-                class="btn btn-link text-primary"
-              >
-                {{ isReportsExpanded ? '收合' : '看更多...' }}
-              </button>
-            </div>
-          </div>
-        </template>
-  
-        <!-- 館方快訊頁面 -->
-        <template v-else-if="$route.path === '/news'">
-          <div class="announcement-section">
-            <div class="section-header mb-4">
-              <h3 class="text-center section-title">館方快訊</h3>
-            </div>
-            <NewsComponent :announcements="displayedNews" />
-          </div>
-        </template>
-  
-        <!-- 相關報導頁面 -->
-        <template v-else-if="$route.path === '/reports'">
-          <div class="announcement-section">
-            <div class="section-header mb-4">
-              <h3 class="text-center section-title">相關報導</h3>
-            </div>
-            <ReportsComponent :announcements="displayedReports" /> 
-          </div>
-        </template>
-  
-        <!-- 科教活動頁面 -->
-        <template v-else-if="$route.path === '/activities'">
-          <div class="announcement-section">
-            <div class="section-header mb-4">
-              <h3 class="text-center section-title">科教活動</h3>
-            </div>
-            <ActivitiesComponent :announcements="filteredActivities" />
-          </div>
-        </template>
+
+        <!-- Display Content Dynamically -->
+        <router-view :news="filteredNews" :reports="filteredReports" :activities="filteredActivities" />
       </div>
     </div>
   </template>
   
   <script setup>
   import { ref, computed } from 'vue'
-  import Activities from "./components/Activities.vue"
-  import News from "./components/News.vue"
-  import Reports from "./components/Reports.vue"
+  import { useRoute } from 'vue-router'
+ 
   
   // 控制展開狀態
-  const isNewsExpanded = ref(false)
-  const isReportsExpanded = ref(false)
   const searchQuery = ref('')
   
   // 館方快訊資料
@@ -274,67 +205,33 @@
     { name: '科教活動', path: '/activities' }
   ])
   
-  // 計算屬性：過濾後的館方快訊
-  const displayedNews = computed(() => {
-    let filtered = newsData.value
+  // Computed properties to filter data based on search query
+const filteredNews = computed(() => {
+  return filterData(newsData.value)
+})
+
+const filteredReports = computed(() => {
+  return filterData(reportsData.value)
+})
+
+const filteredActivities = computed(() => {
+  return filterData(activitiesData.value)
+})
   
-    // 搜尋過濾
-    if (searchQuery.value) {
-      const query = searchQuery.value.toLowerCase()
-      filtered = filtered.filter(announcement => 
-        announcement.title.toLowerCase().includes(query) ||
-        announcement.details.toLowerCase().includes(query) 
-      )
-    }
-  
-    // 根據展開狀態決定顯示數量
-    return isNewsExpanded.value ? filtered : filtered.slice(0, 10)
-  })
-  
-  // 計算屬性：過濾後的相關報導
-  const displayedReports = computed(() => {
-    let filtered = reportsData.value
-  
-    // 搜尋過濾
-    if (searchQuery.value) {
-      const query = searchQuery.value.toLowerCase()
-      filtered = filtered.filter(announcement => 
-        announcement.title.toLowerCase().includes(query) ||
-        announcement.details.toLowerCase().includes(query) 
-      )
-    }
-  
-    // 根據展開狀態決定顯示數量
-    return isReportsExpanded.value ? filtered : filtered.slice(0, 10)
-  })
-  
-  // 計算屬性：過濾後的科教活動
-  const filteredActivities= computed(() => {
-    if (!searchQuery.value) return activitiesData.value
-  
-    const query = searchQuery.value.toLowerCase()
-    return activitiesData.value.filter(activity =>
-      activity.title.toLowerCase().includes(query) ||
-      activity.details.toLowerCase().includes(query) 
-    )
-  })
-  
-  // 方法：切換館方快訊展開狀態
-  const toggleNewsExpand = () => {
-    isNewsExpanded.value = !isNewsExpanded.value
-  }
-  
-  // 方法：切換相關報導展開狀態
-  const toggleReportsExpand = () => {
-    isReportsExpanded.value = !isReportsExpanded.value
-  }
-  
-  // 方法：處理搜尋
-  const handleSearch = () => {
-    // 搜尋時重置展開狀態
-    isNewsExpanded.value = false
-    isReportsExpanded.value = false
-  }
+// 過濾資料的簡化函數
+const filterData = (data) => {
+  return data.filter(item => 
+    item.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    item.details.toLowerCase().includes(searchQuery.value.toLowerCase())
+  )
+}
+
+// 處理搜尋功能
+const handleSearch = () => {
+  // 清除或更新過濾後的資料
+}
+
+
   </script>
   
   <style scoped>

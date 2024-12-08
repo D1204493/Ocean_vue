@@ -1,12 +1,15 @@
 <template>
-    <div class="table-responsive">
+    <div class="announcement-section">
+      <div class="section-header mb-4">
+        <h3 class="text-center section-title">相關報導</h3>
+      </div>
       <table class="table table-hover announcement-table">
         <thead>
           <tr>
-            <th class="text-center" style="width: 15%">訊息類型</th>
-            <th class="text-center" style="width: 40%">日期</th>
-            <th class="text-center" style="width: 20%">標題</th>
-            <th class="text-center" style="width: 25%">內容</th>
+            <th class="text-center">類型</th>
+            <th class="text-center">日期</th>
+            <th class="text-center">標題</th>
+            <th class="text-center">內容</th>
           </tr>
         </thead>
         <tbody>
@@ -16,9 +19,9 @@
             class="announcement-row"
             @click="showAnnouncementDetail(announcement)"
           >
-            <!-- <td class="text-center align-middle">
-              <span class="announcement-type">{{ announcement.type }}</span>
-            </td> -->
+            <td class="text-center align-middle">
+              <span class="announcement-category">{{ announcement.category }}</span>
+            </td>
             <td class="text-center align-middle">{{ announcement.category }}</td>
             <td class="text-center align-middle">{{ announcement.date }}</td>
             <td class="text-center align-middle">{{ announcement.title }}</td>
@@ -69,7 +72,7 @@
     background-color: #f8f9fa;
   }
   
-  .announcement-type {
+  .announcement-category {
     display: inline-block;
     padding: 0.25rem 0.625rem;
     background-color: #334255;

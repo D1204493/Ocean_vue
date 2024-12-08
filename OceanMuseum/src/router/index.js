@@ -15,28 +15,21 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-      children: [
-        { 
-          path: '', 
-          name: 'home',
-          component: HomeView 
-        },
-        { 
-          path: 'news', 
-          name: 'news',
-          component: HomeView_News 
-        },
-        { 
-          path: 'reports', 
-          name: 'reports',
-          component: HomeView_Reports 
-        },
-        { 
-          path: 'activities', 
-          name: 'activities',
-          component: HomeView_Activities 
-        }
-      ]
+    },
+    { 
+      path: '/news', 
+      name: 'news',
+      component: HomeView_News 
+    },
+    { 
+      path: '/reports', 
+      name: 'reports',
+      component: HomeView_Reports 
+    },
+    { 
+      path: '/activities', 
+      name: 'activities',
+      component: HomeView_Activities 
     },
     {
       path: '/MarineSpecies',
