@@ -8,7 +8,7 @@
                 <div class="personal-info">
                     <div class="form-group">
                         <label><span class="required">*</span>購票人姓名</label>
-                        <input type="text" v-model="formData.name" placeholder="John Doe">
+                        <input type="text" v-model="formData.name" placeholder="王大名">
                     </div>
 
                     <div class="form-group">
@@ -45,39 +45,15 @@
 
             <div>
                 <div class="ticket-selection">
-                    <div class="ticket-type">
+                    <div class="ticket-type" v-for="ticket in ticketPrices" :key="ticket.ticket_id">
                         <label>
-                            全票 ${{ getTicketPrice('full') }}
+                            {{getChineseTicketName(ticket.type)}} ${{ ticket.weekday }}
                             <span class="price-type">{{ getPriceType }}</span>
                         </label>
                         <div class="quantity-control">
-                            <button @click="decreaseTicket('full')" :disabled="formData.fullTickets <= 0">-</button>
-                            <input type="number" v-model="formData.fullTickets" readonly>
-                            <button @click="increaseTicket('full')">+</button>
-                        </div>
-                    </div>
-
-                    <div class="ticket-type">
-                        <label>
-                            優待票 ${{ getTicketPrice('half') }}
-                            <span class="price-type">{{ getPriceType }}</span>
-                        </label>
-                        <div class="quantity-control">
-                            <button @click="decreaseTicket('half')" :disabled="formData.halfTickets <= 0">-</button>
-                            <input type="number" v-model="formData.halfTickets" readonly>
-                            <button @click="increaseTicket('half')">+</button>
-                        </div>
-                    </div>
-
-                    <div class="ticket-type">
-                        <label>
-                            博愛票 ${{ getTicketPrice('child') }}
-                            <span class="price-type">{{ getPriceType }}</span>
-                        </label>
-                        <div class="quantity-control">
-                            <button @click="decreaseTicket('child')" :disabled="formData.childTickets <= 0">-</button>
-                            <input type="number" v-model="formData.childTickets" readonly>
-                            <button @click="increaseTicket('child')">+</button>
+                            <button @click="decreaseTicket(ticket.type)" :disabled="formData[ticket.type + 'Tickets'] <= 0">-</button>
+                            <input type="number" v-model=" formData[ticket.type + 'Tickets']" readonly>
+                            <button @click="increaseTicket(ticket.type)">+</button>
                         </div>
                     </div>
                 </div>
@@ -85,7 +61,7 @@
         </div>
 
         <div class="actions">
-            <button class="cancel-btn" @click="resetForm">取消選擇</button>
+            <button class="cancel-btn" @click="resetForm">清空資訊</button>
             <button class="submit-btn" @click="submitForm">確定購票</button>
         </div>
     </div>
@@ -96,8 +72,9 @@ export default {
     data() {
         return {
             formData: {  // 表單資料
+
+                id_number: '',
                 name: '',
-                idNumber: '',
                 phone: '',
                 email: '',
                 visitDate: '',
@@ -106,9 +83,9 @@ export default {
                 childTickets: 0  // 博愛票數量
             },
             ticketPrices: { // 票價設定
-                full: { type:'全票', weekday: 150, weekend: 200 },
-                half: { type: '博愛票', weekday: 120, weekend: 150 },
-                child: { type: '優待票', weekday: 75, weekend: 100 },
+                full: { ticket_id:"1", type:'full', weekday: 150, weekend: 200 },
+                half: { ticket_id:"2", type: 'half', weekday: 120, weekend: 150 },
+                child: { ticket_id:"3", type: 'child', weekday: 75, weekend: 100 },
             },
             // 特定假日清單 (年-月-日 格式)
             holidays: [
@@ -128,7 +105,35 @@ export default {
             previousPriceType: null,  // 記錄前一次的價格類型
         }
     },
+    //本頁面實例創建後,先自資料庫拿取票種資訊,以用於初始化vue中的票種屬性
+    async created() {
+          try{
+            const response = await fetch("http://localhost:8085/ticket/getAll",{
+              method:"GET",
+              headers:{
+                "Content-Type":"application/json"
+              }
+            });
+            if(response.ok) {
+              const tickets = await response.json();
+              this. ticketPrices.full = tickets[0];
+              this. ticketPrices.hal = tickets[1];
+              this. ticketPrices.child = tickets[2];
+            } else {
+              console.log("獲取票種失敗:",response.json());
+            }
+          } catch (error) {
+            console.log("送出獲取票種請求失敗:",error.message);
+          }
+
+    },
     computed: {
+      ticketMapping(type) {
+        if (type === 'full') return 'fullTickets';
+        if (type === 'half') return 'halfTickets';
+        if (type === 'child') return 'childTickets';
+        return null;
+      },
         isWeekend() {  // 判斷是否為週末
             if(!this.formData.visitDate) return false;
             const date = new Date(this.formData.visitDate);
@@ -157,6 +162,8 @@ export default {
                 this.formData.childTickets
             )
         }
+
+
     },
     methods: {
         getTicketPrice(type) {  // 取得票價
@@ -185,13 +192,13 @@ export default {
             switch (type) {
                 case 'full':
                     this.formData.fullTickets++
-                    break
+                    break;
                 case 'half':
                     this.formData.halfTickets++
-                    break
+                    break;
                 case 'child':
                     this.formData.childTickets++
-                    break
+                    break;
             }
         },
         // 減少票數
@@ -199,13 +206,13 @@ export default {
             switch (type) {
                 case 'full':
                     if (this.formData.fullTickets > 0) this.formData.fullTickets--
-                    break
+                    break;
                 case 'half':
                     if (this.formData.halfTickets > 0) this.formData.halfTickets--
-                    break
+                    break;
                 case 'child':
                     if (this.formData.childTickets > 0) this.formData.childTickets--
-                    break
+                    break;
             }
         },
         // 重置表單
@@ -220,14 +227,34 @@ export default {
                 halfTickets: 0,
                 childTickets: 0
             }
-        },
+        }, getChineseTicketName(englishName) {
+        if(englishName === "full") {
+          return "全票"
+        } else if (englishName === "half") {
+          return "半票"
+        } else if (englishName === "child"){
+          return  "優待票"
+        }
+      },
         // 提交表單
-        submitForm() {
+        async submitForm() {
+            const userOrderInfo = {
+              id_number:this.formData.id_number,
+              name:this.formData.name,
+              phone:this.formData.phone,
+              email:this.formData.email
+            };
             console.log('Form submitted:', this.formData)
         }
+
     }
 }
 </script>
+
+
+
+
+
 
 <style scoped>
 .booking-form {
