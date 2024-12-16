@@ -16,6 +16,24 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      children: [
+        {
+          path: '',
+          redirect: '/news'
+        },
+        {
+          path: 'news',
+          component: HomeView_News
+        },
+        {
+          path: 'reports',
+          component: HomeView_Reports
+        },
+        {
+          path: 'activities',
+          component: HomeView_Activities
+        }
+      ]
     },
     { 
       path: '/news', 

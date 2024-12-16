@@ -21,11 +21,12 @@ import Reports from '../components/homePage/Reports.vue';
             <div class="header-wrapper">
                 <MuseumHeader />
                 <MuseumNavBar />
-                <news/>
-            </div>
+               </div>
         </div>
         <div class="content-container">
+            <HomePage/>
             <News/>
+
         </div>
     </div>
 </template>

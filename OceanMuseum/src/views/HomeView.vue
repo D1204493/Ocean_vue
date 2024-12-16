@@ -6,6 +6,8 @@ import News from '../components/homePage/News.vue';
 import Reports from '../components/homePage/Reports.vue';
 import Activities from '../components/homePage/Activities.vue';
 
+
+
 // import OceanSpeciesCard from '../components/MarineSpecies/OceanSpeciesCard.vue'
 
 </script>
@@ -22,7 +24,8 @@ import Activities from '../components/homePage/Activities.vue';
             </div>
         </div>
         <div class="content-container">
-            <HomePage />
+            <HomePage/>
+
         </div>
     </div>
 </template>

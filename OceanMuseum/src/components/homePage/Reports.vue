@@ -1,7 +1,7 @@
 <template>
   <div class="announcement-section">
     <div class="section-header mb-4">
-      <h3 class="text-center section-title">科教活動</h3>
+      <h3 class="text-center section-title">相關報導</h3>
     </div>
     <table class="table table-hover">
       <thead>
@@ -13,11 +13,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="activity in activities" :key="activity.id">
+        <tr v-for="report in reports" :key="report.id">
           <td>{{ formatDate(activity.date) }}</td>
-          <td>{{ activity.title }}</td>
-          <td>{{ activity.summary }}</td>
-          <td>{{ activity.details }}</td>
+          <td>{{ report.title }}</td>
+          <td>{{ report.summary }}</td>
+          <td>{{ report.details }}</td>
         </tr>
       </tbody>
     </table>
@@ -26,10 +26,10 @@
 
 <script>
 export default {
-  name: 'Activities',
+  name: 'Reports',
   data() {
     return {
-      activities: []
+      reports: []
     }
   },
   methods: {

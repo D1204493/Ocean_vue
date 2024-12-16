@@ -11,6 +11,7 @@
           <th>標題</th>
           <th>摘要</th>
           <th>詳細內容</th>
+          <th>位置</th>
         </tr>
       </thead>
       <tbody>

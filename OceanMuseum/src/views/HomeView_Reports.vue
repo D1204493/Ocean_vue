@@ -7,6 +7,7 @@
         </div>
       </div>
       <div class="content-container">
+        <home-page/>
         <Reports />
       </div>
     </div>
