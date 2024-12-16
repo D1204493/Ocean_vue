@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2294f94-2628-4b5d-a2e9-a8d682ca6b57" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OceanMuseum/src/components/Ticket/TicketOrder.vue" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/components/Ticket/TicketOrder.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -13,6 +14,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="OceanSpecies_Huang" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -31,7 +37,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;OceanSpecies__Huang&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;OceanSpecies__Hsu1215&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -57,7 +63,9 @@
       <workItem from="1733829551949" duration="6903000" />
       <workItem from="1734099487288" duration="704000" />
       <workItem from="1734246194681" duration="860000" />
-      <workItem from="1734256877348" duration="9183000" />
+      <workItem from="1734256877348" duration="9282000" />
+      <workItem from="1734312120370" duration="6620000" />
+      <workItem from="1734330398961" duration="5560000" />
     </task>
     <servers />
   </component>

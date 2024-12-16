@@ -8,27 +8,27 @@
                 <div class="personal-info">
                     <div class="form-group">
                         <label><span class="required">*</span>購票人姓名</label>
-                        <input type="text" v-model="formData.name" placeholder="王大名">
+                        <input type="text" v-model="formData.name" placeholder="王大名" required>
                     </div>
 
                     <div class="form-group">
                         <label><span class="required">*</span>身分證字號</label>
-                        <input type="text" v-model="formData.idNumber" placeholder="D123456789">
+                        <input type="text" v-model="formData.id_number" placeholder="D123456789" required>
                     </div>
 
                     <div class="form-group">
                         <label><span class="required">*</span>連絡電話</label>
-                        <input type="tel" v-model="formData.phone" placeholder="0912345678">
+                        <input type="tel" v-model="formData.phone" placeholder="0912345678" required>
                     </div>
 
                     <div class="form-group">
                         <label>電子信箱</label>
-                        <input type="email" v-model="formData.email" placeholder="John@gmail.com">
+                        <input type="email" v-model="formData.email" placeholder="John@gmail.com" >
                     </div>
 
                     <div class="form-group">
                         <label><span class="required">*</span>參觀日期</label>
-                        <input type="date" v-model="formData.visitDate" @change="handleDateChange">
+                        <input type="date" v-model="formData.visitDate" @change="handleDateChange" required>
                     </div>
                     <div v-if="formData.visitDate" class="date-type">
                         {{ isHoliday ? '假日價格' : '平日價格' }}
@@ -47,7 +47,7 @@
                 <div class="ticket-selection">
                     <div class="ticket-type" v-for="ticket in ticketPrices" :key="ticket.ticket_id">
                         <label>
-                            {{getChineseTicketName(ticket.type)}} ${{ ticket.weekday }}
+                            {{getChineseTicketName(ticket.type)}} ${{ getTicketPrice(ticket.type) }}
                             <span class="price-type">{{ getPriceType }}</span>
                         </label>
                         <div class="quantity-control">
@@ -71,8 +71,7 @@
 export default {
     data() {
         return {
-            formData: {  // 表單資料
-
+            formData: {
                 id_number: '',
                 name: '',
                 phone: '',
@@ -80,7 +79,12 @@ export default {
                 visitDate: '',
                 fullTickets: 0,  // 全票數量
                 halfTickets: 0,  // 優待票數量
-                childTickets: 0  // 博愛票數量
+                childTickets: 0,  // 博愛票數量
+                tickets: [
+                  { type: "full", quantity: 0, price:0 },
+                  { type: "half", quantity: 0, price:0 },
+                  { type: "child", quantity: 0, price:0 }
+                ]
             },
             ticketPrices: { // 票價設定
                 full: { ticket_id:"1", type:'full', weekday: 150, weekend: 200 },
@@ -106,34 +110,27 @@ export default {
         }
     },
     //本頁面實例創建後,先自資料庫拿取票種資訊,以用於初始化vue中的票種屬性
-    async created() {
-          try{
-            const response = await fetch("http://localhost:8085/ticket/getAll",{
-              method:"GET",
-              headers:{
-                "Content-Type":"application/json"
-              }
-            });
-            if(response.ok) {
-              const tickets = await response.json();
-              this. ticketPrices.full = tickets[0];
-              this. ticketPrices.hal = tickets[1];
-              this. ticketPrices.child = tickets[2];
-            } else {
-              console.log("獲取票種失敗:",response.json());
-            }
-          } catch (error) {
-            console.log("送出獲取票種請求失敗:",error.message);
-          }
-
-    },
+    // async created() {
+    //       try{
+    //         const response = await fetch("http://localhost:8080/ticket/getAll",{
+    //           method:"GET",
+    //           headers:{
+    //             "Content-Type":"application/json"
+    //           }
+    //         });
+    //         if(response.ok) {
+    //           const tickets = await response.json();
+    //           this. ticketPrices.full = tickets[0];
+    //           this. ticketPrices.hal = tickets[1];
+    //           this. ticketPrices.child = tickets[2];
+    //         } else {
+    //           console.log("獲取票種失敗:",response.json());
+    //         }
+    //       } catch (error) {
+    //         console.log("送出獲取票種請求失敗:",error.message);
+    //       }
+    // },
     computed: {
-      ticketMapping(type) {
-        if (type === 'full') return 'fullTickets';
-        if (type === 'half') return 'halfTickets';
-        if (type === 'child') return 'childTickets';
-        return null;
-      },
         isWeekend() {  // 判斷是否為週末
             if(!this.formData.visitDate) return false;
             const date = new Date(this.formData.visitDate);
@@ -162,14 +159,18 @@ export default {
                 this.formData.childTickets
             )
         }
-
-
     },
     methods: {
         getTicketPrice(type) {  // 取得票價
             if(!this.formData.visitDate) {
+              this.formData.tickets[0].price = this.ticketPrices.full.weekday;
+              this.formData.tickets[1].price = this.ticketPrices.half.weekday;
+              this.formData.tickets[2].price = this.ticketPrices.child.weekday;
                 return this.ticketPrices[type].weekday; // 預設顯示平日價格
             }
+          this.formData.tickets[0].price = this.ticketPrices.full.weekend;
+          this.formData.tickets[1].price = this.ticketPrices.half.weekend;
+          this.formData.tickets[2].price = this.ticketPrices.child.weekend;
             return this.isHoliday ? this.ticketPrices[type].weekend : this.ticketPrices[type].weekday;
         },
         handleDateChange() {  // 處理日期變更
@@ -189,31 +190,29 @@ export default {
         },
         // 增加票數
         increaseTicket(type) {
-            switch (type) {
-                case 'full':
-                    this.formData.fullTickets++
-                    break;
-                case 'half':
-                    this.formData.halfTickets++
-                    break;
-                case 'child':
-                    this.formData.childTickets++
-                    break;
-            }
+          const ticketMap = {
+            full: 0,
+            half: 1,
+            child: 2
+          };
+          const index = ticketMap[type];
+          if (index !== undefined) {
+            this.formData.tickets[index].quantity++;
+            this.formData[`${type}Tickets`]++;
+          }
         },
         // 減少票數
         decreaseTicket(type) {
-            switch (type) {
-                case 'full':
-                    if (this.formData.fullTickets > 0) this.formData.fullTickets--
-                    break;
-                case 'half':
-                    if (this.formData.halfTickets > 0) this.formData.halfTickets--
-                    break;
-                case 'child':
-                    if (this.formData.childTickets > 0) this.formData.childTickets--
-                    break;
-            }
+          const ticketMap = {
+            full: 0,
+            half: 1,
+            child: 2
+          };
+          const index = ticketMap[type];
+          if (index !== undefined && this.formData[`${type}Tickets`] > 0) {
+            this.formData.tickets[index].quantity--;
+            this.formData[`${type}Tickets`]--;
+          }
         },
         // 重置表單
         resetForm() {
@@ -227,35 +226,83 @@ export default {
                 halfTickets: 0,
                 childTickets: 0
             }
-        }, getChineseTicketName(englishName) {
-        if(englishName === "full") {
-          return "全票"
-        } else if (englishName === "half") {
-          return "半票"
-        } else if (englishName === "child"){
-          return  "優待票"
-        }
+        },
+        getChineseTicketName(englishName) {
+            if(englishName === "full") {
+              return "全票"
+            } else if (englishName === "half") {
+              return "半票"
+            } else if (englishName === "child"){
+              return  "優待票"
+            }
       },
-        // 提交表單
+        // 提交表單給後端處理
         async submitForm() {
+          if(!this.checkTicketInfo()) {
+            return;
+          }
             const userOrderInfo = {
               id_number:this.formData.id_number,
               name:this.formData.name,
               phone:this.formData.phone,
-              email:this.formData.email
+              email:this.formData.email,
+              date:this.formData.visitDate,
+              tickets:this.formData.tickets
             };
-            console.log('Form submitted:', this.formData)
-        }
+          if (!this.formData.email || this.formData.email.trim() === "") {
+            userOrderInfo.email = "No email provided";
+          }
+            console.log('Form submitted:', userOrderInfo);
+          try{
+            const response = await fetch("http://localhost:8080/ticket/orderTicket",{
+              method:"POST",
+              headers:{
+                "Content-Type":"application/json"
+              },
+              body:JSON.stringify(userOrderInfo)
+            });
 
+            if(response.ok) {
+              const message = await response.json();
+              alert(message);
+            } else {
+              console.error(`HTTP error! status: ${response.status}`);
+              alert(`訂單送出失敗，錯誤代碼：${response.status}`);
+            }
+          } catch (error) {
+            console.error("Network error:", error.message);
+            alert("網絡發生錯誤，請稍後再試");
+          }
+
+        },
+
+      checkTicketInfo(){
+        if (!this.formData.name) {
+          alert("請填寫購票人姓名！");
+          return false;
+        }
+        if (!this.formData.id_number) {
+          alert("請填寫身分證字號！");
+          return false;
+        }
+        if (!this.formData.phone) {
+          alert("請填寫連絡電話！");
+          return false;
+        }
+        if (!this.formData.visitDate) {
+          alert("請選擇參觀日期！");
+          return false;
+        }
+        const hasValidTicket = this.formData.tickets.some(ticket => ticket.quantity > 0);
+        if (!hasValidTicket) {
+          alert("至少必須選擇一種票種！");
+          return false;
+        }
+        return true;
+      }
     }
 }
 </script>
-
-
-
-
-
-
 <style scoped>
 .booking-form {
     max-width: none;
