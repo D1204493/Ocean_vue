@@ -33,37 +33,73 @@
         </div>
 
         <!-- Display Content Dynamically -->
-        <slot>
-          <router-view :news="filteredNews" :reports="filteredReports" :activities="filteredActivities" />  
-        </slot>
+        <div v-if="filteredPosts.length">
+          <router-view :museumPosts="filteredPosts" />
+        </div>
+        <div v-else>
+          <p class="text-muted">目前沒有資料。</p>
+        </div>  
       </div>
     </div>
   </template>
   
-  <script setup>
-  import { ref, computed } from 'vue'
-  import { useRoute } from 'vue-router'
- 
-  
-  // 控制展開狀態
-  const searchQuery = ref('')
-  
- 
-  
-  // 導航連結
-  const navLinks = ref([
-    { name: '館方快訊', path: '/news' },
-    { name: '相關報導', path: '/reports' },
-    { name: '科教活動', path: '/activities' }
-  ])
-  
-  // computed properties 之後將與後端 API 整合
-const filteredNews = computed(() => [])
-const filteredReports = computed(() => [])
-const filteredActivities = computed(() => [])
+  <script>
+  export default {
+    name: 'HomePage',
+    data() {
+      return {
+        museumPosts: [], // 儲存後端返回的文章資料
+        searchQuery: '', // 搜尋框輸入內容
+        activeType: 'NEWS', // 預設顯示的文章類型
+        navLinks: [
+          { name: '館方快訊', type: "NEWS" },
+          { name: '相關報導', type: "REPORT" },
+          { name: '科教活動', type: "ACTIVITY" }
+        ]
+      };
+    },
+    computed: {
+      // 搜尋功能過濾資料
+      filteredPosts() {
+        if (!this.museumPosts) return [];
+        return this.museumPosts.filter(post => 
+          post.details.toLowerCase().includes(this.searchQuery.toLowerCase()) || post.summary.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+      }
+    },
+    methods: {
+      // 切換文章類型並調用 API
+      async changeType(type) {
+        this.activeType = type; // 更新當前類型
+        await this.fetchPosts(type); // 調用 API 獲取資料
+      },
 
+    // 從後端 API 獲取所有文章資料
+    async fetchPosts(type) {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/posts/all?type=${type}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        this.museumPosts = await response.json();
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    },
 
-  </script>
+    // 處理搜尋事件
+    handleSearch() {
+      console.log("Search Query:", this.searchQuery);
+    }
+  },
+  mounted() {
+    // 組件掛載時預設加載 "NEWS" 類型的文章
+    this.fetchPosts(this.activeType);
+  }
+};
+</script>
   
   <style scoped>
   .announcement-container {

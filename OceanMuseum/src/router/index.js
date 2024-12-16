@@ -20,18 +20,6 @@ const router = createRouter({
         {
           path: '',
           redirect: '/news'
-        },
-        {
-          path: 'news',
-          component: HomeView_News
-        },
-        {
-          path: 'reports',
-          component: HomeView_Reports
-        },
-        {
-          path: 'activities',
-          component: HomeView_Activities
         }
       ]
     },
