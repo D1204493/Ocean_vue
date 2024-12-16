@@ -263,7 +263,7 @@ export default {
             });
 
             if(response.ok) {
-              const message = await response.json();
+              const message = await response.text();
               alert(message);
             } else {
               console.error(`HTTP error! status: ${response.status}`);
