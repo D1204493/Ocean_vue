@@ -1,7 +1,7 @@
 <script setup>
-import MuseumHeader from '../components/MuseumHeader.vue'
-import MuseumNavBar from '../components/MuseumNavBar.vue'
-import ProductPage from '../components/Shop/ProductPage.vue'
+import MuseumHeader from '../../components/MuseumHeader.vue'
+import MuseumNavBar from '../../components/MuseumNavBar.vue'
+import ProductPage from '../../components/Shop/ProductPage.vue'
 
 </script>
 
@@ -16,7 +16,7 @@ import ProductPage from '../components/Shop/ProductPage.vue'
             </div>
         </div>
         <div class="content-container">
-            <!-- <ProductPage /> -->
+            <ProductPage />
         </div>
     </div>
 </template>

@@ -109,7 +109,7 @@
                                                     </button>
                                                     <input type="number" class="form-control text-center"
                                                         v-model.number="item.quantity" min="1"
-                                                        @change="updateCartTotal">
+                                                        @change="handleQuantityChange(item)">
                                                     <button class="btn btn-outline-secondary"
                                                         @click="updateCartItemQuantity(item, 1)">
                                                         +
@@ -240,10 +240,23 @@ export default {
         updateCartItemQuantity(item, change) {
             const newQuantity = item.quantity + change;
             if (newQuantity >= 1) {
+                // 更新購物車 icon 的計數
+                this.cartItemCount = this.cartItemCount - item.quantity + newQuantity;
+                // 更新商品數量和總額
                 item.quantity = newQuantity;
                 item.total = item.price * newQuantity;
                 this.updateCartTotal();
             }
+        },
+
+        handleQuantityChange(item) {
+            if (item.quantity < 1) {
+                item.quantity = 1;
+            }
+            // 重新計算整個購物車的商品總數
+            this.cartItemCount = this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            item.total = item.price * item.quantity;
+            this.updateCartTotal();
         },
 
         removeFromCart(item) {
@@ -279,7 +292,7 @@ export default {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    background: white;
+    background: #c8d9f6;
     padding: 13px;
     border-radius: 50%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);

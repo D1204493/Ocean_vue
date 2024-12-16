@@ -45,9 +45,9 @@ export default {
                     url: '/TicketInfoView'
                 },
                 {
-                    text: '文創',
+                    text: '文創商品',
                     icon: '/src/components/icons/puzzle.png',
-                    url: '/'
+                    url: '/ProductView'
                 },
                 {
                     text: '服務功能介紹',
