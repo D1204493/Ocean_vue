@@ -1,94 +1,85 @@
+<!-- News.vue -->
 <template>
   <div class="announcement-section">
     <div class="section-header mb-4">
-        <h3 class="text-center section-title">館方快訊</h3>
+      <h3 class="text-center section-title">館方快訊</h3>
     </div>
-    <table class="table table-hover announcement-table">
-        <thead>
-          <tr>
-            <th class="text-center" >類型</th>
-            <th class="text-center" >日期</th>
-            <th class="text-center" >標題</th>
-            <th class="text-center" >內容</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="announcement in announcements"
-            :key="announcement.id"
-                class="announcement-row"
-            >
-            <td class="text-center align-middle">
-                <span class="announcement-category">{{ announcement.category }}</span>
-            </td>
-            <!-- <td class="text-center align-middle">{{ announcement.category }}</td> -->
-            <td class="text-center align-middle">{{ announcement.date }}</td>
-            <td class="text-center align-middle">{{ announcement.title }}</td>
-            <td class="text-center align-middle">{{ announcement.details }}</td>
-          </tr>
-        </tbody>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>日期</th>
+          <th>標題</th>
+          <th>摘要</th>
+          <th>詳細內容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="post in posts" :key="post.id">
+          <td>{{ formatDate(post.date) }}</td>
+          <td>{{ post.title }}</td>
+          <td>{{ post.summary }}</td>
+          <td>{{ post.details }}</td>
+        </tr>
+      </tbody>
     </table>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'News',
-    props: {
-      announcements: {
-        type: Array,
-        required: true
-      }
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'News',
+  data() {
+    return {
+      posts: []
     }
-  }
-  </script>
-  
-  <style scoped>
-  .announcement-table {
-    margin-bottom: 0;
-  }
-  
-  .announcement-table thead th {
-    background-color: #f8f9fa;
-    border-bottom: 2px solid #FFCD50;
-    color: #334255;
-    font-weight: 500;
-    padding: 1rem;
-  }
-  
-  .announcement-row {
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .announcement-row:hover {
-    background-color: #f8f9fa;
-  }
-  
-  .announcement-category {
-    display: inline-block;
-    padding: 0.25rem 0.625rem;
-    background-color: #334255;
-    color: #fff;
-    border-radius: 50px;
-    font-size: 0.875rem;
-  }
-  
-  td {
-    padding: 1rem !important;
-    color: #495057;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .announcement-category {
-      padding: 0.15rem 0.5rem;
-      font-size: 0.75rem;
+  },
+  methods: {
+    formatDate(date) {
+      return new Date(date).toLocaleDateString('zh-TW')
     }
-    
-    td, th {
-      padding: 0.75rem !important;
-      font-size: 0.875rem;
-    }
+  },
+  mounted() {
+    // 這裡可以之後加入獲取資料的邏輯
   }
-  </style>
+}
+</script>
+
+<style scoped>
+.announcement-section {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.section-title {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 12px;
+}
+
+.table td {
+  padding: 12px;
+  vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+  .table {
+    font-size: 14px;
+  }
+  
+  .table td, .table th {
+    padding: 8px;
+  }
+}
+</style>
