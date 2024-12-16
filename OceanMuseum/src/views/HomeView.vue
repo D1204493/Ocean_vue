@@ -1,7 +1,7 @@
 <script setup>
 import MuseumHeader from '../components/MuseumHeader.vue'
 import MuseumNavBar from '../components/MuseumNavBar.vue'
-import TicketOrder from '../components/Ticket/TicketOrder.vue'
+import ProductPage from '../components/Shop/ProductPage.vue'
 
 </script>
 
@@ -9,15 +9,15 @@ import TicketOrder from '../components/Ticket/TicketOrder.vue'
 <template>
 
     <div class="museum-app">
-        <div class="fixed-header">
+        <!-- <div class="fixed-header">
             <div class="header-wrapper">
                 <MuseumHeader />
                 <MuseumNavBar />
             </div>
-        </div>
-        <!-- <div class="content-container">
-            <TicketOrder />
         </div> -->
+        <div class="content-container">
+            <ProductPage />
+        </div>
     </div>
 </template>
 
