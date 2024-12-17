@@ -19,6 +19,7 @@ const router = createRouter({
       children: [
         {
           path: '',
+          name: 'home-news',
           redirect: '/news'
         }
       ]
