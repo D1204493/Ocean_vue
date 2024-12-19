@@ -1,12 +1,12 @@
 <script setup>
-import MuseumHeader from '../components/MuseumHeader.vue'
-import MuseumNavBar from '../components/MuseumNavBar.vue'
-import Activity from '../components/homePage/Activities.vue';
-import News from '../components/homePage/News.vue';
-import Reports from '../components/homePage/Reports.vue';
-import ProgramsSchedule from '../components/ProgramsSchedule.vue';
+import MuseumHeader from '../../components/MuseumHeader.vue'
+import MuseumNavBar from '../../components/MuseumNavBar.vue'
+import ProductPage from '../../components/Shop/ProductPage.vue'
+import HomePage from '../../components/homePage/HomePage.vue'
+import News from '../../components/homePage/News.vue';
+import Reports from '../../components/homePage/Reports.vue';
+import Activities from '../../components/homePage/Activities.vue';
 
-// import OceanSpeciesCard from '../components/MarineSpecies/OceanSpeciesCard.vue'
 
 </script>
 
@@ -18,15 +18,18 @@ import ProgramsSchedule from '../components/ProgramsSchedule.vue';
             <div class="header-wrapper">
                 <MuseumHeader />
                 <MuseumNavBar />
+             
             </div>
         </div>
         <div class="content-container">
-            <ProgramsSchedule />
+            <!-- <ProductPage /> -->
+            <HomePage/>
+
         </div>
     </div>
 </template>
 
-<style>
+<style scoped>
 * {
     margin: 0;
     padding: 0;
@@ -64,15 +67,12 @@ body {
 }
 
 .content-container {
-    padding-top: 180px;
-    /* 調整這個值以匹配 header 的實際高度 */
     width: 100%;
-    max-width: 1400px;
     margin: 0 auto;
     min-height: calc(100vh - 120px);
-    /* 確保內容區域有足夠的高度 */
     overflow-y: auto;
-    /* 允許內容區域滾動 */
+    padding: 20px;
+    margin-top: 170px;
 }
 
 /* Header 和 NavBar 的基本樣式 */
@@ -103,43 +103,23 @@ body {
 }
 
 /* 響應式設計 */
-@media (max-width: 2230px) {
+@media (min-width: 1024px) {
     .content-container {
-        padding-top: 200px;
+        padding: 40px;
+        max-width: 100%; /* 移除最大寬度限制 */
     }
 }
 
-@media (max-width: 1200px) {
-
-    .header-container,
-    .nav-container {
-        padding: 0 16px;
-    }
-
+@media (max-width: 860px) {
     .content-container {
-        padding-top: 200px;
-    }
-}
-
-@media (max-width: 1023px) {
-    .content-container {
-        padding-top: 170px;
-    }
-}
-
-@media (max-width: 900px) {
-    .content-container {
-        padding-top: 190px;
+        margin-top: 200px;
     }
 }
 
 @media (max-width: 768px) {
-    .header-wrapper {
-        padding: 8px;
-    }
-
     .content-container {
-        padding-top: 360px;
+        margin-top: 380px;
     }
 }
+
 </style>

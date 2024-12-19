@@ -1,15 +1,7 @@
 <script setup>
-import MuseumHeader from '../components/MuseumHeader.vue'
-import MuseumNavBar from '../components/MuseumNavBar.vue'
-import ProductPage from '../components/Shop/ProductPage.vue'
-import HomePage from '../components/homePage/HomePage.vue'
-import News from '../components/homePage/News.vue';
-import Reports from '../components/homePage/Reports.vue';
-import Activities from '../components/homePage/Activities.vue';
-
-
-
-// import OceanSpeciesCard from '../components/MarineSpecies/OceanSpeciesCard.vue'
+import MuseumHeader from '../../components/MuseumHeader.vue'
+import MuseumNavBar from '../../components/MuseumNavBar.vue'
+import QandA from '../../components/FQA/Q&A.vue'
 
 </script>
 
@@ -21,13 +13,10 @@ import Activities from '../components/homePage/Activities.vue';
             <div class="header-wrapper">
                 <MuseumHeader />
                 <MuseumNavBar />
-             
             </div>
         </div>
         <div class="content-container">
-            <!-- <ProductPage /> -->
-            <HomePage/>
-
+            <QandA />
         </div>
     </div>
 </template>
@@ -108,14 +97,14 @@ body {
 /* 響應式設計 */
 @media (min-width: 1024px) {
     .content-container {
-        padding: 40px;
+        padding: 45px;
         max-width: 100%; /* 移除最大寬度限制 */
     }
 }
 
 @media (max-width: 860px) {
     .content-container {
-        margin-top: 200px;
+        margin-top: 185px;
     }
 }
 
@@ -124,5 +113,6 @@ body {
         margin-top: 380px;
     }
 }
+
 
 </style>

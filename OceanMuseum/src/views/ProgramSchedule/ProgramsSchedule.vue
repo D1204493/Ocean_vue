@@ -1,14 +1,8 @@
 <script setup>
-import MuseumHeader from '../components/MuseumHeader.vue'
-import MuseumNavBar from '../components/MuseumNavBar.vue'
-import HomePage from '../components/homePage/HomePage.vue'
-import News from '../components/homePage/News.vue';
-import Reports from '../components/homePage/Reports.vue';
-import Activities from '../components/homePage/Activities.vue';
+import MuseumHeader from '../../components/MuseumHeader.vue'
+import MuseumNavBar from '../../components/MuseumNavBar.vue'
+import ProgramsSchedule from '../../components/ProgramSchedule/ProgramsSchedule.vue';
 
-
-
-// import OceanSpeciesCard from '../components/MarineSpecies/OceanSpeciesCard.vue'
 
 </script>
 
@@ -20,14 +14,10 @@ import Activities from '../components/homePage/Activities.vue';
             <div class="header-wrapper">
                 <MuseumHeader />
                 <MuseumNavBar />
-             
             </div>
         </div>
         <div class="content-container">
-            <HomePage>
-              <Reports :museumPosts="museumPosts" />
-            </HomePage>
-
+            <ProgramsSchedule />
         </div>
     </div>
 </template>
