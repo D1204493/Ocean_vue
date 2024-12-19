@@ -1,5 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import HomeView_News from '../views/HomeView_News.vue'
+import HomeView_Reports from '../views/HomeView_Reports.vue'
+import HomeView_Activities from '../views/HomeView_Activities.vue'
+import ProgramsSchedule from '../views/ProgramsSchedule.vue'
+import MarineSpecies from '../views/MarineSpecies.vue'
+import SpeciesAnnotate from '../views/SpeciesAnnotate.vue'
 import MarineSpecies from '../views/Marine/MarineSpecies.vue'
 import SpeciesAnnotate from '../views/Marine/SpeciesAnnotate.vue'
 import TicketInfoView from '../views/Ticket/TicketInfoView.vue'
@@ -8,13 +14,41 @@ import QandAView from '../views/Q&AView.vue'
 import ProductView from '../views/Shop/ProductView.vue'
 
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      children: [
+        {
+          path: '',
+          name: 'home-news',
+          redirect: '/news'
+        }
+      ]
+    },
+    {
+      path: '/news',
+      name: 'news',
+      component: HomeView_News
+    },
+    {
+      path: '/reports',
+      name: 'reports',
+      component: HomeView_Reports
+    },
+    {
+      path: '/activities',
+      name: 'activities',
+      component: HomeView_Activities
+    },
+    {
+      path: '/programs',
+      name: 'programs',
+      component: ProgramsSchedule
     },
     {
       path: '/MarineSpecies',
@@ -47,7 +81,7 @@ const router = createRouter({
       name: 'ProductView',
       component: ProductView
     },
-    
+
   ]
 })
 

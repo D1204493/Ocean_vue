@@ -22,7 +22,7 @@ export default {
                 {
                     text: '最新動態',
                     icon: '/src/components/icons/messages.png',
-                    url: '/'
+                    url: '/news'
                 },
                 {
                     text: '館場導覽',
@@ -37,7 +37,7 @@ export default {
                 {
                     text: '節目表',
                     icon: '/src/components/icons/seal.png',
-                    url: '/'
+                    url: '/programs'
                 },
                 {
                     text: '購票',
