@@ -3,6 +3,7 @@ import HomeView from '../views/HomePage/HomeView.vue'
 import HomeView_News from '../views/HomePage/HomeView_News.vue'
 import HomeView_Reports from '../views/HomePage/HomeView_Reports.vue'
 import HomeView_Activities from '../views/HomePage/HomeView_Activities.vue'
+import MuseumGuide from '../views/MuseumGuide/MuseumGuide.vue'
 import ProgramsSchedule from '../views/ProgramSchedule/ProgramsSchedule.vue'
 import MarineSpecies from '../views/Marine/MarineSpecies.vue'
 import SpeciesAnnotate from '../views/Marine/SpeciesAnnotate.vue'
@@ -42,6 +43,11 @@ const router = createRouter({
       path: '/activities',
       name: 'activities',
       component: HomeView_Activities
+    },
+    {
+      path: '/guide',
+      name: 'MuseumGuide',
+      component: MuseumGuide
     },
     {
       path: '/programs',

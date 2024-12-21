@@ -27,7 +27,7 @@ export default {
                 {
                     text: '館場導覽',
                     icon: '/src/components/icons/museum.png',
-                    url: '/'
+                    url: '/guide'
                 },
                 {
                     text: '認識海洋生物',

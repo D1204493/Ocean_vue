@@ -37,7 +37,7 @@
         <p>摘要：{{ selectedItem.summary }}</p>
         <p>內容：{{ selectedItem.details }}</p>
         <p>地點：{{ selectedItem.location }}</p>
-        <button @click="selectedItem = null">關閉</button>
+        <button @click="selectedItem = null" class="close-btn">關閉</button>
       </div>
     </div>
   </div>
@@ -95,5 +95,19 @@ export default {
   border-radius: 5px;
   width: 90%;
   max-width: 500px;
+}
+.close-btn {
+  margin-top: 10px;
+  background: #0078d7;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.close-btn:hover {
+  background: #005bb5;
 }
 </style>

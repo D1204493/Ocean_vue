@@ -98,11 +98,13 @@ export default {
 }
 .custom-nav-btn {
   margin: 0 10px;
-  padding: 10px 20px;
-  background-color: #f8f9fa;
   border: 1px solid #ddd;
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #f0f0f0;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 .custom-nav-btn.active {
   background-color: #ffc107;
@@ -114,4 +116,5 @@ export default {
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+
 </style>
