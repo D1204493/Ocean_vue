@@ -97,7 +97,7 @@ export default {
 .title {
   font-size: 24px;
   margin-bottom: 20px;
-  color: #d17a22;
+  color: #ffa500;
   font-weight: 900;
   }
 
@@ -137,7 +137,7 @@ export default {
   display: block;
   margin-top: 5px;
   font-size: 14px;
-  color: #d17a22;
+  color: #ffa500;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 4px;
   padding: 2px 5px;

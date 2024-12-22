@@ -60,11 +60,10 @@ body {
 }
 
 .content-container {
-    padding: 0 16px;
     padding-top: 180px;
     /* 調整這個值以匹配 header 的實際高度 */
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     min-height: calc(100vh - 120px);
     /* 確保內容區域有足夠的高度 */

@@ -157,6 +157,12 @@ export default {
 
 .programs-schedule {
   text-align: center;
+  margin: 20px;
+}
+
+/*
+.programs-schedule {
+  text-align: center;
   font-family: Arial, sans-serif;
   background-color: #fafafa;
   max-width: 100%;
@@ -164,6 +170,7 @@ export default {
   padding: 20px;
   border-radius: 10px;
 }
+*/
 
 /* 日期選擇器 */
 .date-selector {
@@ -235,6 +242,10 @@ export default {
 .card-content {
   padding: 10px;
   text-align: center;
+  color: #d17a22;
+  font-size: 18px;
+  font-weight: bold;
+  
 }
 
 /* Modal 設計 */
@@ -273,7 +284,7 @@ export default {
 .modal-info h3 {
   font-size: 20px;
   margin-bottom: 10px;
-  color: #007bff;
+  color: #ffa500;
 }
 
 .modal-info p {
