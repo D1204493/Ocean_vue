@@ -33,7 +33,6 @@
         @click="showDetails(morningProgram)"
       >
         <img :src="morningProgram.img_url" alt="上午節目" class="program-image" />
-        <h3 class="program-session">上午節目</h3>
         <h3 class="program-title">{{ morningProgram.title }}</h3>
       </div>
       <div
@@ -42,26 +41,20 @@
         @click="showDetails(afternoonProgram)"
       >
         <img :src="afternoonProgram.img_url" alt="下午節目" class="program-image" />
-        <h3 class="program-session">下午節目</h3>
         <h3 class="program-title">{{ afternoonProgram.title }}</h3>
       </div>
     </div>
 
-    <!-- 詳細內容 Modal -->
-    <div v-if="selectedProgram" class="modal-overlay" @click="closeDetails">
-      <div class="modal-content" @click.stop>
-        <img :src="selectedProgram.img_url" :alt="selectedProgram.title" class="modal-image" />
-        <div class="modal-info">
-          <h3>{{ selectedProgram.title }}</h3>
-          <p>{{ selectedProgram.description }}</p>
-          <p>開始時間：{{ selectedProgram.start_time }}</p>
-          <p>結束時間：{{ selectedProgram.end_time }}</p>
-          <p>地點：{{ selectedProgram.location }}</p>
-          <button class="close-button" @click="closeDetails">關閉</button>
-        </div>
-      </div>
+    <!-- 詳細內容 -->
+    <div v-if="selectedProgram" class="program-details">
+      <h3>{{ selectedProgram.title }}</h3>
+      <p>{{ selectedProgram.description }}</p>
+      <p>開始時間：{{ selectedProgram.start_time }}</p>
+      <p>結束時間：{{ selectedProgram.end_time }}</p>
+      <p>地點：{{ selectedProgram.location }}</p>
+      <button class="close-button" @click="selectedProgram = null">關閉</button>
     </div>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -142,10 +135,6 @@ export default {
       // 顯示詳細內容
       this.selectedProgram = program;
     },
-    closeDetails() {
-      // 關閉詳細內容
-      this.selectedProgram = null;
-    },
   },
 };
 </script>
@@ -153,47 +142,30 @@ export default {
 <style scoped>
 .programs-schedule {
   text-align: center;
+  padding: 20px;
   font-family: Arial, sans-serif;
   background-color: #f8f9fa;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-
-}
-
-/* 日期選擇器 */
-.date-selector {
-  text-align: left;
-  margin-bottom: 20px;
-}
-
-.date-selector label {
-  font-size: 16px;
-  font-weight: bold;
-  margin-right: 10px;
 }
 
 .date-selector select {
-  padding: 8px 12px;
-  font-size: 14px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  padding: 8px;
+  margin: 10px;
+  font-size: 16px;
 }
 
-/* 日期顯示與星期 */
-.date-display {
-  margin: 20px 0;
+.disabled-option {
+  color: gray;
 }
 
 .date-display h2 {
-  margin: 20px;
+  margin: 20px 0;
   font-size: 24px;
   color: #2c3e50;
 }
 
 .week-info button {
   margin: 5px;
-  padding: 8px 16px;
+  padding: 10px;
   font-size: 14px;
   color: white;
   background-color: #007bff;
@@ -206,21 +178,20 @@ export default {
   background-color: #0056b3;
 }
 
-
 .programs-container {
   display: flex;
-  justify-content: space-evenly;
-  /*flex-wrap: wrap;*/
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
 .program-card {
-  width: 48%;
-  background: white;
+  width: 350px; /* 調整卡片寬度 */
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
 }
 
@@ -232,79 +203,45 @@ export default {
   width: 100%;
   height: 220px;
   object-fit: cover;
-  border-bottom: 1px solid #ddd;
-}
-
-.program-session {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 10px 0;
-  color: #0078d7;
 }
 
 .program-title {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 10px;
+  font-size: 18px;
+  margin: 15px 0;
+  color: #333;
 }
 
-/* Modal 設計 */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: white;
+.program-details {
+  margin: 30px auto;
   padding: 20px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
   max-width: 500px;
-  width: 90%;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
-.modal-image {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 8px;
-}
-
-.modal-info h3 {
-  font-size: 20px;
+.program-details h3 {
   margin-bottom: 10px;
   color: #007bff;
 }
 
-.modal-info p {
-  font-size: 14px;
-  color: #555;
+.program-details p {
+  margin-bottom: 8px;
 }
-
 
 .close-button {
   background-color: #FFCD50; /* 黃色背景 */
-  padding: 10px 20px; /* 上下左右內邊距 */
+  color: #333; /* 深灰文字顏色 */
+  border: none; /* 移除邊框 */
+  border-radius: 20px; /* 圓角按鈕 */
+  padding: 8px 20px; /* 上下左右內邊距 */
   font-size: 16px; /* 文字大小 */
   font-weight: bold; /* 粗體字 */
-  border: none; /* 移除邊框 */
-  border-radius: 5px; /* 圓角按鈕 */
   cursor: pointer; /* 滑鼠懸停時顯示點擊手勢 */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 按鈕陰影 */
   transition: all 0.3s ease; /* 平滑過渡效果 */
-  color: #333; /* 深灰文字顏色 */
-  
 }
 
 .close-button:hover {
