@@ -106,8 +106,11 @@ export default {
   cursor: pointer;
   transition: all 0.3s ease;
 }
+.custom-nav-btn:hover {
+    background-color: #e0e0e0;
+}
 .custom-nav-btn.active {
-  background-color: #ffc107;
+  background-color: #ffa500;
   color: white;
 }
 .search-box input {

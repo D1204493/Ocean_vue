@@ -2,7 +2,7 @@
   <div class="programs-schedule">
     <!-- 日期選擇器 -->
     <div class="date-selector">
-      <label for="date-picker">日期查詢：</label>
+      <label for="date-picker">📅日期查詢：</label>
       <select id="date-picker" v-model="selectedDate" @change="updatePrograms">
         <option
           v-for="date in activeDates"
@@ -18,11 +18,9 @@
 
     <!-- 日期顯示與星期 -->
     <div class="date-display">
-      <h2>{{ selectedDate }} 當日活動</h2>
-      <div class="week-info">
-        <button class="time-btn">時間</button>
-        <button class="week-btn">{{ getWeekDay(selectedDate) }}</button>
-      </div>
+      <h2>
+        📆 {{ selectedDate }}（{{ getWeekDay(selectedDate) }}）當日活動
+      </h2>
     </div>
 
     <!-- 上午與下午節目展示 -->
@@ -32,18 +30,23 @@
         class="program-card"
         @click="showDetails(morningProgram)"
       >
+        <div class="card-header morning">上午節目</div> 
         <img :src="morningProgram.img_url" alt="上午節目" class="program-image" />
-        <h3 class="program-session">上午節目</h3>
-        <h3 class="program-title">{{ morningProgram.title }}</h3>
+        <div class="card-content">
+          <h3 class="program-title">{{ morningProgram.title }}</h3>
+        </div>
       </div>
+      
       <div
         v-if="afternoonProgram"
         class="program-card"
         @click="showDetails(afternoonProgram)"
       >
+        <div class="card-header afternoon">下午節目</div>
         <img :src="afternoonProgram.img_url" alt="下午節目" class="program-image" />
-        <h3 class="program-session">下午節目</h3>
-        <h3 class="program-title">{{ afternoonProgram.title }}</h3>
+        <div class="card-content">
+          <h3 class="program-title">{{ afternoonProgram.title }}</h3>
+        </div>      
       </div>
     </div>
 
@@ -54,9 +57,9 @@
         <div class="modal-info">
           <h3>{{ selectedProgram.title }}</h3>
           <p>{{ selectedProgram.description }}</p>
-          <p>開始時間：{{ selectedProgram.start_time }}</p>
-          <p>結束時間：{{ selectedProgram.end_time }}</p>
-          <p>地點：{{ selectedProgram.location }}</p>
+          <p>🕒開始時間：{{ selectedProgram.start_time }}</p>
+          <p>🕒結束時間：{{ selectedProgram.end_time }}</p>
+          <p>📍 地點：{{ selectedProgram.location }}</p>
           <button class="close-button" @click="closeDetails">關閉</button>
         </div>
       </div>
@@ -151,14 +154,15 @@ export default {
 </script>
 
 <style scoped>
+
 .programs-schedule {
   text-align: center;
   font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
-  max-width: 1200px;
-  margin: 0 auto;
+  background-color: #fafafa;
+  max-width: 100%;
+  margin: 20px auto;
   padding: 20px;
-
+  border-radius: 10px;
 }
 
 /* 日期選擇器 */
@@ -174,78 +178,63 @@ export default {
 }
 
 .date-selector select {
-  padding: 8px 12px;
+  padding: 8px;
   font-size: 14px;
   border-radius: 5px;
-  border: 1px solid #ccc;
 }
 
-/* 日期顯示與星期 */
-.date-display {
-  margin: 20px 0;
-}
-
+/* 日期顯示 */
 .date-display h2 {
-  margin: 20px;
-  font-size: 24px;
+  font-size: 28px;
+  margin-bottom: 20px;
   color: #2c3e50;
 }
 
-.week-info button {
-  margin: 5px;
-  padding: 8px 16px;
-  font-size: 14px;
-  color: white;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.week-info button:hover {
-  background-color: #0056b3;
-}
-
-
+/* 卡片設計 */
 .programs-container {
   display: flex;
-  justify-content: space-evenly;
-  /*flex-wrap: wrap;*/
   gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .program-card {
-  width: 48%;
+  width: 45%;
   background: white;
-  border-radius: 10px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
 }
 
 .program-card:hover {
-  transform: scale(1.05); /* 放大效果 */
+  transform: translateY(-5px);
+}
+
+.card-header {
+  text-align: center;
+  font-size: 16px;
+  padding: 8px 0;
+  font-weight: bold;
+}
+
+.morning {
+  background-color: #ffd580;
+}
+
+.afternoon {
+  background-color: #ffa07a;
 }
 
 .program-image {
   width: 100%;
-  height: 220px;
+  height: 200px;
   object-fit: cover;
-  border-bottom: 1px solid #ddd;
 }
 
-.program-session {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 10px 0;
-  color: #0078d7;
-}
-
-.program-title {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 10px;
+.card-content {
+  padding: 10px;
+  text-align: center;
 }
 
 /* Modal 設計 */
@@ -270,7 +259,7 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  max-width: 500px;
+  max-width: 600px;
   width: 90%;
 }
 

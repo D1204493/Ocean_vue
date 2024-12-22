@@ -87,6 +87,7 @@ export default {
   overflow-y: auto; /* 垂直滾動條 */
   border: 1px solid #ddd; /* 添加邊框 */
   border-radius: 5px; /* 圓角 */
+  position: relative;
 }
 
 /* 表格樣式 */
@@ -98,19 +99,19 @@ export default {
 
 .styled-table thead th {
   font-weight: 900; /* 表頭字體加粗 */
-  background-color: #fff8e1; /* 表頭背景色 */
   color: #d17a22; /* 表頭字體顏色 */
-  border-bottom: 2px solid #d17a22; /* 表頭底線 */
+  border-bottom: 2px solid #ffa500; /* 表頭底線 */
   padding: 10px;
+  text-align: center;
 }
 
 /* 奇偶行背景色 */
 .styled-table tbody tr:nth-of-type(odd) {
-  background-color: #fffdf2; /* 奇數行背景色 */
+  background-color: #ffffff; /* 奇數行背景色 */
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-  background-color: #f5f5f5; /* 偶數行背景色 */
+  background-color: #f2f2f2; /* 偶數行背景色 */
 }
 
 .styled-table tbody tr:hover {
@@ -128,6 +129,12 @@ export default {
   text-align: left;
 }
 
+/* 儲存格最後一列邊框去除 */
+.styled-table td:last-child,
+.styled-table th:last-child {
+  border-right: none;
+}
+
 
 /* 滾動條設計 */
 .table-container::-webkit-scrollbar {
@@ -139,7 +146,7 @@ export default {
 }
 
 .table-container::-webkit-scrollbar-thumb {
-  background: #d17a22; /* 滾動條顏色 */
+  background: #ffa500; /* 滾動條顏色 */
   border-radius: 4px; /* 滾動條圓角 */
 }
 
@@ -170,6 +177,7 @@ export default {
   width: 90%;
   max-width: 500px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: left;
 }
 
 .modal-content h3 {
@@ -184,7 +192,7 @@ export default {
 
 .close-btn {
   margin-top: 10px;
-  background: #d17a22;
+  background: #ffa500;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -194,7 +202,7 @@ export default {
 }
 
 .close-btn:hover {
-  background: #d17a22;
+  background: #ffa500;
   transform: scale(1.05)
 }
 </style>
