@@ -97,6 +97,8 @@ export default {
 .title {
   font-size: 24px;
   margin-bottom: 20px;
+  color: #d17a22;
+  font-weight: 900;
   }
 
 .floor-plan-container {
@@ -135,7 +137,7 @@ export default {
   display: block;
   margin-top: 5px;
   font-size: 14px;
-  color: #0078d7;
+  color: #d17a22;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 4px;
   padding: 2px 5px;
@@ -204,16 +206,17 @@ export default {
 
 .close-btn {
   margin-top: 10px;
-  background: #0078d7;
+  background: #ffa500;
   color: white;
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
 }
 
 .close-btn:hover {
-  background: #005bb5;
+  background: #ffa500;
+  transform: scale(1.05)
 }
 </style>
