@@ -11,6 +11,11 @@ import TicketInfoView from '../views/Ticket/TicketInfoView.vue'
 import OrderTicketView from '../views/Ticket/OrderTicketView.vue'
 import QandAView from '../views/FQA/Q&AView.vue'
 import ProductView from '../views/Shop/ProductView.vue'
+import ImagePage from "@/RearPage/ImagePage.vue";
+import LoginPage from "@/RearPage/LoginPage.vue";
+import MuseumPage from "@/RearPage/MuseumPage.vue";
+import QAPage from "@/RearPage/QAPage.vue";
+import TicketPage from "@/RearPage/TicketPage.vue";
 
 
 
@@ -85,6 +90,32 @@ const router = createRouter({
       name: 'ProductView',
       component: ProductView
     },
+    {
+      path: '/admin/login',
+      name: 'LoginPageView',
+      component: LoginPage,
+    },
+    {
+      path: '/admin/home',
+      name: 'MuseumManagementView',
+      component: MuseumPage,
+    },
+    {
+      path: '/admin/ticket',
+      name: 'TicketManagementView',
+      component: TicketPage,
+    },
+    {
+      path:'/admin/QA',
+      name:'QAManagementView',
+      component: QAPage
+    },
+    {
+      path:'/admin/img',
+      name:'imgManageView',
+      component: ImagePage
+    }
+
 
   ]
 })

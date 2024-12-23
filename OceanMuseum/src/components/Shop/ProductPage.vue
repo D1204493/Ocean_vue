@@ -138,18 +138,106 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" :disabled="cartItems.length === 0"
-                        @click="proceedToCheckout">
+                            data-bs-toggle="modal" data-bs-target="#payment_modal">
                         付款
                     </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         關閉
                     </button>
                 </div>
+
+
+
             </div>
         </div>
     </div>
+  <!--payment info modal -->
+  <div v-if="currentModal === 'userInfoModal'" class="modal fade " id="payment_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">付款資訊</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form @submit.prevent="submitPaymentInfo">
+            <div class="mb-3">
+              <label for="name" class="form-label">姓名<span class="text-danger">*</span></label>
+              <input type="text" id="name" class="form-control" v-model="paymentInfo.name" required>
+            </div>
+            <div class="mb-3">
+              <label for="idNumber" class="form-label">身分證字號<span class="text-danger">*</span></label>
+              <input type="text" id="idNumber" class="form-control" v-model="paymentInfo.id_number" required>
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">電話<span class="text-danger">*</span></label>
+              <input type="tel" id="phone" class="form-control" v-model="paymentInfo.phone" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email(選填)</label>
+              <input type="email" id="email" class="form-control" v-model="paymentInfo.email">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary"    @click="validateAndProceed">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment method modal-->
+  <div v-if="currentModal === 'paymentMethodModal'" class="modal fade show"   tabindex="-1" aria-labelledby="paymentMethodLabel" aria-hidden="true" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="paymentMethodLabel">選擇支付方式</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="paymentForm">
+            <!-- 支付方式選擇 -->
+            <div class="mb-3">
+              <label class="form-label">支付方式</label>
+              <select class="form-select" v-model="selectedPaymentMethod">
+                <option value="" selected disabled>請選擇</option>
+                <option value="visa">Visa</option>
+                <option value="paypal">PayPal</option>
+              </select>
+            </div>
+
+            <!-- 卡號詳細信息 -->
+            <div v-if="selectedPaymentMethod === 'visa' || selectedPaymentMethod === 'paypal'">
+              <div class="mb-3">
+                <label class="form-label">卡號</label>
+                <input type="text" class="form-control" v-model="creditCardDetails.cardNumber" placeholder="例如：1234 5678 9012 3456">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">有效期</label>
+                <input type="text" class="form-control" v-model="creditCardDetails.expiryDate" placeholder="MM/YY">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">安全碼 (CVV)</label>
+                <input type="text" class="form-control" v-model="creditCardDetails.cvv" placeholder="CVV">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" @click="submitPaymentInfo">確認</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
 
 </template>
 
@@ -158,6 +246,13 @@ export default {
     name: 'ProductGrid',
     data() {
         return {
+            currentModal: 'userInfoModal',
+            selectedPaymentMethod: '', // 選擇的支付方式
+            creditCardDetails: {
+              cardNumber: '',
+              expiryDate: '',
+              cvv: ''
+            },
             products: [
                 {
                     id: 1,
@@ -181,6 +276,12 @@ export default {
                     description: '海洋生物博物館25週年特刊，收錄珍貴史料與精美立體圖片。'
                 }
             ],
+            paymentInfo:{
+                name:null,
+                id_number:null,
+                email:null,
+                phone:null
+            },
             selectedProduct: {},
             quantity: 1,
             cartItemCount: 0,
@@ -215,7 +316,7 @@ export default {
                 price: this.selectedProduct.price,
                 quantity: this.quantity,
                 total: this.totalPrice,
-                image: this.selectedProduct.image
+                image: this.selectedProduct.image,
             };
 
             // 檢查商品是否已在購物車中
@@ -271,11 +372,68 @@ export default {
         updateCartTotal() {
             this.cartTotalAmount = this.cartItems.reduce((sum, item) => sum + item.total, 0);
         },
-
-        proceedToCheckout() {
-            // TODO: 實現結帳功能
-            alert('進入結帳流程');
+        validateAndProceed() {
+          const { name, id_number, phone } = this.paymentInfo;
+          if (!name || !id_number || !phone) {
+            alert('請完整填寫必填資訊！');
+            return;
+          }
+          this.currentModal = 'paymentMethodModal';
+          console.log("test")
         },
+
+      //送出訂單的方法,送出前移除id與image屬性
+       async submitPaymentInfo () {
+
+         const requestBody = {
+           paymentInfo: {
+             name: this.paymentInfo.name,
+             id_number: this.paymentInfo.id_number,
+             phone: this.paymentInfo.phone,
+             email: this.paymentInfo.email
+           },
+           cartItems: this.cartItems.map(item => ({
+             title: item.title,
+             price: item.price,
+             quantity: item.quantity,
+             total: item.total
+           })),
+           paymentMethod: this.selectedPaymentMethod
+         };
+
+
+           if (!this.creditCardDetails.cardNumber || !this.creditCardDetails.cvv || !this.creditCardDetails.expiryDate) {
+             alert('請完整填寫信用卡資訊！');
+             return;
+           }
+           requestBody.cardInfo = {
+             cardNumber: this.creditCardDetails.cardNumber,
+             cvv: this.creditCardDetails.cvv,
+             expiryDate: this.creditCardDetails.expiryDate
+           };
+
+          console.log(requestBody);
+        try {
+          const response = await fetch("http://localhost:8080/product/createOrder",{
+            method:"POST",
+            headers:{
+              "Content-Type":"application/json"
+            },
+            body:JSON.stringify(requestBody)
+          });
+           if(response.ok) {
+             const message = await response.text();
+             alert("送出訂單成功");
+             console.log("Server message:",message);
+           } else {
+             const message = await response.text();
+             alert("送出訂單失敗");
+             console.log("Server message:",message);
+           }
+        } catch(error) {
+          console.log("Failed to send request:",error.message);
+        }
+       }
     },
 }
 </script>
