@@ -47,7 +47,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <!-- 對話視窗 -->
     <div v-if="showChat" class="chat-dialog">
@@ -189,6 +189,13 @@ export default {
     max-width: 1400px;
     margin: 0 auto;
     padding: 10px 20px;
+
+    display: flex;
+    /* 添加 */
+    flex-direction: column;
+    /* 添加 */
+    align-items: center;
+    /* 添加 */
 }
 
 .header-wrapper {
@@ -229,6 +236,13 @@ export default {
     background: #FFF3E0;
     border-radius: 8px;
     padding: 20px;
+
+    width: 100%;
+    /* 修改 */
+    max-width: 1000px;
+    /* 添加 */
+    margin: 0 auto;
+    /* 添加 */
 }
 
 .content-title {
@@ -419,6 +433,13 @@ export default {
 @media (min-width: 1024px) {
     .content-section {
         width: 1000px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 670px) {
+    .header-section {
+        margin-left: 10px;
     }
 }
 </style>
