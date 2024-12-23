@@ -95,6 +95,14 @@ export default {
   text-align: center;
 }
 
+/* 固定表頭 */
+.styled-table thead {
+  position: sticky;
+  top: 0; /* 固定在容器頂部 */
+  background-color: #fff8e1; /* 表頭背景色 */
+  z-index: 10;
+}
+
 .styled-table thead th {
   font-weight: 900; /* 表頭字體加粗 */
   color: #d17a22; /* 表頭字體顏色 */
