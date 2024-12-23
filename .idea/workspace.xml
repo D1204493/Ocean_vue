@@ -5,17 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40b89e7d-cdd9-4551-bee5-dff23de872af" name="Changes" comment="圖片管理頁面">
-      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/components/Shop/ProductPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/components/Shop/ProductPage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OceanMuseum/public/img/ocean-logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OceanMuseum/src/RearPage/ImagePage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OceanMuseum/src/RearPage/LoginPage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OceanMuseum/src/RearPage/MuseumPage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OceanMuseum/src/RearPage/QAPage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OceanMuseum/src/RearPage/SideBar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OceanMuseum/src/RearPage/TicketPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OceanMuseum/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OceanMuseum/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/router/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Composition API Component" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="OceanSpecies_Huang" />
+        <entry key="$PROJECT_DIR$" value="OceanSpecies_Rear_Product_Merge" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -33,9 +51,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "OceanSpecies__Product__Hsu",
+    "git-widget-placeholder": "OceanSpecies__Rear__Product__Merge",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -43,8 +62,20 @@
     "nodejs_package_manager_path": "npm",
     "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2023.3.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "vue.recent.templates": [
+      "Vue Composition API Component"
+    ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\CGI artifacts\Desktop\foodPandaWeb\demo\Ocean_vue\OceanMuseum\src\RearPage" />
+      <recent name="C:\Users\CGI artifacts\Desktop\foodPandaWeb\demo\Ocean_vue\OceanMuseum\src\components" />
+      <recent name="C:\Users\CGI artifacts\Desktop\foodPandaWeb\demo\Ocean_vue\OceanMuseum\public\img" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -83,13 +114,11 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/OceanMuseum/src/components/Shop/ProductPage.vue</url>
           <line>247</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/OceanMuseum/src/components/Shop/ProductPage.vue</url>
           <line>222</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
