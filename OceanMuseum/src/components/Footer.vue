@@ -10,17 +10,21 @@
             <div class="col-lg-12 col-sm-12 col-xs-12">
               <div class="footer_menu">
                 <ul>
-                  <li><router-link to="/home">Home</router-link></li>
-                  <li><router-link to="/about">About</router-link></li>
-                  <li><router-link to="/termsOfService">Service</router-link></li>
-                  <li>
-                    <router-link to="/privacyPolicy">Privacy Policy</router-link>
-                  </li>
-                  <li><router-link to="/contact">Contact</router-link></li>
+                  <li><router-link to="/">最新動態</router-link></li>
+                  <li><router-link to="/guide">館場導覽</router-link></li>
+                  <li><router-link to="/MarineSpecies">海洋生物</router-link></li>
+                  <li><router-link to="/programs">節目表</router-link></li>
+                  <li><router-link to="/TicketInfoView">購票</router-link></li>
+                  <li><router-link to="/ProductView">文創商品</router-link></li>
+                  <li><router-link to="/QandAView">Q&A</router-link></li>
                 </ul>
               </div>
               <div class="footer_copyright">
-                <p>© 2024 All Rights Reserved.</p>
+                <p>海洋生物博物館 版權所有 © 2016</p>
+                <p>引用時，請註明資料來源，請確保資料之完整性，不得任意增刪，亦不得作為商業使用</p>
+                <p>地址：944401 屏東縣車城鄉後灣村後灣路2號</p>
+                <p>遊客服務電話：(08)882-5678 / 傳真：(08)882-5061 / 公部門電話：(08)882-5001 / 傳真：(08)882-4504</p>
+                <p>更新日期：2024-12-25</p>
               </div>
               <div class="footer_profile">
                 <ul>
