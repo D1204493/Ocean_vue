@@ -2,6 +2,7 @@
 import MuseumHeader from '../../components/MuseumHeader.vue'
 import MuseumNavBar from '../../components/MuseumNavBar.vue'
 import OceanSpeciesCard from '../../components/MarineSpecies/OceanSpeciesCard.vue'
+import Footer from '../../components/Footer.vue'
 
 </script>
 
@@ -19,6 +20,8 @@ import OceanSpeciesCard from '../../components/MarineSpecies/OceanSpeciesCard.vu
             <OceanSpeciesCard />
         </div>
     </div>
+    <Footer />
+
 </template>
 
 <style scoped>

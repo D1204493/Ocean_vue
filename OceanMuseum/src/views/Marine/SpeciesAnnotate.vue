@@ -2,6 +2,7 @@
 import MuseumHeader from '../../components/MuseumHeader.vue'
 import MuseumNavBar from '../../components/MuseumNavBar.vue'
 import SpeciesAnnotate from '../../components/MarineSpecies/SpeciesAnnotate.vue'
+import Footer from '../../components/Footer.vue'
 
 </script>
 
@@ -19,6 +20,8 @@ import SpeciesAnnotate from '../../components/MarineSpecies/SpeciesAnnotate.vue'
             <SpeciesAnnotate />
         </div>
     </div>
+    <Footer />
+
 </template>
 
 <style>

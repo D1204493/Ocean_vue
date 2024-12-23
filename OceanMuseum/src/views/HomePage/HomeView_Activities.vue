@@ -5,7 +5,7 @@ import HomePage from '../../components/homePage/HomePage.vue'
 import News from '../../components/homePage/News.vue';
 import Reports from '../../components/homePage/Reports.vue';
 import Activities from '../../components/homePage/Activities.vue';
-
+import Footer from '../../components/Footer.vue'
 
 </script>
 <template>
@@ -23,6 +23,7 @@ import Activities from '../../components/homePage/Activities.vue';
         </HomePage>
       </div>
     </div>
+    <Footer />
   </template>
   
   <script>

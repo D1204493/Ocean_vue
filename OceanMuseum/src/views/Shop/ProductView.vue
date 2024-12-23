@@ -2,6 +2,7 @@
 import MuseumHeader from '../../components/MuseumHeader.vue'
 import MuseumNavBar from '../../components/MuseumNavBar.vue'
 import ProductPage from '../../components/Shop/ProductPage.vue'
+import Footer from '../../components/Footer.vue'
 
 </script>
 
@@ -19,6 +20,8 @@ import ProductPage from '../../components/Shop/ProductPage.vue'
             <ProductPage />
         </div>
     </div>
+    <Footer />
+
 </template>
 
 <style scoped>
@@ -98,7 +101,8 @@ body {
 @media (min-width: 1024px) {
     .content-container {
         padding: 40px;
-        max-width: 100%; /* 移除最大寬度限制 */
+        max-width: 100%;
+        /* 移除最大寬度限制 */
     }
 }
 
@@ -113,5 +117,4 @@ body {
         margin-top: 380px;
     }
 }
-
 </style>

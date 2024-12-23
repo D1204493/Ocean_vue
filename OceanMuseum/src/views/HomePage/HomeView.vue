@@ -6,7 +6,7 @@ import HomePage from '../../components/homePage/HomePage.vue'
 import News from '../../components/homePage/News.vue';
 import Reports from '../../components/homePage/Reports.vue';
 import Activities from '../../components/homePage/Activities.vue';
-
+import Footer from '../../components/Footer.vue'
 
 </script>
 
@@ -18,15 +18,14 @@ import Activities from '../../components/homePage/Activities.vue';
             <div class="header-wrapper">
                 <MuseumHeader />
                 <MuseumNavBar />
-             
             </div>
         </div>
         <div class="content-container">
-            <!-- <ProductPage /> -->
             <HomePage/>
-
         </div>
     </div>
+    <Footer />
+
 </template>
 
 <style scoped>

@@ -2,7 +2,7 @@
 import MuseumHeader from '../../components/MuseumHeader.vue'
 import MuseumNavBar from '../../components/MuseumNavBar.vue'
 import MuseumGuide from '../../components/MuseumGuide/MuseumGuide.vue'; 
-
+import Footer from '../../components/Footer.vue'
 
 </script>
 
@@ -20,6 +20,8 @@ import MuseumGuide from '../../components/MuseumGuide/MuseumGuide.vue';
             <MuseumGuide />
         </div>
     </div>
+    <Footer />
+
 </template>
 
 <style>

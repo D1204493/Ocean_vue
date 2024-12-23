@@ -2,6 +2,7 @@
 import MuseumHeader from '../../components/MuseumHeader.vue'
 import MuseumNavBar from '../../components/MuseumNavBar.vue'
 import TicketOrder from '../../components/Ticket/TicketOrder.vue'
+import Footer from '../../components/Footer.vue'
 
 </script>
 
@@ -19,6 +20,8 @@ import TicketOrder from '../../components/Ticket/TicketOrder.vue'
             <TicketOrder />
         </div>
     </div>
+    <Footer />
+
 </template>
 
 <style scoped>

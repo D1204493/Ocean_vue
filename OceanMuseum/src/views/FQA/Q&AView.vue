@@ -2,6 +2,7 @@
 import MuseumHeader from '../../components/MuseumHeader.vue'
 import MuseumNavBar from '../../components/MuseumNavBar.vue'
 import QandA from '../../components/FQA/Q&A.vue'
+import Footer from '../../components/Footer.vue'
 
 </script>
 
@@ -19,6 +20,8 @@ import QandA from '../../components/FQA/Q&A.vue'
             <QandA />
         </div>
     </div>
+    <Footer />
+
 </template>
 
 <style scoped>
