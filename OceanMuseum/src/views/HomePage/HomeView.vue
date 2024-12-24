@@ -21,7 +21,7 @@ import Footer from '../../components/Footer.vue'
             </div>
         </div>
         <div class="content-container">
-            <HomePage/>
+            <HomePage />
         </div>
     </div>
     <Footer />
@@ -102,23 +102,61 @@ body {
 }
 
 /* 響應式設計 */
-@media (min-width: 1024px) {
+@media (max-width: 2230px) {
     .content-container {
-        padding: 40px;
-        max-width: 100%; /* 移除最大寬度限制 */
+        padding-top: 200px;
     }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1200px) {
+
+    .header-container,
+    .nav-container {
+        padding: 0 16px;
+    }
+
     .content-container {
-        margin-top: 200px;
+        padding-top: 200px;
+    }
+}
+
+@media (max-width: 1023px) {
+    .content-container {
+        padding-top: 210px;
+    }
+}
+
+@media (max-width: 811px) {
+    .content-container {
+        padding-top: 230px;
     }
 }
 
 @media (max-width: 768px) {
+    .header-wrapper {
+        padding: 8px;
+    }
+
     .content-container {
-        margin-top: 380px;
+        padding-top: 400px;
     }
 }
 
+@media (max-width: 495px) {
+    .content-container {
+        padding-top: 450px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-container {
+        padding-top: 490px;
+    }
+}
+
+@media (max-width: 384px) {
+    .content-container {
+        padding-top: 530px;
+    }
+}
 </style>

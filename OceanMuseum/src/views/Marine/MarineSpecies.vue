@@ -119,15 +119,15 @@ body {
     }
 }
 
-@media (max-width: 1023px) {
-    .content-container {
-        padding-top: 170px;
-    }
-}
-
 @media (max-width: 900px) {
     .content-container {
         padding-top: 190px;
+    }
+}
+
+@media (max-width: 811px) {
+    .content-container {
+        padding-top: 220px;
     }
 }
 
@@ -137,7 +137,19 @@ body {
     }
 
     .content-container {
-        padding-top: 360px;
+        padding-top: 390px;
+    }
+}
+
+@media (max-width: 425px) {
+    .content-container {
+        padding-top: 470px;
+    }
+}
+
+@media (max-width: 384px) {
+    .content-container {
+        padding-top: 510px;
     }
 }
 </style>

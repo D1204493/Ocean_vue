@@ -17,7 +17,7 @@ import Footer from '../../components/Footer.vue'
             <div class="header-wrapper">
                 <MuseumHeader />
                 <MuseumNavBar />
-                     
+
             </div>
         </div>
         <div class="content-container">
@@ -30,7 +30,7 @@ import Footer from '../../components/Footer.vue'
 
 </template>
 
-<style>
+<style scoped>
 * {
     margin: 0;
     padding: 0;
@@ -127,13 +127,13 @@ body {
 
 @media (max-width: 1023px) {
     .content-container {
-        padding-top: 170px;
+        padding-top: 210px;
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 811px) {
     .content-container {
-        padding-top: 190px;
+        padding-top: 230px;
     }
 }
 
@@ -143,7 +143,25 @@ body {
     }
 
     .content-container {
-        padding-top: 360px;
+        padding-top: 400px;
+    }
+}
+
+@media (max-width: 495px) {
+    .content-container {
+        padding-top: 450px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-container {
+        padding-top: 490px;
+    }
+}
+
+@media (max-width: 384px) {
+    .content-container {
+        padding-top: 530px;
     }
 }
 </style>
