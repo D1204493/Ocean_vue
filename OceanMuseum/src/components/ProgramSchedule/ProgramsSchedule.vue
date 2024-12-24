@@ -4,13 +4,8 @@
     <div class="date-selector">
       <label for="date-picker">📅日期查詢：</label>
       <select id="date-picker" v-model="selectedDate" @change="updatePrograms">
-        <option
-          v-for="date in activeDates"
-          :key="date.date"
-          :value="date.date"
-          :disabled="!date.active"
-          :class="{ 'disabled-option': !date.active }"
-        >
+        <option v-for="date in activeDates" :key="date.date" :value="date.date" :disabled="!date.active"
+          :class="{ 'disabled-option': !date.active }">
           {{ date.date }}
         </option>
       </select>
@@ -25,28 +20,20 @@
 
     <!-- 上午與下午節目展示 -->
     <div class="programs-container">
-      <div
-        v-if="morningProgram"
-        class="program-card"
-        @click="showDetails(morningProgram)"
-      >
-        <div class="card-header morning">上午節目</div> 
+      <div v-if="morningProgram" class="program-card" @click="showDetails(morningProgram)">
+        <div class="card-header morning">上午節目</div>
         <img :src="morningProgram.img_url" alt="上午節目" class="program-image" />
         <div class="card-content">
           <h3 class="program-title">{{ morningProgram.title }}</h3>
         </div>
       </div>
-      
-      <div
-        v-if="afternoonProgram"
-        class="program-card"
-        @click="showDetails(afternoonProgram)"
-      >
+
+      <div v-if="afternoonProgram" class="program-card" @click="showDetails(afternoonProgram)">
         <div class="card-header afternoon">下午節目</div>
         <img :src="afternoonProgram.img_url" alt="下午節目" class="program-image" />
         <div class="card-content">
           <h3 class="program-title">{{ afternoonProgram.title }}</h3>
-        </div>      
+        </div>
       </div>
     </div>
 
@@ -64,7 +51,7 @@
         </div>
       </div>
     </div>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -154,10 +141,10 @@ export default {
 </script>
 
 <style scoped>
-
 .programs-schedule {
   text-align: center;
   margin: 20px;
+  margin-top: 30px;
 }
 
 /*
@@ -206,13 +193,41 @@ export default {
 }
 
 .program-card {
-  width: 45%;
+  width: 100%;
+  /* 小螢幕時佔滿寬度 */
+  max-width: 350px;
+  /* 設定最大寬度，防止卡片過寬 */
   background: white;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease-in-out;
 }
+
+/* 平板尺寸 */
+@media (min-width: 768px) {
+  .program-card {
+    width: 45%;
+    max-width: 400px;
+  }
+}
+
+/* 筆電尺寸 */
+@media (min-width: 1024px) {
+  .program-card {
+    width: 40%;
+    max-width: 450px;
+  }
+}
+
+/* 大型筆電和桌機尺寸 */
+@media (min-width: 1440px) {
+  .program-card {
+    width: 35%;
+    max-width: 500px;
+  }
+}
+
 
 .program-card:hover {
   transform: translateY(-5px);
@@ -245,7 +260,7 @@ export default {
   color: #d17a22;
   font-size: 18px;
   font-weight: bold;
-  
+
 }
 
 /* Modal 設計 */
@@ -294,27 +309,42 @@ export default {
 
 
 .close-button {
-  background-color: #FFCD50; /* 黃色背景 */
-  padding: 10px 20px; /* 上下左右內邊距 */
-  font-size: 16px; /* 文字大小 */
-  font-weight: bold; /* 粗體字 */
-  border: none; /* 移除邊框 */
-  border-radius: 5px; /* 圓角按鈕 */
-  cursor: pointer; /* 滑鼠懸停時顯示點擊手勢 */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 按鈕陰影 */
-  transition: all 0.3s ease; /* 平滑過渡效果 */
-  color: #333; /* 深灰文字顏色 */
-  
+  background-color: #FFCD50;
+  /* 黃色背景 */
+  padding: 10px 20px;
+  /* 上下左右內邊距 */
+  font-size: 16px;
+  /* 文字大小 */
+  font-weight: bold;
+  /* 粗體字 */
+  border: none;
+  /* 移除邊框 */
+  border-radius: 5px;
+  /* 圓角按鈕 */
+  cursor: pointer;
+  /* 滑鼠懸停時顯示點擊手勢 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  /* 按鈕陰影 */
+  transition: all 0.3s ease;
+  /* 平滑過渡效果 */
+  color: #333;
+  /* 深灰文字顏色 */
+
 }
 
 .close-button:hover {
-  background-color: #FFA500; /* 橘色背景，滑鼠懸停時變化 */
-  color: #fff; /* 白色文字 */
-  transform: scale(1.05); /* 放大按鈕 */
+  background-color: #FFA500;
+  /* 橘色背景，滑鼠懸停時變化 */
+  color: #fff;
+  /* 白色文字 */
+  transform: scale(1.05);
+  /* 放大按鈕 */
 }
 
 .close-button:active {
-  background-color: #E69500; /* 深橘色背景，按下時 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 陰影變小 */
+  background-color: #E69500;
+  /* 深橘色背景，按下時 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  /* 陰影變小 */
 }
 </style>

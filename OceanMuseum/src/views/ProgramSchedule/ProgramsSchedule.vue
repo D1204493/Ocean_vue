@@ -24,7 +24,7 @@ import Footer from '../../components/Footer.vue'
 
 </template>
 
-<style>
+<style scoped>
 * {
     margin: 0;
     padding: 0;
@@ -121,7 +121,7 @@ body {
 
 @media (max-width: 1023px) {
     .content-container {
-        padding-top: 170px;
+        padding-top: 200px;
     }
 }
 
@@ -131,13 +131,25 @@ body {
     }
 }
 
+@media (max-width: 811px) {
+    .content-container {
+        padding-top: 220px;
+    }
+}
+
 @media (max-width: 768px) {
     .header-wrapper {
         padding: 8px;
     }
 
     .content-container {
-        padding-top: 360px;
+        padding-top: 390px;
+    }
+}
+
+@media (max-width: 495px) {
+    .content-container {
+        padding-top: 480px;
     }
 }
 </style>
