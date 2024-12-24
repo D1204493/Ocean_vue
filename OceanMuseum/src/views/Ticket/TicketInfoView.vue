@@ -108,7 +108,6 @@ body {
 }
 
 @media (max-width: 1200px) {
-
     .header-container,
     .nav-container {
         padding: 0 16px;
@@ -119,15 +118,9 @@ body {
     }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 811px) {
     .content-container {
-        padding-top: 200px;
-    }
-}
-
-@media (max-width: 900px) {
-    .content-container {
-        padding-top: 200px;
+        padding-top: 250px;
     }
 }
 
@@ -137,7 +130,26 @@ body {
     }
 
     .content-container {
-        padding-top: 410px;
+        padding-top: 420px;
+    }
+}
+
+
+@media (max-width: 495px) {
+    .content-container {
+        padding-top: 465px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-container {
+        padding-top: 510px;
+    }
+}
+
+@media (max-width: 384px) {
+    .content-container {
+        padding-top: 545px;
     }
 }
 </style>

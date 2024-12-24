@@ -125,12 +125,6 @@ body {
     }
 }
 
-@media (max-width: 900px) {
-    .content-container {
-        padding-top: 190px;
-    }
-}
-
 @media (max-width: 811px) {
     .content-container {
         padding-top: 220px;
@@ -150,6 +144,12 @@ body {
 @media (max-width: 495px) {
     .content-container {
         padding-top: 480px;
+    }
+}
+
+@media (max-width: 384px) {
+    .content-container {
+        padding-top: 520px;
     }
 }
 </style>

@@ -20,7 +20,9 @@ import Footer from '../../components/Footer.vue'
             <SpeciesAnnotate />
         </div>
     </div>
-    <Footer />
+    <div class="foot">
+        <Footer />
+    </div>
 
 </template>
 
@@ -100,6 +102,10 @@ body {
     border-bottom: 1px solid #eee;
 }
 
+.foot {
+    margin-top: 20px;
+}
+
 /* 響應式設計 */
 @media (max-width: 2230px) {
 
@@ -115,13 +121,13 @@ body {
 
 @media (max-width: 1023px) {
     .content-container {
-        padding-top: 200px;
+        padding-top: 230px;
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 843px) {
     .content-container {
-        padding-top: 190px;
+        padding-top: 250px;
     }
 }
 
@@ -131,7 +137,25 @@ body {
     }
 
     .content-container {
-        padding-top: 390px;
+        padding-top: 440px;
+    }
+}
+
+@media (max-width: 527px) {
+    .content-container {
+        padding-top: 480px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-container {
+        padding-top: 520px;
+    }
+}
+
+@media (max-width: 416px) {
+    .content-container {
+        padding-top: 560px;
     }
 }
 </style>

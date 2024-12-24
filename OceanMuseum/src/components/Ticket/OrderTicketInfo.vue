@@ -65,7 +65,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myTicketModal" >查詢</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#myTicketModal">查詢</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                 </div>
             </div>
@@ -73,8 +74,7 @@
     </div>
 
     <!-- 驗證身份成功後的 訂票資訊 Modal -->
-    <div class="modal fade" id="myTicketModal" tabindex="-1" aria-labelledby="myTicketModal"
-        aria-hidden="true">
+    <div class="modal fade" id="myTicketModal" tabindex="-1" aria-labelledby="myTicketModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -308,5 +308,18 @@ export default {
 
 .btn-close:hover {
     opacity: 1;
+}
+
+/* 響應式設計 */
+@media (max-width: 950px) {
+    .container {
+        max-width: 850px;
+    }
+}
+
+@media (max-width: 815px) {
+    .container {
+        max-width: 750px;
+    }
 }
 </style>

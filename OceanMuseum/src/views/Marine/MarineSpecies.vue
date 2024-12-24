@@ -141,9 +141,15 @@ body {
     }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 495px) {
     .content-container {
-        padding-top: 470px;
+        padding-top: 430px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-container {
+        padding-top: 480px;
     }
 }
 

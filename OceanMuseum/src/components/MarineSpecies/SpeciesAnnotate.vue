@@ -134,7 +134,7 @@ export default {
 <style scoped>
 .container {
   position: relative;
-  width: 100%;
+  width: 95%;
   max-width: 64rem;
   margin: 0 auto;
   background-color: #1e293b;

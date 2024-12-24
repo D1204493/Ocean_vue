@@ -117,5 +117,22 @@ body {
     }
 }
 
+@media (max-width: 511px) {
+    .content-container {
+        margin-top: 430px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-container {
+        margin-top: 480px;
+    }
+}
+
+@media (max-width: 400px) {
+    .content-container {
+        margin-top: 520px;
+    }
+}
 
 </style>

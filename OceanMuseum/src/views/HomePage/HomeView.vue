@@ -109,7 +109,6 @@ body {
 }
 
 @media (max-width: 1200px) {
-
     .header-container,
     .nav-container {
         padding: 0 16px;
