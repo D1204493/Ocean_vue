@@ -2,7 +2,10 @@
     <div class="booking-form">
         <div class="form-header">
             <h2>購票資訊</h2>
-            <button class="back-btn" @click="$router.push('/TicketInfoView')">返回</button>
+            <!-- <button class="back-btn" @click="$router.push('/TicketInfoView')">返回</button> -->
+            <button class="back-btn" @click="$router.push('/TicketInfoView')">
+                <img src="/backIcon.png">
+            </button>
         </div>
         <p class="required-note">*為必填項目</p>
 
@@ -321,22 +324,25 @@ export default {
 }
 
 .back-btn {
-    border: 1px solid #ddd;
     background: #98d2f0;
-    width: 100px;
-    /* 固定寬度 */
-    padding: 12px 35px;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: 400;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
     cursor: pointer;
-    transition: all 0.3s ease;
-    /* 添加過渡效果 */
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
 .back-btn:hover {
     background: #61c5f7;
+    transform: translateX(-3px);
+}
+
+.back-btn img {
+    width: 24px;
+    height: 24px;
 }
 
 .required-note {

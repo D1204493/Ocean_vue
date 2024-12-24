@@ -35,10 +35,98 @@
             </table>
         </div>
         <div class="button-group">
-            <button class="btn btn-primary">我的票夾</button>
-            <button class="btn btn-secondary" @click="$router.push('/OrderTicketView')">前往訂票</button>
+            <button class="btn btn-primary1" data-bs-toggle="modal" data-bs-target="#checkmyTicketModal">我的票夾</button>
+            <button class="btn btn-secondary1" @click="$router.push('/OrderTicketView')">前往訂票</button>
         </div>
     </div>
+
+
+    <!-- 查票驗證身份 的 Modal -->
+    <div class="modal fade" id="checkmyTicketModal" tabindex="-1" aria-labelledby="checkmyTicketModal"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">驗證身份</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">電話號碼<span class="text-danger">*</span></label>
+                                <input>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">電子信箱<span class="text-danger">*</span></label>
+                                <input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myTicketModal" >查詢</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 驗證身份成功後的 訂票資訊 Modal -->
+    <div class="modal fade" id="myTicketModal" tabindex="-1" aria-labelledby="myTicketModal"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">我的訂票資訊</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">訂單編號</label>
+                                <p>1111</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">訂票人</label>
+                                <p>Jhon</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">電子信箱</label>
+                                <p>email</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">電話號碼</label>
+                                <p>09123</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">訂票日期</label>
+                                <p>2024-12-12</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">訂票種類</label>
+                                <p>全票</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">訂票數量</label>
+                                <p>1 張</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">訂票總額</label>
+                                <p>200 元</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning">退票</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </template>
 
 <script>
@@ -120,8 +208,8 @@ export default {
 }
 
 .indent {
-  padding-left: 20px;
-  margin: 5px 0;
+    padding-left: 20px;
+    margin: 5px 0;
 }
 
 .opening-hours {
@@ -152,13 +240,73 @@ export default {
     transform: translateY(-1px);
 }
 
-.btn-primary {
+.btn-primary1 {
     background-color: #B4D132;
     color: white;
 }
 
-.btn-secondary {
+.btn-secondary1 {
     background-color: #E5A853;
     color: white;
+}
+
+.modal-content {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    border-bottom: 1px solid #eee;
+    padding: 20px 30px;
+}
+
+.modal-title {
+    font-size: 24px;
+    color: #333;
+    font-weight: 600;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.form-label {
+    color: #555;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.modal-body input {
+    width: 200%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.modal-body input:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+.modal-footer {
+    padding: 20px 30px;
+    border-top: 1px solid #eee;
+    gap: 15px;
+}
+
+.modal-footer .btn {
+    min-width: 120px;
+}
+
+.btn-close {
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.btn-close:hover {
+    opacity: 1;
 }
 </style>
