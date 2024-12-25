@@ -73,94 +73,99 @@
         </div>
     </div>
 
-  <!--payment info modal -->
-  <div v-if="currentModal === 'userInfoModal'" class="modal fade " id="payment_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">請確認付款資訊</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!--payment info modal -->
+    <div v-if="currentModal === 'userInfoModal'" class="modal fade " id="payment_modal" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">請確認付款資訊</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form @submit.prevent="submitForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">姓名<span class="text-danger">*</span></label>
+                            <input type="text" id="name" class="form-control" v-model="formData.name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="idNumber" class="form-label">身分證字號<span class="text-danger">*</span></label>
+                            <input type="text" id="idNumber" class="form-control" v-model="formData.id_number" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">電話<span class="text-danger">*</span></label>
+                            <input type="tel" id="phone" class="form-control" v-model="formData.phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email(選填)</label>
+                            <input type="email" id="email" class="form-control" v-model="formData.email">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" @click="validateAndProceed">提交</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <form @submit.prevent="submitForm">
-            <div class="mb-3">
-              <label for="name" class="form-label">姓名<span class="text-danger">*</span></label>
-              <input type="text" id="name" class="form-control" v-model="formData.name" required>
-            </div>
-            <div class="mb-3">
-              <label for="idNumber" class="form-label">身分證字號<span class="text-danger">*</span></label>
-              <input type="text" id="idNumber" class="form-control" v-model="formData.id_number" required>
-            </div>
-            <div class="mb-3">
-              <label for="phone" class="form-label">電話<span class="text-danger">*</span></label>
-              <input type="tel" id="phone" class="form-control" v-model="formData.phone" required>
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email(選填)</label>
-              <input type="email" id="email" class="form-control" v-model="formData.email">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary"    @click="validateAndProceed">提交</button>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Payment method modal-->
-  <div v-if="currentModal === 'paymentMethodModal'" class="modal fade show"   tabindex="-1" aria-labelledby="paymentMethodLabel" aria-hidden="true" style="display: block;">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="paymentMethodLabel">選擇支付方式</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="paymentForm">
-            <!-- 支付方式選擇 -->
-            <div class="mb-3">
-              <label class="form-label">支付方式</label>
-              <select class="form-select" v-model="selectedPaymentMethod">
-                <option value="" selected disabled>請選擇</option>
-                <option value="visa">Visa</option>
-                <option value="paypal">PayPal</option>
-              </select>
-            </div>
+    <!-- Payment method modal-->
+    <div v-if="currentModal === 'paymentMethodModal'" class="modal fade show" tabindex="-1"
+        aria-labelledby="paymentMethodLabel" aria-hidden="true" style="display: block;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentMethodLabel">選擇支付方式</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="paymentForm">
+                        <!-- 支付方式選擇 -->
+                        <div class="mb-3">
+                            <label class="form-label">支付方式</label>
+                            <select class="form-select" v-model="selectedPaymentMethod">
+                                <option value="" selected disabled>請選擇</option>
+                                <option value="visa">Visa</option>
+                                <option value="paypal">PayPal</option>
+                            </select>
+                        </div>
 
-            <!-- 卡號詳細信息 -->
-            <div v-if="selectedPaymentMethod === 'visa' || selectedPaymentMethod === 'paypal'">
-              <div class="mb-3">
-                <label class="form-label">卡號</label>
-                <input type="text" class="form-control" v-model="formData.creditCardDetails.cardNumber" placeholder="例如：1234 5678 9012 3456">
-              </div>
-              <div class="mb-3">
-                <label class="form-label">有效期</label>
-                <input type="text" class="form-control" v-model="formData.creditCardDetails.expiryDate" placeholder="MM/YY">
-              </div>
-              <div class="mb-3">
-                <label class="form-label">安全碼 (CVV)</label>
-                <input type="text" class="form-control" v-model="formData.creditCardDetails.cvv" placeholder="CVV">
-              </div>
+                        <!-- 卡號詳細信息 -->
+                        <div v-if="selectedPaymentMethod === 'visa' || selectedPaymentMethod === 'paypal'">
+                            <div class="mb-3">
+                                <label class="form-label">卡號</label>
+                                <input type="text" class="form-control" v-model="formData.creditCardDetails.cardNumber"
+                                    placeholder="例如：1234 5678 9012 3456">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">有效期</label>
+                                <input type="text" class="form-control" v-model="formData.creditCardDetails.expiryDate"
+                                    placeholder="MM/YY">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">安全碼 (CVV)</label>
+                                <input type="text" class="form-control" v-model="formData.creditCardDetails.cvv"
+                                    placeholder="CVV">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" @click="submitForm">確認</button>
+                </div>
             </div>
-          </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary" @click="submitForm">確認</button>
-        </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
 export default {
     data() {
         return {
-          currentModal: 'userInfoModal',
-          selectedPaymentMethod: '', // 選擇的支付方式
+            currentModal: 'userInfoModal',
+            selectedPaymentMethod: '', // 選擇的支付方式
             formData: {
                 id_number: '',
                 name: '',
@@ -175,11 +180,11 @@ export default {
                     { type: "half", quantity: 0, price: 0 },
                     { type: "child", quantity: 0, price: 0 }
                 ],
-              creditCardDetails:{
-                cardNumber: '',
-                expiryDate: '',
-                cvv: ''
-              }
+                creditCardDetails: {
+                    cardNumber: '',
+                    expiryDate: '',
+                    cvv: ''
+                }
             },
             ticketPrices: { // 票價設定
                 full: { ticket_id: "1", type: 'full', weekday: 150, weekend: 200 },
@@ -309,18 +314,18 @@ export default {
                 return "優待票"
             }
         },
-      validateAndProceed() {
-        if(!this.checkTicketInfo()) {
-          alert("請填寫完整資訊!");
-        }
-        this.currentModal = 'paymentMethodModal';
-      },
+        validateAndProceed() {
+            if (!this.checkTicketInfo()) {
+                alert("請填寫完整資訊!");
+            }
+            this.currentModal = 'paymentMethodModal';
+        },
         // 提交表單給後端處理
         async submitForm() {
-          if (!this.formData.creditCardDetails.cardNumber || !this.formData.creditCardDetails.cvv || !this.formData.creditCardDetails.expiryDate) {
-            alert('請完整填寫信用卡資訊！');
-            return;
-          }
+            if (!this.formData.creditCardDetails.cardNumber || !this.formData.creditCardDetails.cvv || !this.formData.creditCardDetails.expiryDate) {
+                alert('請完整填寫信用卡資訊！');
+                return;
+            }
             const userOrderInfo = {
                 id_number: this.formData.id_number,
                 name: this.formData.name,
@@ -328,7 +333,7 @@ export default {
                 email: this.formData.email,
                 date: this.formData.visitDate,
                 tickets: this.formData.tickets,
-                cardInfo:this.formData.creditCardDetails
+                cardInfo: this.formData.creditCardDetails
             };
 
             console.log('Form submitted:', userOrderInfo);
@@ -344,6 +349,10 @@ export default {
                 if (response.ok) {
                     const message = await response.text();
                     alert(message);
+                    // 關閉 modal 並清理相關樣式
+                    this.closeModal();
+                    // 重置表單數據
+                    this.resetFormAfterSubmit();
                 } else {
                     console.error(`HTTP error! status: ${response.status}`);
                     alert(`訂單送出失敗，請檢查卡號格式`);
@@ -353,6 +362,56 @@ export default {
                 alert("網絡發生錯誤，請稍後再試");
             }
 
+        },
+
+        // 新增方法：關閉 Modal
+        closeModal() {
+            // 移除 modal 顯示
+            const modal = document.querySelector('.modal.show');
+            if (modal) {
+                modal.style.display = 'none';
+                modal.classList.remove('show');
+            }
+
+            // 移除 body 的 modal 相關類別和樣式
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+
+            // 移除背景遮罩
+            const modalBackdrops = document.querySelectorAll('.modal-backdrop');
+            modalBackdrops.forEach(backdrop => backdrop.remove());
+        },
+
+        // 新增方法：重置表單數據
+        resetFormAfterSubmit() {
+            // 重置 modal 狀態
+            this.currentModal = 'userInfoModal';
+            // 重置支付方式
+            this.selectedPaymentMethod = '';
+            // 重置所有表單資料
+            this.formData = {
+                id_number: '',
+                name: '',
+                phone: '',
+                email: '',
+                visitDate: '',
+                fullTickets: 0,
+                halfTickets: 0,
+                childTickets: 0,
+                tickets: [
+                    { type: "full", quantity: 0, price: 0 },
+                    { type: "half", quantity: 0, price: 0 },
+                    { type: "child", quantity: 0, price: 0 }
+                ],
+                creditCardDetails: {
+                    cardNumber: '',
+                    expiryDate: '',
+                    cvv: ''
+                }
+            };
+            // 重置價格類型提示
+            this.previousPriceType = null;
         },
 
         checkTicketInfo() {
