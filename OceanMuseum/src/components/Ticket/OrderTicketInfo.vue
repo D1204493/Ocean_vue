@@ -185,6 +185,10 @@ export default {
 
         const failureModal = document.getElementById('failureModal');
         failureModal.addEventListener('hidden.bs.modal', this.handleModalHidden);
+
+        // 新增：監聽驗證 Modal 的隱藏事件
+        const verifyModal = document.getElementById('checkmyTicketModal');
+        verifyModal.addEventListener('hidden.bs.modal', this.handleVerifyModalHidden);
     },
     beforeDestroy() {
         // 移除事件監聽器以避免記憶體洩漏
@@ -193,8 +197,20 @@ export default {
 
         const failureModal = document.getElementById('failureModal');
         failureModal.removeEventListener('hidden.bs.modal', this.handleModalHidden);
+
+        // 新增：移除驗證 Modal 的事件監聽器
+        const verifyModal = document.getElementById('checkmyTicketModal');
+        verifyModal.removeEventListener('hidden.bs.modal', this.handleVerifyModalHidden);
     },
     methods: {
+        handleVerifyModalHidden() {
+            // 清空驗證表單的輸入欄位
+            this.verifyPhone = "";
+            this.verifyCode = "";
+            
+            // 處理背景遮罩
+            this.handleModalHidden();
+        },
         handleModalHidden() {
             // 確保移除所有 modal-backdrop 元素
             document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
@@ -228,16 +244,10 @@ export default {
                     console.log(ticketInfo);
                     this.userTicketOrder = ticketInfo;
 
-                    // 清空輸入欄位
-                    this.verifyPhone = "";
-                    this.verifyCode = "";
-
                     // 關閉驗證身份的 Modal
                     const verifyModal = bootstrap.Modal.getInstance(document.getElementById('checkmyTicketModal'));
                     if (verifyModal) {
                         verifyModal.hide();
-                        // 確保移除背景遮罩
-                        this.handleModalHidden();
                     }
                     // 顯示訂票資訊的 Modal
                     const ticketModal = new bootstrap.Modal(document.getElementById('myTicketModal'));
