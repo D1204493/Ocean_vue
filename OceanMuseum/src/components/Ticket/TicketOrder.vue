@@ -78,7 +78,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">付款資訊</h5>
+          <h5 class="modal-title" id="exampleModalLabel">請確認付款資訊</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -346,7 +346,7 @@ export default {
                     alert(message);
                 } else {
                     console.error(`HTTP error! status: ${response.status}`);
-                    alert(`訂單送出失敗，錯誤代碼：${response.status}`);
+                    alert(`訂單送出失敗，請檢查卡號格式`);
                 }
             } catch (error) {
                 console.error("Network error:", error.message);
