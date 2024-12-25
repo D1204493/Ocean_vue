@@ -23,7 +23,7 @@
         </div>
 
         <div class="content-section">
-            <h2 class="content-title">問題</h2>
+            <h2 class="content-title">常見問題</h2>
             <div class="faq-container">
                 <div v-for="(item, index) in paginatedQuestions" :key="index" class="faq-item">
                     <div class="question" @click="toggleAnswer(index)">
@@ -114,7 +114,7 @@ export default {
         },
         async fetchData() {
             try {
-                const response = await fetch('http://localhost:8080/FAQ/get');
+                const response = await fetch('http://localhost:8080/FAQ/getAll');
                 this.questions = await response.json();
             } catch (error) {
                 console.log('Failed to fetch FAQ data:', error);
@@ -359,6 +359,7 @@ export default {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    z-index: 10000;
 }
 
 .chat-header {
