@@ -69,7 +69,7 @@
 
         <div class="actions">
             <button class="cancel-btn" @click="resetForm">清空資訊</button>
-            <button class="submit-btn" data-bs-toggle="modal" data-bs-target="#payment_modal">確定購票</button>
+            <button class="submit-btn" @click="validateAndProceed">確定購票</button>
         </div>
     </div>
 
@@ -111,13 +111,13 @@
     </div>
 
     <!-- Payment method modal-->
-    <div v-if="currentModal === 'paymentMethodModal'" class="modal fade show" tabindex="-1"
-        aria-labelledby="paymentMethodLabel" aria-hidden="true" style="display: block;">
+    <div class="modal fade" id="payment_modal" tabindex="-1"
+        aria-labelledby="paymentMethodLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="paymentMethodLabel">選擇支付方式</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" @click="closeModal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="paymentForm">
@@ -131,7 +131,7 @@
                             </select>
                         </div>
 
-                        <!-- 卡號詳細信息 -->
+                        <!-- 卡號詳細訊息 -->
                         <div v-if="selectedPaymentMethod === 'visa' || selectedPaymentMethod === 'paypal'">
                             <div class="mb-3">
                                 <label class="form-label">卡號</label>
@@ -152,7 +152,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-secondary" @click="closeModal">取消</button>
                     <button type="button" class="btn btn-primary" @click="submitForm">確認</button>
                 </div>
             </div>
@@ -162,9 +162,11 @@
 
 <script>
 export default {
+    name: 'TicketPriceTable',
     data() {
         return {
             currentModal: 'userInfoModal',
+            paymentModal: null,  // 用於存儲 Modal 實例
             selectedPaymentMethod: '', // 選擇的支付方式
             formData: {
                 id_number: '',
@@ -315,11 +317,79 @@ export default {
             }
         },
         validateAndProceed() {
-            if (!this.checkTicketInfo()) {
-                alert("請填寫完整資訊!");
+            // 先檢查表單
+            if (!this.formData.name) {
+                alert("請填寫購票人姓名！");
+                return;
             }
-            this.currentModal = 'paymentMethodModal';
+            if (!this.formData.id_number) {
+                alert("請填寫身分證字號！");
+                return;
+            }
+            if (!this.formData.phone) {
+                alert("請填寫連絡電話！");
+                return;
+            }
+            if (!this.formData.visitDate) {
+                alert("請選擇參觀日期！");
+                return;
+            }
+
+            // 檢查是否有選擇票種
+            const hasValidTicket = this.formData.tickets.some(ticket => ticket.quantity > 0);
+            if (!hasValidTicket) {
+                alert("至少必須選擇一種票種！");
+                return;
+            }
+
+            // 設置 Modal 狀態並顯示
+            this.showPaymentMethodModal();
         },
+        showPaymentMethodModal() {
+            this.currentModal = 'paymentMethodModal';
+            // 確保先關閉任何可能開啟的 Modal
+            this.closeAllModals();
+
+            // 創建並顯示新的 Modal
+            const modal = document.getElementById('payment_modal');
+            if (modal) {
+                this.paymentModal = new bootstrap.Modal(modal, {
+                    backdrop: 'static',  // 防止點擊背景關閉
+                    keyboard: false      // 防止按 ESC 關閉
+                });
+                this.paymentModal.show();
+            }
+        },
+        closeAllModals() {
+            // 關閉所有開啟的 Modal
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                const bsModal = bootstrap.Modal.getInstance(modal);
+                if (bsModal) {
+                    bsModal.hide();
+                }
+            });
+
+            // 移除所有背景遮罩
+            document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
+                backdrop.remove();
+            });
+
+            // 重置 body 樣式
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+        },
+
+        // 關閉特定 Modal
+        closeModal() {
+            if (this.paymentModal) {
+                this.paymentModal.hide();
+                this.paymentModal = null;
+            }
+            this.closeAllModals();
+        },
+
         // 提交表單給後端處理
         async submitForm() {
             if (!this.formData.creditCardDetails.cardNumber || !this.formData.creditCardDetails.cvv || !this.formData.creditCardDetails.expiryDate) {
@@ -364,27 +434,9 @@ export default {
 
         },
 
-        // 新增方法：關閉 Modal
-        closeModal() {
-            // 移除 modal 顯示
-            const modal = document.querySelector('.modal.show');
-            if (modal) {
-                modal.style.display = 'none';
-                modal.classList.remove('show');
-            }
-
-            // 移除 body 的 modal 相關類別和樣式
-            document.body.classList.remove('modal-open');
-            document.body.style.overflow = '';
-            document.body.style.paddingRight = '';
-
-            // 移除背景遮罩
-            const modalBackdrops = document.querySelectorAll('.modal-backdrop');
-            modalBackdrops.forEach(backdrop => backdrop.remove());
-        },
-
         // 新增方法：重置表單數據
         resetFormAfterSubmit() {
+            this.closeModal();
             // 重置 modal 狀態
             this.currentModal = 'userInfoModal';
             // 重置支付方式
