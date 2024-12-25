@@ -18,18 +18,8 @@
         <!-- 子選項（展開/收起控制） -->
         <ul v-if="isExpanded" class="sub-menu ps-4">
           <li>
-            <router-link to="/admin/home" class="nav-link text-white">
-              首頁
-            </router-link>
-          </li>
-          <li>
             <router-link to="/admin/QA" class="nav-link text-white">
               Q&A 管理
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/museumManage" class="nav-link text-white">
-              展場管理
             </router-link>
           </li>
           <li>

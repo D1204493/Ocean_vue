@@ -3,17 +3,17 @@ export default {
 data(){
   return {
     loginInfo:{
-      userName:null,
-      userPassword:null
+      name:null,
+     password:null
     }
   }
 },
   methods:{
   async login(){
-    const requestBody = JSON.stringify(this.loginInfo);
+    const requestBody =  JSON.stringify(this.loginInfo);
 
     try{
-      const response = await fetch("",{
+      const response = await fetch("http://localhost:8080/admin/login",{
         method:"POST",
         headers: {
           "Content-Type": "application/json",
@@ -22,12 +22,13 @@ data(){
       })
       if(response.ok){
         console.log("Login successfully");
-        this.$router.push("/");
+        this.$router.push("/admin/ticket");
       } else {
         const errorMessage = await response.text();
-        console.log("Error:",errorMessage);
+        alert(errorMessage);
       }
     } catch (error) {
+      alert("請求登錄失敗, 請檢查網路連線");
       console.log(error);
     }
   }
@@ -44,17 +45,12 @@ data(){
 
     </div>
     <div class="input-group d-flex flex-column align-items-center">
-      <input class="admin-name rounded-pill" v-model="loginInfo.userName">
-      <input class="admin-password rounded-pill" v-model="loginInfo.userPassword">
-      <div class="form-check mt-5 ">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
-        <label class="form-check-label text-white" for="flexCheckIndeterminate">
-          保持登錄狀態
-        </label>
-      </div>
+      <input class="admin-name rounded-pill" v-model="loginInfo.name">
+      <input class="admin-password rounded-pill" v-model="loginInfo.password">
+
     </div>
-    <div class="login-btn-div">
-      <button class="btn  login-btn text-white">登錄</button>
+    <div class="login-btn-div mt-5">
+      <button class="btn  login-btn text-white" @click="login">登錄</button>
     </div>
 
   </div>
