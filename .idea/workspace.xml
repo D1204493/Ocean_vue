@@ -5,12 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2294f94-2628-4b5d-a2e9-a8d682ca6b57" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/OceanMuseum/src/RearPage/ProductPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_12_23__01_07__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_12_23__01_07__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/RearPage/SideBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/RearPage/SideBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/RearPage/TicketPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/RearPage/TicketPage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OceanMuseum/src/components/Ticket/TicketOrder.vue" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/components/Ticket/TicketOrder.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/router/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Composition API Component" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -36,7 +49,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;OceanSpecies__Hsu1215&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -44,6 +57,11 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2023.3.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;vue.recent.templates&quot;: [
+      &quot;Vue Composition API Component&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
@@ -65,6 +83,9 @@
       <workItem from="1734256877348" duration="9282000" />
       <workItem from="1734312120370" duration="6620000" />
       <workItem from="1734330398961" duration="5795000" />
+      <workItem from="1734941537162" duration="1397000" />
+      <workItem from="1735035692390" duration="2379000" />
+      <workItem from="1735079808345" duration="2597000" />
     </task>
     <servers />
   </component>

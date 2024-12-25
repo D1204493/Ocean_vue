@@ -66,15 +66,98 @@
 
         <div class="actions">
             <button class="cancel-btn" @click="resetForm">清空資訊</button>
-            <button class="submit-btn" @click="submitForm">確定購票</button>
+            <button class="submit-btn" data-bs-toggle="modal" data-bs-target="#payment_modal">確定購票</button>
         </div>
     </div>
+
+  <!--payment info modal -->
+  <div v-if="currentModal === 'userInfoModal'" class="modal fade " id="payment_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">付款資訊</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form @submit.prevent="submitForm">
+            <div class="mb-3">
+              <label for="name" class="form-label">姓名<span class="text-danger">*</span></label>
+              <input type="text" id="name" class="form-control" v-model="formData.name" required>
+            </div>
+            <div class="mb-3">
+              <label for="idNumber" class="form-label">身分證字號<span class="text-danger">*</span></label>
+              <input type="text" id="idNumber" class="form-control" v-model="formData.id_number" required>
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">電話<span class="text-danger">*</span></label>
+              <input type="tel" id="phone" class="form-control" v-model="formData.phone" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email(選填)</label>
+              <input type="email" id="email" class="form-control" v-model="formData.email">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary"    @click="validateAndProceed">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment method modal-->
+  <div v-if="currentModal === 'paymentMethodModal'" class="modal fade show"   tabindex="-1" aria-labelledby="paymentMethodLabel" aria-hidden="true" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="paymentMethodLabel">選擇支付方式</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="paymentForm">
+            <!-- 支付方式選擇 -->
+            <div class="mb-3">
+              <label class="form-label">支付方式</label>
+              <select class="form-select" v-model="selectedPaymentMethod">
+                <option value="" selected disabled>請選擇</option>
+                <option value="visa">Visa</option>
+                <option value="paypal">PayPal</option>
+              </select>
+            </div>
+
+            <!-- 卡號詳細信息 -->
+            <div v-if="selectedPaymentMethod === 'visa' || selectedPaymentMethod === 'paypal'">
+              <div class="mb-3">
+                <label class="form-label">卡號</label>
+                <input type="text" class="form-control" v-model="formData.creditCardDetails.cardNumber" placeholder="例如：1234 5678 9012 3456">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">有效期</label>
+                <input type="text" class="form-control" v-model="formData.creditCardDetails.expiryDate" placeholder="MM/YY">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">安全碼 (CVV)</label>
+                <input type="text" class="form-control" v-model="formData.creditCardDetails.cvv" placeholder="CVV">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" @click="submitForm">確認</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
     data() {
         return {
+          currentModal: 'userInfoModal',
+          selectedPaymentMethod: '', // 選擇的支付方式
             formData: {
                 id_number: '',
                 name: '',
@@ -88,7 +171,12 @@ export default {
                     { type: "full", quantity: 0, price: 0 },
                     { type: "half", quantity: 0, price: 0 },
                     { type: "child", quantity: 0, price: 0 }
-                ]
+                ],
+              creditCardDetails:{
+                cardNumber: '',
+                expiryDate: '',
+                cvv: ''
+              }
             },
             ticketPrices: { // 票價設定
                 full: { ticket_id: "1", type: 'full', weekday: 150, weekend: 200 },
@@ -113,27 +201,7 @@ export default {
             previousPriceType: null,  // 記錄前一次的價格類型
         }
     },
-    //本頁面實例創建後,先自資料庫拿取票種資訊,以用於初始化vue中的票種屬性
-    // async created() {
-    //       try{
-    //         const response = await fetch("http://localhost:8080/ticket/getAll",{
-    //           method:"GET",
-    //           headers:{
-    //             "Content-Type":"application/json"
-    //           }
-    //         });
-    //         if(response.ok) {
-    //           const tickets = await response.json();
-    //           this. ticketPrices.full = tickets[0];
-    //           this. ticketPrices.hal = tickets[1];
-    //           this. ticketPrices.child = tickets[2];
-    //         } else {
-    //           console.log("獲取票種失敗:",response.json());
-    //         }
-    //       } catch (error) {
-    //         console.log("送出獲取票種請求失敗:",error.message);
-    //       }
-    // },
+
     computed: {
         isWeekend() {  // 判斷是否為週末
             if (!this.formData.visitDate) return false;
@@ -238,22 +306,28 @@ export default {
                 return "優待票"
             }
         },
+      validateAndProceed() {
+        if(!this.checkTicketInfo()) {
+          alert("請填寫完整資訊!");
+        }
+        this.currentModal = 'paymentMethodModal';
+      },
         // 提交表單給後端處理
         async submitForm() {
-            if (!this.checkTicketInfo()) {
-                return;
-            }
+          if (!this.formData.creditCardDetails.cardNumber || !this.formData.creditCardDetails.cvv || !this.formData.creditCardDetails.expiryDate) {
+            alert('請完整填寫信用卡資訊！');
+            return;
+          }
             const userOrderInfo = {
                 id_number: this.formData.id_number,
                 name: this.formData.name,
                 phone: this.formData.phone,
                 email: this.formData.email,
                 date: this.formData.visitDate,
-                tickets: this.formData.tickets
+                tickets: this.formData.tickets,
+                cardInfo:this.formData.creditCardDetails
             };
-            if (!this.formData.email || this.formData.email.trim() === "") {
-                userOrderInfo.email = "No email provided";
-            }
+
             console.log('Form submitted:', userOrderInfo);
             try {
                 const response = await fetch("http://localhost:8080/ticket/orderTicket", {

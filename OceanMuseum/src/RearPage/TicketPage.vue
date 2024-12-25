@@ -24,6 +24,26 @@ export default {
         option.isClicked = i === index;
       });
     }
+  },
+  async created() {
+    try{
+      const response = await fetch("http://localhost:8080/ticket/getAllOrder",{
+        method:"GET",
+        headers:{
+          "Content-Type":"application/json"
+        }
+      });
+      if(response.ok){
+        const body =await response.json();
+        console.log(body);
+        console.log("獲取資料成功");
+      } else {
+        console.log("獲取資料失敗");
+      }
+    }  catch (error) {
+      console.log("發送請求失敗,請檢察網路連接");
+    }
+
   }
 };
 
