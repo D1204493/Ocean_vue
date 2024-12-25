@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary"  @click="getUserOrder">查詢</button>
+                    <button type="button" class="btn btn-primary"  @click="getUserTicketOrder">查詢</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                 </div>
             </div>
@@ -179,7 +179,7 @@ export default {
         }
     },
   methods:{
-    async getUserOrder(){
+    async getUserTicketOrder(){
       const phone = this.verifyPhone;
       const verifyCode = this.verifyCode;
 
@@ -206,7 +206,7 @@ export default {
 
         } else {
           const modal = new bootstrap.Modal(document.getElementById('failureModal'));
-          modal.show(); // 显示失败的 Modal
+          modal.show();
           const message = await response.text();
           console.log(message);
         }
