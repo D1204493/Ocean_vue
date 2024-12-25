@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary"  @click="getUserTicketOrder">查詢</button>
+                    <button type="button" class="btn btn-primary" @click="getUserTicketOrder">查詢</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                 </div>
             </div>
@@ -73,7 +73,7 @@
     </div>
 
     <!-- 驗證身份成功後的 訂票資訊 Modal -->
-    <div  class="modal fade" id="myTicketModal" tabindex="-1" aria-labelledby="myTicketModal" aria-hidden="true">
+    <div class="modal fade" id="myTicketModal" tabindex="-1" aria-labelledby="myTicketModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -85,39 +85,39 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label fw-bold">訂單編號</label>
-                                <p>{{this.userTicketOrder.ticket_order_id}}</p>
+                                <p>{{ this.userTicketOrder.ticket_order_id }}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold">訂票人</label>
-                                <p>{{this.userTicketOrder.name}}</p>
+                                <p>{{ this.userTicketOrder.name }}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold">電子信箱</label>
-                                <p>{{this.userTicketOrder.email}}</p>
+                                <p>{{ this.userTicketOrder.email }}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold">電話號碼</label>
-                                <p>{{this.userTicketOrder.phone}}</p>
+                                <p>{{ this.userTicketOrder.phone }}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold">訂票日期</label>
-                                <p>{{this.userTicketOrder.visit_time}}</p>
+                                <p>{{ this.userTicketOrder.visit_time }}</p>
                             </div>
 
-                          <div v-for="(ticket, index) in userTicketOrder.orderTickets" :key="index" class="mb-3">
-                            <div class="mb-3">
-                              <label class="form-label fw-bold">訂票種類</label>
-                              <p>{{ ticket.type }}</p>
+                            <div v-for="(ticket, index) in userTicketOrder.orderTickets" :key="index" class="mb-3">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">訂票種類</label>
+                                    <p>{{ ticket.type }}</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">訂票數量</label>
+                                    <p>{{ ticket.quantity }} 張</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">訂票總額</label>
+                                    <p>{{ ticket.price }} 元</p>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                              <label class="form-label fw-bold">訂票數量</label>
-                              <p>{{ ticket.quantity }} 張</p>
-                            </div>
-                            <div class="mb-3">
-                              <label class="form-label fw-bold">訂票總額</label>
-                              <p>{{ ticket.price }} 元</p>
-                            </div>
-                          </div>
                         </div>
                     </div>
                 </div>
@@ -129,26 +129,26 @@
         </div>
     </div>
 
-  <!-- 失败时显示的 Modal -->
-  <div class="modal fade" id="failureModal" tabindex="-1" aria-labelledby="failureModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="failureModalLabel">找不到訂單</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- 失敗時顯示的 Modal -->
+    <div class="modal fade" id="failureModal" tabindex="-1" aria-labelledby="failureModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="failureModalLabel">找不到訂單</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>無法找到符合條件的訂單，請檢查您的輸入資訊。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>無法找到符合條件的訂單，請檢查您的輸入資訊。</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-        </div>
-      </div>
     </div>
-  </div>
-
 
 </template>
+
 
 <script>
 export default {
@@ -160,64 +160,100 @@ export default {
                 { type: '博愛票', weekday: 120, weekend: 150 },
                 { type: '優待票', weekday: 75, weekend: 100 }
             ],
-          verifyPhone:"",
-          verifyCode:"",
-          userTicketOrder: {
-              ticket_order_id:"",
-              name:"",
-            phone:"",
-            visit_time:"",
-            email:"",
-            orderTickets:{
-                order_ticket_id:"",
-                price:"",
-                type:"",
-                quantity:""
+            verifyPhone: "",
+            verifyCode: "",
+            userTicketOrder: {
+                ticket_order_id: "",
+                name: "",
+                phone: "",
+                visit_time: "",
+                email: "",
+                orderTickets: {
+                    order_ticket_id: "",
+                    price: "",
+                    type: "",
+                    quantity: ""
+                }
             }
-          }
 
         }
     },
-  methods:{
-    async getUserTicketOrder(){
-      const phone = this.verifyPhone;
-      const verifyCode = this.verifyCode;
+    mounted() {
+        // 監聽 Modal 隱藏事件
+        const myTicketModal = document.getElementById('myTicketModal');
+        myTicketModal.addEventListener('hidden.bs.modal', this.handleModalHidden);
 
-      if(!phone || !verifyCode){
-        alert("請填妥查詢資訊");
-        return;
-      }
+        const failureModal = document.getElementById('failureModal');
+        failureModal.addEventListener('hidden.bs.modal', this.handleModalHidden);
+    },
+    beforeDestroy() {
+        // 移除事件監聽器以避免記憶體洩漏
+        const myTicketModal = document.getElementById('myTicketModal');
+        myTicketModal.removeEventListener('hidden.bs.modal', this.handleModalHidden);
 
+        const failureModal = document.getElementById('failureModal');
+        failureModal.removeEventListener('hidden.bs.modal', this.handleModalHidden);
+    },
+    methods: {
+        handleModalHidden() {
+            // 確保移除所有 modal-backdrop 元素
+            document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
+                backdrop.remove();
+            });
+            // 移除 body 上的 modal-open class
+            document.body.classList.remove('modal-open');
+            // 重置 body 的 style
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+        },
+        async getUserTicketOrder() {
+            const phone = this.verifyPhone;
+            const verifyCode = this.verifyCode;
 
-      try{
-        const response = await fetch (`http://localhost:8080/ticket/getOrder/${phone}`,{
-          method:"POST",
-          headers:{
-            'Content-Type':'application/json'
-          },
-          body:verifyCode
-        })
-        if(response.ok){
-          const ticketInfo = await response.json();
-          console.log(ticketInfo);
-          this.userTicketOrder = ticketInfo ;
-          const modal = new bootstrap.Modal(document.getElementById('myTicketModal'));
-          modal.show();
+            if (!phone || !verifyCode) {
+                alert("請填妥查詢資訊");
+                return;
+            }
 
-        } else {
-          const modal = new bootstrap.Modal(document.getElementById('failureModal'));
-          modal.show();
-          const message = await response.text();
-          console.log(message);
+            try {
+                const response = await fetch(`http://localhost:8080/ticket/getOrder/${phone}`, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: verifyCode
+                })
+                if (response.ok) {
+                    const ticketInfo = await response.json();
+                    console.log(ticketInfo);
+                    this.userTicketOrder = ticketInfo;
+
+                    // 清空輸入欄位
+                    this.verifyPhone = "";
+                    this.verifyCode = "";
+
+                    // 關閉驗證身份的 Modal
+                    const verifyModal = bootstrap.Modal.getInstance(document.getElementById('checkmyTicketModal'));
+                    if (verifyModal) {
+                        verifyModal.hide();
+                        // 確保移除背景遮罩
+                        this.handleModalHidden();
+                    }
+                    // 顯示訂票資訊的 Modal
+                    const ticketModal = new bootstrap.Modal(document.getElementById('myTicketModal'));
+                    ticketModal.show();
+                } else {
+                    // 驗證失敗時，只顯示失敗 Modal，保持驗證 Modal 開啟
+                    const failureModal = new bootstrap.Modal(document.getElementById('failureModal'));
+                    failureModal.show();
+                    const message = await response.text();
+                    console.log(message);
+                }
+            } catch (error) {
+                console.log("發送請求錯誤,請檢查網路");
+            }
         }
-      } catch(error){
-        console.log("發送請求錯誤,請檢查網路");
-      }
-
-
-
     }
-  }
 
 }
 </script>
