@@ -16,6 +16,7 @@ import LoginPage from "@/RearPage/LoginPage.vue";
 import MuseumPage from "@/RearPage/MuseumPage.vue";
 import QAPage from "@/RearPage/QAPage.vue";
 import TicketPage from "@/RearPage/TicketPage.vue";
+import ProductPage from "@/RearPage/ProductPage.vue";
 
 
 
@@ -114,6 +115,11 @@ const router = createRouter({
       path:'/admin/img',
       name:'imgManageView',
       component: ImagePage
+    },
+    {
+      path:"/admin/product",
+      name:"productManageView",
+      component:ProductPage
     }
 
 

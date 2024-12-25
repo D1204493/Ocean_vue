@@ -46,7 +46,7 @@
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/login" class="nav-link text-white">
+        <router-link to="/admin/product" class="nav-link text-white">
           <i class="bi bi-cart me-2"></i> 商品管理
         </router-link>
       </li>
