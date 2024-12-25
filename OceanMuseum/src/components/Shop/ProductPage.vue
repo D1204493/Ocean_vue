@@ -15,6 +15,9 @@
                 </div>
             </div>
         </div>
+      <div class="d-flex justify-content-center  mt-5">
+          <button class="btn searchOrder" data-bs-toggle="modal" data-bs-target="#checkMyProductModal">查詢我的訂單</button>
+      </div>
     </div>
 
     <!-- 選擇商品數量的 Modal -->
@@ -151,6 +154,7 @@
 
 
 
+
             </div>
         </div>
     </div>
@@ -235,10 +239,111 @@
     </div>
   </div>
 
+  <!-- 查商品驗證身份 的 Modal -->
+  <div class="modal fade" id="checkMyProductModal" tabindex="-1" aria-labelledby="checkMyProductModal"
+       aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">驗證身份</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label fw-bold">電話號碼<span class="text-danger">*</span></label>
+                <input v-model="verifyPhone">
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold">驗證碼<span class="text-danger">*</span></label>
+                <input v-model="verifyCode">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"  @click="getUserProductOrder">查詢</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- 驗證身份成功後的 商品資訊 Modal -->
+  <div  class="modal fade" id="myProductModal" tabindex="-1" aria-labelledby="myTicketModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">我的商品資訊</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label fw-bold">訂單編號</label>
+                <p>{{this.userProduct.product_order_id}}</p>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold">訂貨人</label>
+                <p>{{this.userProduct.name}}</p>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold">電子信箱</label>
+                <p>{{this.userProduct.email}}</p>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold">電話號碼</label>
+                <p>{{this.userProduct.phone}}</p>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold">訂貨日期</label>
+                <p>{{this.userProduct.order_time}}</p>
+              </div>
 
+              <div v-for="(order, index) in userProduct.orderProducts" :key="index" class="mb-3">
+                <div class="mb-3">
+                  <label class="form-label fw-bold">商品名稱</label>
+                  <p>{{ order.title }}</p>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-bold">購買數量</label>
+                  <p>{{ order.quantity }} 張</p>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-bold">商品價格</label>
+                  <p>{{ order.price }} 元</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning">退貨</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-
+  <!-- 失败时显示的 Modal -->
+  <div class="modal fade" id="failureModal" tabindex="-1" aria-labelledby="failureModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="failureModalLabel">找不到訂單</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>無法找到符合條件的訂單，請檢查您的輸入資訊。</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -287,6 +392,23 @@ export default {
             cartItemCount: 0,
             cartItems: [],
             cartTotalAmount: 0,  // 新增購物車總金額
+            verifyPhone:"",
+            verifyCode:"",
+            userProduct: {
+              product_order_id:"",
+              email:"",
+              id_number:"",
+              name:"",
+              phone:"",
+              order_time:"",
+              orderProducts:{
+                order_product_id:"",
+                price:"",
+                quantity:"",
+                title:"",
+                total:""
+              }
+            }
         }
     },
     computed: {
@@ -483,7 +605,38 @@ export default {
           const paymentModal = bootstrap.Modal.getInstance(document.getElementById('payment_modal'));
           if (paymentModal) paymentModal.hide();
         }
-       }
+       },
+
+      async getUserProductOrder() {
+        const phone = this.verifyPhone;
+        const verifyCode = this.verifyCode;
+        if(!phone || !verifyCode){
+          alert("請填妥查詢資訊");
+          return;
+        }
+        try{
+          const response = await fetch( `http://localhost:8080/product/getOrder/${phone}` ,{
+            method:"POST",
+            headers:{
+              'Content-Type':'application/json'
+            },
+            body:verifyCode
+          });
+          if(response.ok) {
+            this.userProduct =await response.json();
+            console.log(this.userProduct);
+            const modal = new bootstrap.Modal(document.getElementById('myProductModal'));
+            modal.show();
+          }  else {
+            const modal = new bootstrap.Modal(document.getElementById('failureModal'));
+            modal.show();
+            const message = await response.text();
+            console.log(message);
+          }
+        } catch(error) {
+          console.log("發送查詢商品請求失敗");
+        }
+      }
     },
 }
 </script>
@@ -495,7 +648,15 @@ export default {
     padding: 20px;
     position: relative;
 }
-
+.searchOrder{
+background: #B4D132;
+  color: #ffffff;
+  padding: 12px 35px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
 .shopping-cart {
     position: fixed;
     bottom: 30px;
