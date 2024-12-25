@@ -431,7 +431,7 @@ export default {
     background: #15a76c;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1097px) {
     .content-section {
         width: 1000px;
         margin: 0 auto;

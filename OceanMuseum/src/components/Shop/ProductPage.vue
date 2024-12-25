@@ -425,13 +425,63 @@ export default {
              const message = await response.text();
              alert("送出訂單成功");
              console.log("Server message:",message);
+             // 重置購物車
+             this.cartItems = [];
+             this.cartItemCount = 0;
+             this.cartTotalAmount = 0;
+             // 關閉所有 modal 並移除 backdrop
+             const paymentModal = bootstrap.Modal.getInstance(document.getElementById('payment_modal'));
+             const shoppingCartModal = bootstrap.Modal.getInstance(document.getElementById('ShoppingCarModal'));
+             
+             if (paymentModal) {
+               paymentModal.hide();
+               document.body.classList.remove('modal-open');
+               const backdrops = document.getElementsByClassName('modal-backdrop');
+               while(backdrops.length > 0) {
+                 backdrops[0].remove();
+               }
+             }
+             if (shoppingCartModal) {
+               shoppingCartModal.hide();
+               // 確保所有可能的 backdrop 都被移除
+               document.body.classList.remove('modal-open');
+               const backdrops = document.getElementsByClassName('modal-backdrop');
+               while(backdrops.length > 0) {
+                 backdrops[0].remove();
+               }
+             }
+
+             // 重置表單
+             this.paymentInfo = {
+               name: null,
+               id_number: null,
+               email: null,
+               phone: null
+             };
+             this.creditCardDetails = {
+               cardNumber: '',
+               expiryDate: '',
+               cvv: ''
+             };
+             this.currentModal = 'userInfoModal';
            } else {
              const message = await response.text();
              alert("送出訂單失敗");
              console.log("Server message:",message);
+             const paymentModal = bootstrap.Modal.getInstance(document.getElementById('payment_modal'));
+             if (paymentModal) {
+               paymentModal.hide();
+               document.body.classList.remove('modal-open');
+               const backdrops = document.getElementsByClassName('modal-backdrop');
+               while(backdrops.length > 0) {
+                 backdrops[0].remove();
+               }
+             }
            }
         } catch(error) {
           console.log("Failed to send request:",error.message);
+          const paymentModal = bootstrap.Modal.getInstance(document.getElementById('payment_modal'));
+          if (paymentModal) paymentModal.hide();
         }
        }
     },
