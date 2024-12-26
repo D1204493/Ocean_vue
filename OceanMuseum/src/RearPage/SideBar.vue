@@ -41,6 +41,9 @@
         </router-link>
       </li>
     </ul>
+    <div class="logout-section mt-5 text-center">
+      <button class="btn btn-danger" @click="logout">登出</button>
+    </div>
   </div>
 </template>
 
@@ -59,6 +62,12 @@ export default {
   methods:{
     toggleExpand() {
       this.isExpanded = !this.isExpanded; // 切換展開/收起狀態
+    },
+    logout() {
+      // 清除登錄狀態
+      localStorage.removeItem('isLoggedIn');
+      // 重定向到登錄頁面
+      this.$router.push('/admin/login');
     }
   }
 };
