@@ -9,6 +9,8 @@ export default {
   data(){
     return{
       isClicked:false,
+      searchName: "",
+      ticketOrders:[],
       filterOptions:[
          {option:"所有訂票",isClicked: false} ,
         {option:"已交付",isClicked: false},
@@ -19,12 +21,41 @@ export default {
     }
   },
   methods:{
-    toggleBtn(index){
-      this.filterOptions.forEach((option, i) => {
-        option.isClicked = i === index;
-      });
-    }
+
   },
+computed:{
+  mergedOrders(){
+    return this.ticketOrders.map(order => {
+      const totalAmount = order.orderTickets.reduce(
+          (sum, ticket) => sum + parseFloat(ticket.price || 0),
+          0
+      );
+      const ticketsTypes = order.orderTickets.map(ticket => ticket.type).join("   ,   ");
+
+      return {
+        ticket_order_id: order.ticket_order_id,
+        email: order.email,
+        id_number: order.id_number,
+        name: order.name,
+        phone: order.phone,
+        visit_time: order.visit_time,
+        totalAmount,
+        ticketsTypes
+      };
+    });
+
+
+  },
+  filteredOrders() {
+    if (!this.searchName.trim()) {
+      return this.mergedOrders; // 如果未輸入姓名，顯示所有訂單
+    }
+
+    return this.mergedOrders.filter(order =>
+        order.name.toLowerCase().includes(this.searchName.trim().toLowerCase())
+    );
+  }
+},
   async created() {
     try{
       const response = await fetch("http://localhost:8080/ticket/getAllOrder",{
@@ -35,6 +66,7 @@ export default {
       });
       if(response.ok){
         const body =await response.json();
+        this.ticketOrders = body;
         console.log(body);
         console.log("獲取資料成功");
       } else {
@@ -75,8 +107,8 @@ export default {
         </div>
         <div class="search-bar ms-auto">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="請輸入單號" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary search-bar-btn" type="button" id="button-addon2"><span><font-awesome-icon icon="search" /></span></button>
+            <input type="text" class="form-control"  v-model="searchName" placeholder="請輸入姓名篩選" aria-label="Recipient's username" aria-describedby="button-addon2">
+
           </div>
         </div>
       </div>
@@ -85,30 +117,24 @@ export default {
         <table class="table table-striped">
           <thead class="table-dark">
           <tr>
-            <th scope="col" class="text-center">單號</th>
-            <th scope="col" class="text-center">訂票者</th>
-            <th scope="col" class="text-center">日期</th>
-            <th scope="col" class="text-center">ID</th>
+            <th scope="col" class="text-center">訂單編號</th>
+            <th scope="col" class="text-center">姓名</th>
+            <th scope="col" class="text-center">email</th>
+            <th scope="col" class="text-center">手機</th>
+            <th scope="col" class="text-center">參訪時間</th>
+            <th scope="col" class="text-center">訂票種類</th>
             <th scope="col" class="text-center">應支付金額</th>
-            <th scope="col" class="text-center">狀態</th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <th scope="row" class="text-center">t12345678</th>
-            <td class="text-center">Mark</td>
-            <td class="text-center">2024/12/2</td>
-            <td class="text-center">D122713567</td>
-            <td class="text-center">$400</td>
-            <td class="text-center">未支付</td>
-          </tr>
-          <tr>
-            <th scope="row" class="text-center">t12345678</th>
-            <td class="text-center">Mark</td>
-            <td class="text-center">2024/12/2</td>
-            <td class="text-center">D122713567</td>
-            <td class="text-center">$400</td>
-            <td class="text-center">未支付</td>
+          <tr   v-for="(order, index) in filteredOrders"  :key="index">
+            <td>{{ order.ticket_order_id }}</td>
+            <td>{{ order.name }}</td>
+            <td>{{ order.email }}</td>
+            <td>{{ order.phone }}</td>
+            <td>{{ order.visit_time }}</td>
+            <td>{{ order.ticketsTypes }}</td>
+            <td>{{ order.totalAmount }}</td>
           </tr>
 
 
@@ -132,19 +158,9 @@ export default {
   font-weight: bolder;
 }
 
-.mgn-button{
-  background: #adb5bd;
-  width: 120px;
-  font-weight: bolder;
-}
-.mgn-button-is-clicked{
-  background: darkorange;
-  color: white;
-}
 
-.mgn-button:active{
-  background-color: orange;
-}
+
+
 .search-bar-btn{
   background: darkorange;
   color: white;
