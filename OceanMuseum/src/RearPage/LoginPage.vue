@@ -21,6 +21,7 @@ export default {
           body: requestBody
         })
         if (response.ok) {
+          localStorage.setItem('isLoggedIn', 'true')
           console.log("Login successfully");
           this.$router.push("/admin/ticket");
         } else {
