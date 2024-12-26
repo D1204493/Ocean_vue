@@ -6,8 +6,10 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
+
 const app = createApp(App)
 library.add(faLightbulb,faHome, faUser,faTicketAlt,faSearch,faLandmark , faShoppingCart);
-app.use(router)
+
 app.component('font-awesome-icon', FontAwesomeIcon);
+app.use(router)
 app.mount('#app')

@@ -9,6 +9,11 @@
     <!-- 選單項目 -->
     <ul class="nav flex-column mt-4">
       <li class="nav-item">
+        <router-link to="/admin/home" class="nav-link text-white">
+          <i class="bi bi-cart me-2"></i> 銷售報表
+        </router-link>
+      </li>
+      <li class="nav-item">
         <!-- 父項目，點擊展開/收起 -->
         <div class="nav-link text-white d-flex align-items-center" @click="toggleExpand">
           <i class="bi bi-house-door me-2"></i> 展場管理

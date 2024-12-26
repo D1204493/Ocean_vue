@@ -22,7 +22,7 @@ data(){
       })
       if(response.ok){
         console.log("Login successfully");
-        this.$router.push("/admin/ticket");
+        this.$router.push("/admin/home");
       } else {
         const errorMessage = await response.text();
         alert(errorMessage);
