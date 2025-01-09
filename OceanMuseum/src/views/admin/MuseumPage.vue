@@ -1,5 +1,5 @@
 <script>
-import SideBarComponent from "@/RearPage/SideBar.vue";
+import SideBarComponent from "@/components/admin-componet/SideBar.vue";
 
 import { Chart, registerables } from "chart.js";
 export default {

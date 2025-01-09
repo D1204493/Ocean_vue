@@ -73,7 +73,7 @@
         </div>
     </div>
 
-    <!--payment info modal -->
+    <!--付款資訊modal -->
     <div v-if="currentModal === 'userInfoModal'" class="modal fade " id="payment_modal" tabindex="-1"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -110,7 +110,7 @@
         </div>
     </div>
 
-    <!-- Payment method modal-->
+    <!-- 付款方式modal-->
     <div class="modal fade" id="payment_modal" tabindex="-1"
         aria-labelledby="paymentMethodLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -347,15 +347,15 @@ export default {
         },
         showPaymentMethodModal() {
             this.currentModal = 'paymentMethodModal';
-            // 確保先關閉任何可能開啟的 Modal
+            // 關閉Modal
             this.closeAllModals();
 
             // 創建並顯示新的 Modal
             const modal = document.getElementById('payment_modal');
             if (modal) {
                 this.paymentModal = new bootstrap.Modal(modal, {
-                    backdrop: 'static',  // 防止點擊背景關閉
-                    keyboard: false      // 防止按 ESC 關閉
+                    backdrop: 'static',
+                    keyboard: false
                 });
                 this.paymentModal.show();
             }
@@ -419,9 +419,7 @@ export default {
                 if (response.ok) {
                     const message = await response.text();
                     alert(message);
-                    // 關閉 modal 並清理相關樣式
                     this.closeModal();
-                    // 重置表單數據
                     this.resetFormAfterSubmit();
                 } else {
                     console.error(`HTTP error! status: ${response.status}`);
@@ -434,14 +432,11 @@ export default {
 
         },
 
-        // 新增方法：重置表單數據
         resetFormAfterSubmit() {
             this.closeModal();
-            // 重置 modal 狀態
             this.currentModal = 'userInfoModal';
-            // 重置支付方式
             this.selectedPaymentMethod = '';
-            // 重置所有表單資料
+            // 清除所有表單資料
             this.formData = {
                 id_number: '',
                 name: '',
@@ -462,7 +457,6 @@ export default {
                     cvv: ''
                 }
             };
-            // 重置價格類型提示
             this.previousPriceType = null;
         },
 

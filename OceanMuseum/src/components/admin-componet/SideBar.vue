@@ -8,11 +8,11 @@
 
     <!-- 選單項目 -->
     <ul class="nav flex-column mt-4">
-      <li class="nav-item">
-        <router-link to="/admin/home" class="nav-link text-white">
-          <i class="bi bi-cart me-2"></i> 銷售報表
-        </router-link>
-      </li>
+<!--      <li class="nav-item">-->
+<!--        <router-link to="/admin/home" class="nav-link text-white">-->
+<!--          <i class="bi bi-cart me-2"></i> 銷售報表-->
+<!--        </router-link>-->
+<!--      </li>-->
       <li class="nav-item">
         <!-- 父項目，點擊展開/收起 -->
         <div class="nav-link text-white d-flex align-items-center" @click="toggleExpand">
@@ -23,12 +23,12 @@
         <!-- 子選項（展開/收起控制） -->
         <ul v-if="isExpanded" class="sub-menu ps-4">
           <li>
-            <router-link to="/admin/QA" class="nav-link text-white">
+            <router-link to="/admin-component/QA" class="nav-link text-white">
               Q&A 管理
             </router-link>
           </li>
           <li>
-            <router-link to="/admin/img" class="nav-link text-white">
+            <router-link to="/admin-component/img" class="nav-link text-white">
               圖片管理
             </router-link>
           </li>
@@ -36,12 +36,12 @@
       </li>
       <!-- -->
       <li class="nav-item">
-        <router-link to="/admin/ticket" class="nav-link text-white">
+        <router-link to="/admin-component/ticket" class="nav-link text-white">
           <i class="bi bi-ticket me-2"></i> 票務管理
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/admin/product" class="nav-link text-white">
+        <router-link to="/admin-component/product" class="nav-link text-white">
           <i class="bi bi-cart me-2"></i> 商品管理
         </router-link>
       </li>
@@ -76,8 +76,9 @@ export default {
   height: 100vh;
   background-color: #2c3e50;
   color: #fff;
-  position: fixed;
   display: flex;
+  position: sticky;
+  top: 0;
   flex-direction: column;
   padding: 0;
   overflow: hidden;

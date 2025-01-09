@@ -11,12 +11,12 @@ import TicketInfoView from '../views/Ticket/TicketInfoView.vue'
 import OrderTicketView from '../views/Ticket/OrderTicketView.vue'
 import QandAView from '../views/FQA/Q&AView.vue'
 import ProductView from '../views/Shop/ProductView.vue'
-import ImagePage from "@/RearPage/ImagePage.vue";
-import LoginPage from "@/RearPage/LoginPage.vue";
-import MuseumPage from "@/RearPage/MuseumPage.vue";
-import QAPage from "@/RearPage/QAPage.vue";
-import TicketPage from "@/RearPage/TicketPage.vue";
-import ProductPage from "@/RearPage/ProductPage.vue";
+import ImagePage from "@/views/admin/ImagePage.vue";
+import LoginPage from "@/views/admin/LoginPage.vue";
+import MuseumPage from "@/views/admin/MuseumPage.vue";
+import QAPage from "@/views/admin/QAPage.vue";
+import TicketManageBoard from "@/views/admin/TicketPage.vue";
+import ProductPage from "@/views/admin/ProductPage.vue";
 
 
 
@@ -92,32 +92,32 @@ const router = createRouter({
       component: ProductView
     },
     {
-      path: '/admin/login',
+      path: '/admin-component/login',
       name: 'LoginPageView',
       component: LoginPage,
     },
     {
-      path: '/admin/home',
+      path: '/admin-component/home',
       name: 'MuseumManagementView',
       component: MuseumPage,
     },
     {
-      path: '/admin/ticket',
+      path: '/admin-component/ticket',
       name: 'TicketManagementView',
-      component: TicketPage,
+      component: TicketManageBoard,
     },
     {
-      path:'/admin/QA',
+      path:'/admin-component/QA',
       name:'QAManagementView',
       component: QAPage
     },
     {
-      path:'/admin/img',
+      path:'/admin-component/img',
       name:'imgManageView',
       component: ImagePage
     },
     {
-      path:"/admin/product",
+      path:"/admin-component/product",
       name:"productManageView",
       component:ProductPage
     }

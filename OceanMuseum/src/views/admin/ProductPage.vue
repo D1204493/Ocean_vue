@@ -1,7 +1,9 @@
 <script  >
-import SideBarComponent from "@/RearPage/SideBar.vue";
+
+import sideBar from "@/components/admin-componet/SideBar.vue";
 
 export default {
+  name:"ProductPage",
   data(){
     return{
       searchName: "",
@@ -41,7 +43,7 @@ export default {
 
   },
   components: {
-    SideBarComponent,
+    sideBar
   },
   methods:{
     filterOrders() {
@@ -73,11 +75,13 @@ export default {
 
 <template>
 
-  <div class="container-fluid d-flex">
-    <div class="col-4">
-      <SideBarComponent/>
+  <div class="container-fluid d-flex g-0">
+    <div class="p-0">
+      <side-bar/>
     </div>
-    <div class="ticket-management-body d-flex flex-column col-8  ">
+
+    <div class=" flex-grow-1">
+      <div class="p-4 ms-2">
       <!--標題-->
       <div class="title-group mt-5">
         <div class="title d-flex align-items-center  ">
@@ -128,7 +132,7 @@ export default {
             </table>
 
     </div>
-
+    </div>
   </div>
 
 

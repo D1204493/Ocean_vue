@@ -1,9 +1,10 @@
 <script >
-import SideBarComponent from "@/RearPage/SideBar.vue";
+
+import sideBar from "@/components/admin-componet/SideBar.vue";
 
 export default {
   components: {
-    SideBarComponent
+    sideBar,
   },
   data() {
     return {
@@ -38,11 +39,12 @@ export default {
 </script>
 
 <template>
-  <div class="qa-mg-pgn d-flex">
-    <div class="col-4">
-      <SideBarComponent/>
+  <div class="container-fluid d-flex g-0">
+    <div class="p-0">
+      <side-bar/>
     </div>
-      <div class="qa-management col-8">
+      <div class="qa-management flex-grow-1">
+        <div class="p-4 ms-2">
     <!-- 標題 -->
       <div class="header d-flex align-items-center justify-content-between">
         <h1 style="color: #2c3e50;"><span><font-awesome-icon icon="lightbulb" class="me-4" style="color: orange" /></span >Q&A 管理</h1>
@@ -68,6 +70,7 @@ export default {
           </div>
         </div>
       </div>
+        </div>
     </div>
   </div>
 </template>
