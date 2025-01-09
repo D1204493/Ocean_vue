@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c2294f94-2628-4b5d-a2e9-a8d682ca6b57" name="Changes" comment="none">
-      <change afterPath="$PROJECT_DIR$/OceanMuseum/src/components/admin-componet/navBar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OceanMuseum/src/scripts/store.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OceanMuseum/src/scripts/ticketMethods.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OceanMuseum/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OceanMuseum/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OceanMuseum/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/RearPage/ImagePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/views/admin/ImagePage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/RearPage/LoginPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/views/admin/LoginPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/RearPage/MuseumPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/views/admin/MuseumPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/RearPage/ProductPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/views/admin/ProductPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/RearPage/QAPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/views/admin/QAPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/RearPage/SideBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/components/admin-componet/SideBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/RearPage/TicketPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/views/admin/TicketPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/components/Ticket/TicketOrder.vue" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/components/Ticket/TicketOrder.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OceanMuseum/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/OceanMuseum/src/router/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="c2294f94-2628-4b5d-a2e9-a8d682ca6b57" name="Changes" comment="none" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -111,7 +93,7 @@
       <workItem from="1736304640637" duration="13406000" />
       <workItem from="1736386110298" duration="8648000" />
       <workItem from="1736413099860" duration="601000" />
-      <workItem from="1736437994690" duration="8085000" />
+      <workItem from="1736437994690" duration="8416000" />
     </task>
     <servers />
   </component>
