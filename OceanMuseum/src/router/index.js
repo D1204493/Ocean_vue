@@ -125,5 +125,23 @@ const router = createRouter({
 
   ]
 })
+router.beforeEach((to, from, next) => {
+  // 定義需要登錄的路由
+  const protectedRoutes = ['/admin/home', '/admin/ticket', '/admin/QA', '/admin/img', '/admin/product'];
+
+  // 檢查是否需要登錄
+  if (protectedRoutes.includes(to.path)) {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'; // 從 localStorage 獲取狀態
+    if (isLoggedIn) {
+      next(); // 已登錄，放行
+    } else {
+      alert('請先登錄！');
+      next('/admin/login'); // 未登錄，跳轉到登錄頁
+    }
+  } else {
+    next(); // 不需要登錄的路由直接放行
+  }
+});
+
 
 export default router
